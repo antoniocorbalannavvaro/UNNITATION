@@ -1,7 +1,11 @@
 'use client'
+import React from 'react';
 import {Formik, Field, Form, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { useRouter } from 'next/router'
+import Link from 'next/link';
+
+//import 'bootstrap/dist/css/bootstrap.min.css';
 import {
     PageWrapper,
     Title,
@@ -23,7 +27,17 @@ const loginSchema = Yup.object().shape(
     }
 );
 
+const validUsers = [
+    {
+        user1 : {email: 'antoniocn1996@gmail.com', password:'1234'}
+    }
+];
+
+console.log('validUsers', validUsers[0].user1.email);
+
 const LoginComponent = () => {
+
+    const router = useRouter();
 
     const initialCredentials = {
         email: '',
@@ -31,7 +45,6 @@ const LoginComponent = () => {
     }
     return (
         <PageWrapper>
-
         <div>
           <h4>Login</h4>
             <Formik
@@ -78,7 +91,11 @@ const LoginComponent = () => {
                     
                     <button type="submit">Login</button>
 
-                    {isSubmitting ? console.log('Submitin...') : null}
+                    {isSubmitting && 
+                        (email.value === validUsers[0].user1.email) && 
+                        (password.value === validUsers[0].user1.password) 
+                                    ? router.push('/dashboar/videos/upload')
+                                    : null}
                 </Form> 
             )}
 
