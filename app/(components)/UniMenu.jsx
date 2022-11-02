@@ -8,6 +8,7 @@ export default function UniMenu(){
             <a href="/dashboard/labels"><li>Labels</li></a>
             <a href="/dashboard/experiments"><li>Experiments</li></a>
             <a href="/dashboard/users"><li>Users</li></a>
+            <a href="/dashboard/annotation"><li>Annotation</li></a>
         </ul>
     )
 }
