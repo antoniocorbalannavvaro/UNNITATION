@@ -1,0 +1,19 @@
+.labeledPair {
+    display: inline-block;
+    width: fit-content;
+    margin: 15px 15px 0px 0
+}
+
+.label, .content {
+    display: block;
+    font-size: 15px;
+}
+
+.label {
+    font-weight: bold;
+}
+
+.content {
+    font-weight: 400;
+    margin-bottom: 0px;
+}
