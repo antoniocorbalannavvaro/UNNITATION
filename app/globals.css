@@ -1,7 +1,22 @@
+@import url('https://fonts.cdnfonts.com/css/gotham-bold');
+@import url('https://fonts.cdnfonts.com/css/gotham');
+
+/*
+font-family: 'Gotham', sans-serif;
+font-family: 'Gotham Bold', sans-serif;
+font-family: 'Gotham Black', sans-serif;
+font-family: 'Gotham Light', sans-serif;
+font-family: 'Gotham Thin', sans-serif;
+font-family: 'Gotham XLight', sans-serif;
+font-family: 'Gotham Book', sans-serif;
+font-family: 'Gotham Ultra', sans-serif;
+*/
+
 html, body {
     width: 100%;
     margin: 0px;
     height: 100%;
+    font-family: 'Gotham Bold', sans-serif;
 }
 
 .logo {
