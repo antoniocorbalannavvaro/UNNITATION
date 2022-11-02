@@ -1,7 +1,16 @@
 'use client'
-
 import {Formik, Field, Form, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {
+    PageWrapper,
+    Title,
+    Label,
+    Input,
+    StyledInlineErrorMessage,
+    Submit,
+    CodeWrapper
+  } from "./styles";
 
 const loginSchema = Yup.object().shape(
     {
@@ -21,6 +30,8 @@ const LoginComponent = () => {
         password: ''
     }
     return (
+        <PageWrapper>
+
         <div>
           <h4>Login</h4>
             <Formik
@@ -73,6 +84,8 @@ const LoginComponent = () => {
 
             </Formik>
         </div>
+        </PageWrapper>
+
     );
 }
 

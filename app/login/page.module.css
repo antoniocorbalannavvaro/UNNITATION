@@ -1,0 +1,7 @@
+label {
+    align-items: left;
+    background-color: rgb(59, 173, 167);
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+  }
