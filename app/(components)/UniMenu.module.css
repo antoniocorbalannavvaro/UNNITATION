@@ -1,0 +1,9 @@
+.list {
+    margin-bottom: 0px;
+}
+
+.list li {
+    display: inline-block;
+    color: white;
+    margin-right: 15px;
+}
