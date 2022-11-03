@@ -2,9 +2,7 @@
 import React from 'react';
 import {Formik, Field, Form, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
-import { useRouter } from 'next/router'
-import Link from 'next/link';
-
+import { useRouter } from "next/router";
 //import 'bootstrap/dist/css/bootstrap.min.css';
 import {
     PageWrapper,
@@ -37,15 +35,15 @@ console.log('validUsers', validUsers[0].user1.email);
 
 const LoginComponent = () => {
 
-    const router = useRouter();
-
     const initialCredentials = {
         email: '',
         password: ''
     }
+
     return (
         <PageWrapper>
         <div>
+            <Title></Title>
           <h4>Login</h4>
             <Formik
                 initialValues = {initialCredentials}
@@ -64,7 +62,7 @@ const LoginComponent = () => {
                         id="email" 
                         type="email"    
                         name="email" 
-                        placeholder="example@gmail.com" />
+                        placeholder="example@gmail.com"/>
                     
                     {
                         errors.email && touched.email && 
@@ -88,13 +86,13 @@ const LoginComponent = () => {
                             </div>
                         )
                     }
-                    
+                    <button onClick={() => console.log('email.value:',email.value,'\npassword.value:',password.value)}>check</button>
                     <button type="submit">Login</button>
 
                     {isSubmitting && 
                         (email.value === validUsers[0].user1.email) && 
                         (password.value === validUsers[0].user1.password) 
-                                    ? router.push('/dashboar/videos/upload')
+                                    ? console.log('bien')
                                     : null}
                 </Form> 
             )}

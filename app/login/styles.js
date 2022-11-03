@@ -5,19 +5,21 @@ export const PageWrapper = styled.section`
   &,
   & * {
     box-sizing: border-box;
-    display: block;
+    display: 'center';
   }
 
   hr {
-    display: block;
+    display: center;
     border: none;
-    border-top: 1px solid lightgrey;
-
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
+    border-top: 10rem solid lightgrey;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
   }
 
   font-family: system-ui;
+  border-collapse: separate;
+  border-spacing: 10px 5px;
+
   font-size: 1rem;
   line-height: 1.5rem;
   max-width: 35em;
@@ -26,7 +28,7 @@ export const PageWrapper = styled.section`
   margin-top: 1.5rem;
   padding: 1rem 0.75rem;
   border: 1px solid lightgrey;
-  border-radius: 4px;
+  border-radius: 20px;
 `;
 
 export const CodeWrapper = styled.pre`
