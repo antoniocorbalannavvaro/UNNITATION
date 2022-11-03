@@ -10,7 +10,7 @@ export default function Page(){
     const [annotations, setAnnotations] = useState([]);
 
     const handleClick = (label) => {
-        setAnnotations([{ label: label, time: ref.current.currentTime*1000},...annotations ])
+        setAnnotations([{ label: label, time: ref.current.currentTime*100},...annotations ])
     }
 
     return(
