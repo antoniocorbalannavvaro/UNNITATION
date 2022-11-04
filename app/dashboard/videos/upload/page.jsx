@@ -1,8 +1,7 @@
 'use client'
-import React from 'react';
-import {Formik, Field, Form, ErrorMessage} from 'formik';
+import React, {useState} from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import {PageWrapper, Label, CodeWrapper} from "../../../login/styles";
 
 const loginSchema = Yup.object().shape(
     {
@@ -10,20 +9,20 @@ const loginSchema = Yup.object().shape(
                 .url('URL invalid format')
                 .required('URL is required.'),
 
-        isTranscrypt: Yup.boolean()
+        isTranscrypt: Yup.string()
                 .required('Transcrypt is required.'),
 
         transcryptUrl: Yup.string()
                 .url('URL invalid format')
                 .required('Transcrypt URL is required.'),
 
-        salesMeeting: Yup.boolean()
+        salesMeeting: Yup.string()
                 .required('Sales Meeting is required.'),
 
-        actors: Yup.number()
+        actors: Yup.string()
                 .required('Actors are required.'),
 
-        agentNames: Yup.number()
+        agentNames: Yup.string()
                 .required('Agent Names are required.'),
 
         participants: Yup.number()
@@ -35,7 +34,7 @@ const loginSchema = Yup.object().shape(
         platform: Yup.string()
                 .required('Platform is required.'),
 
-        dealDisposition: Yup.boolean()
+        dealDisposition: Yup.string()
                 .required('Deal Disposition is required.'),
 
         videoCreationDate: Yup.date()
@@ -43,144 +42,177 @@ const loginSchema = Yup.object().shape(
     }
 );
 
-const UploadVideoComponent = () => {
-
-    const initialCredentials = {
-        videoUrl: '',
-        isTranscrypt: 'null',
-        transcryptUrl: '',
-        salesMeeting: 'null',
-        actors: 'null',
-        agentNames: '',
-        participants: 'null',
-        language: 'null',
-        platform: 'null',
-        dealDisposition: 'null',
-        videoCreationDate: 'null'
-    }
-
+const VideoUploadForm = () => {
+    
     const checkForm = (param) => {
-        const validation = Object.values(param).find((x) => x === 'null');
+        const validation = Object.values(param).find((x) => x === 'null' || x === '');
+
         if(validation === 'null'){
             console.log(param);
             alert('Check it makina, there are some campos empty');
         }
-        //TODO Send to the vaquen
+
         else {
             console.log('Vamooooos', param)
         }
     }
 
-    return (
-        <PageWrapper>
-        <div>
-          <h4>UPLOAD VIDEO</h4>
-            <Formik
-                initialValues = {initialCredentials}
+	const [formSend, changeFormSend] = useState(false);
+
+	return (
+		<>
+			<Formik
+				initialValues={{
+                    videoUrl: '',
+                    isTranscrypt: '',
+                    transcryptUrl: '',
+                    salesMeeting: '',
+                    actors: '',
+                    agentNames: '',
+                    participants: '',
+                    language: '',
+                    platform: '',
+                    dealDisposition: '',
+                    videoCreationDate: ''
+				}}
+
                 validationSchema = {loginSchema}
-                
-                onSubmit = {async (values) => {
-                    await new Promise((r) => setTimeout(r, 50));
-                    //Return credential in JSON ==>
-                    console.log(values);
-                }}
-            >
-            {({ values, touched, errors, isSubmitting, handleChange, handleBlur,}) => (
-                <Form>
-                    <Label>
-                    <label htmlFor="videoUrl">Video URL:</label>
-                    <Field id="videoUrl" type="URL" name="videoUrl" placeholder="Paste Video URL"/>
-                    </Label>
 
-                    <Label>
-                    <label htmlFor="transcryptUrl">Transcrypt URL:</label>
-                    <Field id="transcryptUrl" type="URL" name="transcryptUrl" placeholder="Paste Transcrypt URL"/>
-                    </Label>
+				validate={(params) => {
+					let formErrors = {};
 
-                    <Label>
-                    <label htmlFor="agentNames">Agent's Name:</label>
-                    <Field id="agentNames" type="string" name="agentNames"/>
-                    </Label>
+					return formErrors;
+				}}
 
-                    <Label>
-                    <label htmlFor="participants">Nº Participants:</label>
-                    <Field id="participants" type="number" name="participants" placeholder='Add Number'/>
-                    </Label>
+				onSubmit={(params, {resetForm}) => {
+                    //TODO send to the vaquen
+					resetForm();
+                    console.log('Params',params);
+					changeFormSend(true);
+					setTimeout(() => changeFormSend(false), 5000);
+				}}
+			>
+				{( {errors, props} ) => (
+					<Form className="formulario">
+						<div>
+							<label htmlFor="videoUrl">Video URL</label>
+							<Field
+								type="URL" 
+								id="videoUrl" 
+								name="videoUrl" 
+							/>
+							<ErrorMessage name="videoUrl" component={() => (<div className="error">{errors.videoUrl}</div>)} />
+						</div>
 
-                    <Label>
-                    <label htmlFor="platform">Platform:</label>
-                    <Field id ='platform' name="platform" as="select">
-                        <option value="null">-</option>
-                        <option value="zoom">Zoom</option>
-                        <option value="meet">Meet</option>
-                        <option value="team">Team</option>
-                    </Field>
-                    </Label>
+                        <div>
+							<label htmlFor="transcryptUrl">Transcrypt URL</label>
+							<Field
+								type="URL" 
+								id="transcryptUrl" 
+								name="transcryptUrl" 
+							/>
+							<ErrorMessage name="transcryptUrl" component={() => (<div className="error">{errors.transcryptUrl}</div>)} />
+						</div>
 
-                    <Label>
-                    <label htmlFor="language">Language:</label>
-                    <Field id='language' name="language" as="select">
-                        <option value='null'>-</option>
-                        <option value="english">English</option>
-                        <option value="spanish">Spanish</option>
-                        <option value="german">German</option>
-                        <option value="french">French</option>
-                        <option value="chinese">Chinese</option>
-                        <option value="russian">Russian</option>
-                    </Field>
-                    </Label>
+                        <div>
+							<label htmlFor="agentNames">Agent Names</label>
+							<Field
+								type="text" 
+								id="agentNames" 
+								name="agentNames" 
+							/>
+							<ErrorMessage name="agentNames" component={() => (<div className="error">{errors.agentNames}</div>)} />
+						</div>
 
-                    <Label>
-                    <label htmlFor="dealDisposition">Deal Predisposition:</label>
-                    <Field id='dealDisposition' name="dealDisposition" as="select">
-                        <option value="null">-</option>
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-                    </Field>
-                    </Label>
+                        <div>
+                            <label htmlFor="participants">Nº Participants:</label>
+                            <Field id="participants" type="number" name="participants" placeholder='Add Number'/>
+                            <ErrorMessage name="participants" component={() => (<div className="error">{errors.participants}</div>)} />
 
-                    <Label>
-                    <label htmlFor="videoCreationDate">Video Creation:</label>
-                    <Field id="videoCreationDate" type="date" name="videoCreationDate"/>
-                    </Label>
+                        </div>
 
-                    <Label>
-                    <label htmlFor="isTranscrypt">Video Has Transcrypt?:</label>
-                    <Field id='isTranscrypt' name="isTranscrypt" as="select">
-                        <option value="null">-</option>
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-                    </Field> 
-                    </Label>
+                        <div>
+                            <label htmlFor="videoCreationDate">Video Creation:</label>
+                            <Field id="videoCreationDate" type="date" name="videoCreationDate"/>
+                            <ErrorMessage name="videoCreationDate" component={() => (<div className="error">{errors.videoCreationDate}</div>)} />
+                        </div>
 
-                    <Label>
-                    <label htmlFor="actors">Actors?:</label>
-                    <Field id='actors' name="actors" as="select">
-                        <option value="null">-</option>
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-                    </Field> 
-                    </Label>
+						<div>
+                            <label>Language</label>
+							<Field name="language" as="select">
+                                <option value='null'>-</option>
+                                <option value="english">English</option>
+                                <option value="spanish">Spanish</option>
+                                <option value="german">German</option>
+                                <option value="french">French</option>
+                                <option value="chinese">Chinese</option>
+                                <option value="russian">Russian</option>
+							</Field>
+                            <ErrorMessage name="language" component={() => (<div className="error">{errors.language}</div>)} />
+						</div>
 
-                    <Label>
-                    <label htmlFor="salesMeeting">Sales Meeting?:</label>
-                    <Field id='salesMeeting' name="salesMeeting" as="select">
-                        <option value="null">-</option>
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-                    </Field> 
-                    </Label>
+                        <div>
+                            <label>Platform</label>
+							<Field name="platform" as="select">
+                                <option value="null">-</option>
+                                <option value="zoom">Zoom</option>
+                                <option value="meet">Meet</option>
+                                <option value="team">Team</option>
+							</Field>
+                            <ErrorMessage name="platform" component={() => (<div className="error">{errors.platform}</div>)} />
+						</div>
 
-                    <Label>
-                    <button type="submit" onClick={() => checkForm(values)} >Upload</button>
-                    </Label>
+                        <div>
+                            <label>Deal Predisposition</label>
+							<Field name="dealDisposition" as="select">
+                                <option value="null">-</option>
+                                <option value='true'>Yes</option>
+                                <option value='false'>No</option>
+							</Field>
+                            <ErrorMessage name="dealDisposition" component={() => (<div className="error">{errors.dealDisposition}</div>)} />
+						</div>
 
-                </Form> 
-            )}
-            </Formik>
-        </div>
-        </PageWrapper>
-    );
+						<div>
+                            <label>Video Has Transcrypt?</label>
+							<label>
+								<Field type="radio" name="isTranscrypt" value="true" /> Yes
+							</label>
+							<label>
+								<Field type="radio" name="isTranscrypt" value="false" /> No
+							</label>
+                            <ErrorMessage name="isTranscrypt" component={() => (<div className="error">{errors.isTranscrypt}</div>)} />
+						</div>
+
+                        <div>
+                            <label>Actors?</label>
+							<label>
+								<Field type="radio" name="actors" value="true" /> Yes
+							</label>
+							<label>
+								<Field type="radio" name="actors" value="false" /> No
+							</label>
+                            <ErrorMessage name="actors" component={() => (<div className="error">{errors.actors}</div>)} />
+						</div>
+
+                        <div>
+                            <label>Sales Meeting?</label>
+							<label>
+								<Field type="radio" name="salesMeeting" value="true" /> Yes
+							</label>
+							<label>
+								<Field type="radio" name="salesMeeting" value="false" /> No
+							</label>
+                            <ErrorMessage name="salesMeeting" component={() => (<div className="error">{errors.salesMeeting}</div>)} />
+						</div>
+
+						<button type="submit">Upload</button>
+						{formSend && <p className="exito">Video uploaded successfully!</p>}
+
+					</Form>
+				)}
+			</Formik>
+		</>
+	);
 }
-
-export default UploadVideoComponent;
+ 
+export default VideoUploadForm;
