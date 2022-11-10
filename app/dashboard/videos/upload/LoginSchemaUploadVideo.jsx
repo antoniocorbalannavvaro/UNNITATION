@@ -11,10 +11,6 @@ export const initialParams = {
     platform: '',
     dealDisposition: '',
     videoCreationDate: '',
-    nAgents: '',
-    nCustomers: '',
-    customerNames: '',
-    agentNames: ''
 }
 
 export const loginSchema = Yup.object().shape(
@@ -24,12 +20,14 @@ export const loginSchema = Yup.object().shape(
                 .required('URL is required.'),
 
         isTranscrypt: Yup.string()
-                .required('Transcrypt is required.'),
+                .required('Transcript is required.'),
 
-        participants: Yup.number(),
+        participants: Yup.number()
+                .required('Participants number is required'),
 
         transcryptUrl: Yup.string()
-                .url('URL invalid format'),
+                .url('URL invalid format')
+                .required('URL Transcript is required'),
 
         salesMeeting: Yup.string()
                 .required('Sales Meeting is required.'),
@@ -48,28 +46,6 @@ export const loginSchema = Yup.object().shape(
                 .required('Deal Disposition is required.'),
 
         videoCreationDate: Yup.date()
-                .required('Video Creation Date is required.'),
-        
-        nAgents: Yup.number(),
-
-        nCustomers: Yup.number(),
-
-        customerNames: Yup.string(),
-
-        agentNames: Yup.string()
+                .required('Video Creation Date is required.')
     }
 );
-
-//Delete?
-const checkForm = (param) => {
-    const validation = Object.values(param).find((x) => x === 'null' || x === '');
-
-    if(validation === 'null'){
-        console.log(param);
-        alert('Check it makina, there are some campos empty');
-    }
-
-    else {
-        console.log('Vamooooos', param)
-    }
-}

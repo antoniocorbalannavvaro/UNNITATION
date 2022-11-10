@@ -1,40 +1,20 @@
 'use client'
 import React, {useState} from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
-import EmojiPicker from 'emoji-picker-react';
-
-function Example() {
-  return (
-    <div>
-      <EmojiPicker />
-    </div>
-  );
-}
+import {initialParams, loginSchema} from './labelSchema';
 
 const LabelForm = () => {
 	const [formSend, changeFormSend] = useState(false);
 	return (
 		<>
 			<Formik
-				initialValues={{
-					labelName: '',
-					color: '',
-					emoji: '',
-					description: ''
-				}}
-
-                //validationSchema = {loginSchema}
-
-				validate={(params) => {
-					let formErrors = {};
-					return formErrors;
-				}}
+				initialValues={{initialParams}}
+				validationSchema = {loginSchema}
 
 				onSubmit={(params, {resetForm}) => {
                     //Send data to the vaquen.
                     console.log('Data: ',params);
-					resetForm();
+					//resetForm();
 					changeFormSend(true);
 					setTimeout(() => changeFormSend(false), 5000);
 				}}
@@ -48,6 +28,7 @@ const LabelForm = () => {
 								id="labelName" 
 								name="labelName" 
 							/>
+
 							<ErrorMessage name="labelName" component={() => (
                             <div className="error">{errors.labelName}</div>)} />
 						</div>
@@ -55,7 +36,7 @@ const LabelForm = () => {
 						<div>
 							<label htmlFor="color">Label Color:</label>
 							<Field
-								type="color" 
+								type="text" 
 								id="color" 
 								name="color" 
 							/>
@@ -64,7 +45,14 @@ const LabelForm = () => {
 						</div>
 
 						<div>
-							<Example></Example>
+							<label htmlFor="labelName">Emoji:</label>
+								<Field
+									type="text" 
+									id="emoji" 
+									name="emoji" 
+								/>
+								<ErrorMessage name="emoji" component={() => (
+							<div className="error">{errors.emoji}</div>)} />
 						</div>
 
 						<div>
@@ -74,9 +62,9 @@ const LabelForm = () => {
                             <div className="error">{errors.description}</div>)} />
 						</div>
 
-						<button type="submit">Login</button>
-                        
-						{formSend && <p className="exito">Create Label</p>}
+						<button type="submit">Create Label</button>
+						{formSend && <p className="exito">Label successfully created</p>}
+
 					</Form>
 				)}
 			</Formik>

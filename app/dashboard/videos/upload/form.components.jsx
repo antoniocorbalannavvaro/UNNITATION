@@ -1,10 +1,6 @@
 import { Field, ErrorMessage } from 'formik';
 
-const [transcryptState, setTranscryptState] = useState('false');
-const [salesMeetingState, setSalesMeetingState] = useState('false');
-const [formSend, changeFormSend] = useState(false);
-
-const VideoUrlComp = () => {
+export const VideoUrlComp = () => {
     return (
     <div>
         <label htmlFor="videoUrl">Video URL</label>
@@ -20,7 +16,7 @@ const VideoUrlComp = () => {
 };
 
 
-const ParticipantsComp = () => {
+export const ParticipantsComp = () => {
     return (
         <div>
             <label htmlFor="participants">Nº Participants:</label>
@@ -30,7 +26,7 @@ const ParticipantsComp = () => {
     );
 }
 
-const VideoCreationDateComp = () => {
+export const VideoCreationDateComp = () => {
     return (
         <div>
             <label htmlFor="videoCreationDate">Video Creation:</label>
@@ -41,7 +37,7 @@ const VideoCreationDateComp = () => {
 }
 
 
-const LanguageComp = () => {
+export const LanguageComp = () => {
     return (
         <div>
             <label>Language</label>
@@ -59,7 +55,7 @@ const LanguageComp = () => {
     );
 }
 
-const PlatformComp = () => {
+export const PlatformComp = () => {
     return (
         <div>
         <label>Platform</label>
@@ -75,7 +71,7 @@ const PlatformComp = () => {
     );
 }
 
-const DealComp = () => {
+export const DealComp = () => {
     return (
         <div>
         <label>Deal Predisposition</label>
@@ -89,7 +85,7 @@ const DealComp = () => {
     );
 }
 
-const ActorsComp = () => {
+export const ActorsComp = () => {
     return (
         <div>
         <label>Actors?</label>
@@ -104,32 +100,30 @@ const ActorsComp = () => {
     );
 }
 
-const HasTranscrypt = () => {
-    return (
-        <div>
-            <label>Video Has Transcrypt?</label>
-            <label>
-            <Field onClick={() => {setTranscryptState('yes')}} type="radio" name="isTranscrypt" value="true" /> Yes
-            </label>
-            <label>
-            <Field onClick={() => {setTranscryptState('no')}} type="radio" name="isTranscrypt" value="false" /> No
-            </label>
-            <ErrorMessage name="isTranscrypt" component={() => (<div className="error">{errors.isTranscrypt}</div>)} />
-        </div>
-    );
-}
-
-const SalesMeetingComp = () => {
+export const SalesMeetingComp = () => {
     return (
         <div>
             <label>Sales Meeting?</label>
             <label>
-                <Field onClick={() => setSalesMeetingState('true')} type="radio" name="salesMeeting" value="true" /> Yes
+                <Field type="radio" name="salesMeeting" value="true" /> Yes
             </label>
             <label>
-                <Field onClick={() => setSalesMeetingState('false')} type="radio" name="salesMeeting" value="false" /> No
+                <Field type="radio" name="salesMeeting" value="false" /> No
             </label>
             <ErrorMessage name="salesMeeting" component={() => (<div className="error">{errors.salesMeeting}</div>)} />
         </div>
+    );
+}
+
+export const TranscryptURLComp = () => {
+    return (
+        <div>
+            <label htmlFor="transcryptUrl">Transcript URL:</label>
+            <Field
+                type="URL" 
+                id="transcryptUrl" 
+                name="transcryptUrl"/>
+            <ErrorMessage name="transcryptUrl" component={() => (<div className="error"></div>)} />
+        </div> 
     );
 }
