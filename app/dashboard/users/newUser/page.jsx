@@ -1,12 +1,10 @@
 'use client'
 import React, {useState} from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import {TranscryptURLComp} from './form.components';
-import { loginSchema, initialParams } from './LoginSchemaUploadVideo';
+import { loginSchema, initialParams } from './schema';
 
 const VideoUploadForm = () => {
 
-    const [transcryptState, setTranscryptState] = useState('false');
 	const [formSend, changeFormSend] = useState(false);
 
 	return (
@@ -109,7 +107,7 @@ const VideoUploadForm = () => {
                         <ErrorMessage name="proficiencySecondLanguage" component={() => (<div className="error">{errors.proficiencySecondLanguage}</div>)} />
                     </div>
 
-						<button type="submit">Login</button>
+						<button type="submit">Send</button>
 						{formSend && <p className="exito">Successfully!</p>}
 
 					</Form>
