@@ -1,7 +1,7 @@
 import styles from './UniSelectField.module.css'
 
 export default function UniSelectField(props){
-    return(
+    return (
         <div className={styles.selectContainer}>
             <label className={styles.label}>{props.children}</label>
             <select class="form-select">
