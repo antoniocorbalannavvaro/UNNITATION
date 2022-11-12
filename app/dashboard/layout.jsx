@@ -1,9 +1,11 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import AuthContext from '../auth'
 
 export default function RootLayout({ children }) {
+
+    const [meta, setMeta] = useState({})
 
     useEffect(() => {
         
@@ -16,14 +18,14 @@ export default function RootLayout({ children }) {
                 return;
             }; 
 
-            console.log(data);
+            setMeta(data)
 
         })
 
     }, [])
 
   return (
-    <AuthContext.Provider value={{msg: 'Funciona'}}>
+    <AuthContext.Provider value={{meta: meta}}>
         {children}
     </AuthContext.Provider>
       

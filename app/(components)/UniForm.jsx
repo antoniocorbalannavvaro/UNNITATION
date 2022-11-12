@@ -15,6 +15,7 @@ function UniForm(props) {
 
                     return  <UniField 
                                 key={i}
+                                id={el.id}
                                 type={el.type} 
                                 label={el.label} 
                                 value={el.value} 
@@ -28,13 +29,14 @@ function UniForm(props) {
     )
 }
 
-function formatField(type,label,value,setter,config){
+function formatField(type,label,value,setter,config,id){
     return {
         type: type,
         label: label,
         value: value,
         handleChange: setter,
-        config: {conditionalShow: true, ...config}
+        config: {conditionalShow: true, ...config},
+        id: id
     }
 }
 
