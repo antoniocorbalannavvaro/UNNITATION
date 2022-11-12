@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 export const initialParams = {
     userEmail: '',
     role: '',
-    weeklyGoal: 0
+    weeklyGoal: 1
 }
 
 export const schema = Yup.object().shape(

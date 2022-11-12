@@ -7,7 +7,12 @@ import EmojiPicker from 'emoji-picker-react';
 const Page = () => {
 
 	const [formSend, changeFormSend] = useState(false);
-	
+	const [showEmojiComp, setShowEmojiComp] = useState(false);
+
+	var emojiChosen = 'Any';
+	const emojiButtonOn = 'Hide Emojis';
+	const emojiButtonOff = 'Show Emojis';
+
 	return (
 		<>
 			<Formik
@@ -16,9 +21,10 @@ const Page = () => {
 
 				onSubmit={(params, {resetForm}) => {
                     //Send data to the vaquen.
-					resetForm();
-                    console.log('Data: ',params);
+					params['emoji'] = emojiChosen;
+                    console.log('Data: ', params);
 					changeFormSend(true);
+					resetForm();
 					setTimeout(() => changeFormSend(false), 5000);
 				}}
 			>
@@ -37,27 +43,21 @@ const Page = () => {
 						</div>
 						
 						<div>
-							<label htmlFor="labelColor">Label Color:</label>
-							<Field
-								type="color" 
-								id="labelColor" 
-								name="labelColor" 
-							/>
-							<ErrorMessage name="labelColor" component={() => (
-                            <div className="error">{errors.labelColor}</div>)} />
-						</div>
+							
+							<button onClick={() => setShowEmojiComp(!showEmojiComp)}>{showEmojiComp ? emojiButtonOn : emojiButtonOff}</button>
+							{showEmojiComp ? 
+								<div>
+									<h4>You have chosen: {emojiChosen}</h4>
+									<EmojiPicker onEmojiClick={(e) => 
+									{
+										emojiChosen = e.emoji;
+										console.log(emojiChosen);
+									}}>
+									</EmojiPicker>
+								</div> 
+							: null}
 
-						
-						<div>
-							<EmojiPicker onEmojiClick={(e)=>console.log(e)} />
     					</div>
-
-						<div>
-							<label htmlFor='labelDescription'>Description:</label>
-							<Field id ='labelDescription' name="labelDescription" as="textarea" placeholder="Description..." />
-							<ErrorMessage name="labelDescription" component={() => (
-                            <div className="error">{errors.labelDescription}</div>)} />
-						</div>
 
 						<button type="submit">Create Label</button>
 						{formSend && <p style={{color:'green'}} className="exito">Label successfully created!</p>}						
