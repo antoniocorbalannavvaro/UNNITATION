@@ -32,7 +32,7 @@ CREATE TYPE Departament AS ENUM ('SALES', 'ENGINEERING', 'SUPPORT', 'CALL_CENTER
 
 CREATE TABLE AppUser(
 	id SERIAL PRIMARY KEY,
-	email VARCHAR(128) NOT NULL,
+	email VARCHAR(128) UNIQUE NOT NULL,
 	password VARCHAR(128) NOT NULL,		-- FIXME: this should be a hash
 	createdBy INTEGER
 );
@@ -68,15 +68,18 @@ CREATE TABLE UserInfo(
 	middleName VARCHAR(64),
 	lastName VARCHAR(64) NOT NULL,
 	mainLanguage LanguageEnum NOT NULL,
-	secondaryLanguage SecondaryLanguage,
 	gender Gender NOT NULL,
 	departament Departament NOT NULL,
+	secondaryLanguageId INTEGER,
 	appUserId INTEGER NOT NULL,
+	FOREIGN KEY (secondaryLanguageId) REFERENCES SecondaryLanguage(id),
 	FOREIGN KEY (appUserId) REFERENCES AppUser(id)
 );
 
 CREATE TABLE Experiment(
 	id SERIAL PRIMARY KEY,
+	name VARCHAR(128) NOT NULL,
+	chunkTime INTERVAL NOT NULL,
 	administratorId INTEGER NOT NULL,
 	FOREIGN KEY (administratorId) REFERENCES Administrator (id)
 );
@@ -84,6 +87,11 @@ CREATE TABLE Experiment(
 CREATE TABLE Video(
 	id SERIAL PRIMARY KEY,
 	name VARCHAR(128) NOT NULL,
+	url VARCHAR(512) NOT NULL,
+	transcriptUrl VARCHAR(512),
+	numActors INTEGER, CHECK(numActors > 1),
+	videoDate TIMESTAMPTZ NOT NULL,
+	uploadDate TIMESTAMPTZ NOT NULL,
 	platform VideoPlatform NOT NULL,
 	language LanguageEnum NOT NULL,
 	dataScientistId INTEGER NOT NULL,
@@ -102,7 +110,7 @@ CREATE TABLE VideoExperiment(
 
 CREATE TABLE Label(
 	id SERIAL PRIMARY KEY,
-	name VARCHAR(32),
+	name VARCHAR(32) UNIQUE NOT NULL,
 	createdBy INTEGER NOT NULL,
 	FOREIGN KEY (createdBy) REFERENCES Administrator(id)
 );
@@ -117,6 +125,7 @@ CREATE TABLE ExperimentLabel(
 
 CREATE TABLE Annotation(
 	id SERIAL PRIMARY KEY,
+	chunkNum INTEGER NOT NULL,
 	videoExperimentId INTEGER NOT NULL,
 	annotatorId INTEGER NOT NULL,
 	FOREIGN KEY (videoExperimentId) REFERENCES VideoExperiment(id),
