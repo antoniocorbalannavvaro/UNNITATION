@@ -1,9 +1,9 @@
 'use client'
 import React, {useState} from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { loginSchema, initialParams } from './schema';
+import { schema, initialParams } from './schema';
 
-const VideoUploadForm = () => {
+const Page = () => {
 
 	const [formSend, changeFormSend] = useState(false);
 
@@ -11,7 +11,7 @@ const VideoUploadForm = () => {
 		<>
 			<Formik
 				initialValues={initialParams}
-                validationSchema = {loginSchema}
+                validationSchema = {schema}
 
 				onSubmit={(params, {resetForm}) => {
                     //TODO send to the vaquen
@@ -118,4 +118,4 @@ const VideoUploadForm = () => {
 }
 
 
-export default VideoUploadForm;
+export default Page;
