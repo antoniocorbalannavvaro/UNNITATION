@@ -8,7 +8,11 @@ import UniLabeledPair from "../../(components)/UniLabeledPair";
 import UniSelectField from "../../(components)/UniSelectField";
 import UniFilterableList from '../../(components)/UniFilterableList';
 
+import { useUser } from '../../auth';
+
 export default function Page(){
+    
+    const something = useUser({});
     
     const [items,setItems] = useState([]);
     const [meta, setMeta] = useState([])
@@ -18,21 +22,33 @@ export default function Page(){
         setItems([{
             name: '136D1D1D1DG.mp4',
             properties: [{
-                label: 'Language',
-                value: 'English',
-                type: 'text'
+                id: 'text12',
+                value: 'English'
             },{
-                label: 'Duration',
+                id: 'duration',
                 value: '24m 32s',
-                type: 'text'
             },{
-                label: 'Date',
-                value: '20/10/2022',
-                type: 'date'
+                id: 'videodate',
+                value: '20/10/2022'
+            },{
+                id: 'select125'
             }]
         }]);
 
-        setMeta({})
+        setMeta([{
+            text12: {
+                type: 'text',
+                label: 'Language'
+            },
+            duration: {
+                type: 'number',
+                label: 'Duration'
+            },
+            videodate: {
+                type: 'datetime',
+                label: 'Date'
+            }
+        }])
 
     },[])
                                 

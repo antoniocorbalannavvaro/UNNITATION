@@ -1,5 +1,5 @@
 'use client'
-import { useState} from 'react'
+import { useState, useEffect} from 'react'
 import { useRouter } from 'next/navigation'
 import { formatField, UniForm} from '../(components)/UniForm';
 import UniCard from '../(components)/UniCard';
@@ -9,12 +9,29 @@ export default function Page() {
     const router = useRouter()
 
     const [email,setEmail] = useState('');
+    const [error,setError] = useState('');
     const [password,setPassword] = useState('');
     const [prueba,setPrueba] = useState('No')
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        router.push('/dashboard/videos')   
+
+        fetch('/api/login?' + new URLSearchParams({
+            username: email,
+            password: password,
+        })).then((res) => {
+            return res.json()
+        }).then((data) => {
+
+            if (data.error) {
+                setError(data.reason)
+                return;
+            };
+
+            router.push('/dashboard/videos')   
+
+        })
+
     }
 
     return (
@@ -26,8 +43,7 @@ export default function Page() {
                     <UniForm 
                         fields={[
                                 formatField('email','Email Address',email,setEmail),
-                                formatField('select','Prueba',prueba,setPrueba,{options: ['Si','No']}),
-                                formatField('password','Your password',password,setPassword, {conditionalShow: prueba == 'No'}),
+                                formatField('password','Your password',password,setPassword),
                                 formatField('submit','LOG IN'),
                         ]}
                         handleSubmit={handleSubmit}>

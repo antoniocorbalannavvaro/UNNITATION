@@ -2,6 +2,7 @@ const database = new Map();
 
 database.set('topo@gmail.com', '1234');
 database.set('david@gmail.com', '4321');
+database.set('pablo@uxing.es', '1234');
 
 export default (req, res) => {
 	if (!(req.query && 'username' in req.query && 'password' in req.query))

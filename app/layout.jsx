@@ -3,6 +3,7 @@ import './globals.css'
 import NavBar from './navbar'
 
 export default function RootLayout({ children }) {
+
   return (
     <html>
       <head></head>

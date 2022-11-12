@@ -5,7 +5,7 @@ function UniForm(props) {
 
     return (
         <form onSubmit={props.handleSubmit}>
-            <div class="form-group">
+            <div className="form-group">
                {
                 props.fields.map((el, i) => {
                    
