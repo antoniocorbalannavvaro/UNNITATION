@@ -15,9 +15,8 @@ export const schema = Yup.object().shape(
         labelColor: Yup.string()
                 .required('Color is required.'),
 
-        emoji: Yup.string()
-                .required('Emoji is required.'),
-
+        emoji: Yup.string(),
+        
         labelDescription: Yup.string()
                 .required('Description is required'),
     }

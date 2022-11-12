@@ -16,8 +16,8 @@ const Page = () => {
 
 				onSubmit={(params, {resetForm}) => {
                     //Send data to the vaquen.
-                    console.log('Data: ',params);
 					resetForm();
+                    console.log('Data: ',params);
 					changeFormSend(true);
 					setTimeout(() => changeFormSend(false), 5000);
 				}}
@@ -60,10 +60,7 @@ const Page = () => {
 						</div>
 
 						<button type="submit">Create Label</button>
-						{formSend 
-							? <p style={{color:'green'}} className="exito">Label successfully created!</p>
-							: <p style={{color:'red'}} className="fracaso">Some fields are empty!</p>}
-
+						{formSend && <p style={{color:'green'}} className="exito">Label successfully created!</p>}						
 					</Form>
 				)}
 			</Formik>
