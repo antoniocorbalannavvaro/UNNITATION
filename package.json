@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "bootstrap": "^5.2.2",
-    "emoji-mart": "^5.2.2",
+    "emoji-mart": "^5.3.2",
     "emoji-picker-react": "^4.4.5",
     "eslint": "8.26.0",
     "eslint-config-next": "13.0.1",
