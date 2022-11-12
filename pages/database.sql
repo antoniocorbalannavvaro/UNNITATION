@@ -87,6 +87,7 @@ CREATE TABLE Video(
 	platform VideoPlatform NOT NULL,
 	language LanguageEnum NOT NULL,
 	dataScientistId INTEGER NOT NULL,
+	newVersionVideoId INTEGER,
 	FOREIGN KEY (dataScientistId) REFERENCES DataScientist(id),
 	FOREIGN KEY (newVersionVideoId) REFERENCES Video(id)
 );
