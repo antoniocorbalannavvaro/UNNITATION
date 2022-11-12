@@ -59,8 +59,8 @@ const Page = () => {
 
     					</div>
 
-						<button onClick={emojiChosen =! 'Any' ? console.log('Chose an emoji') : null} type="submit">Create Label</button>
-						{formSend && emojiChosen != 'Any' && <p style={{color:'green'}} className="exito">Label successfully created!</p>}						
+						<button type="submit">Create Label</button>
+						{formSend && <p style={{color:'green'}} className="exito">Label successfully created!</p>}						
 					</Form>
 				)}
 			</Formik>
