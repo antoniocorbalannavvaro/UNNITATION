@@ -1,20 +1,23 @@
 'use client'
 import React, {useState} from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import {initialParams, loginSchema} from './labelSchema';
+import {initialParams, schema} from './schema';
+import EmojiPicker from 'emoji-picker-react';
 
-const LabelForm = () => {
+const Page = () => {
+
 	const [formSend, changeFormSend] = useState(false);
+	
 	return (
 		<>
 			<Formik
 				initialValues={{initialParams}}
-				validationSchema = {loginSchema}
+				validationSchema = {schema}
 
 				onSubmit={(params, {resetForm}) => {
                     //Send data to the vaquen.
                     console.log('Data: ',params);
-					//resetForm();
+					resetForm();
 					changeFormSend(true);
 					setTimeout(() => changeFormSend(false), 5000);
 				}}
@@ -32,38 +35,34 @@ const LabelForm = () => {
 							<ErrorMessage name="labelName" component={() => (
                             <div className="error">{errors.labelName}</div>)} />
 						</div>
-
+						
 						<div>
-							<label htmlFor="color">Label Color:</label>
+							<label htmlFor="labelColor">Label Color:</label>
 							<Field
-								type="text" 
-								id="color" 
-								name="color" 
+								type="color" 
+								id="labelColor" 
+								name="labelColor" 
 							/>
-							<ErrorMessage name="color" component={() => (
-                            <div className="error">{errors.color}</div>)} />
+							<ErrorMessage name="labelColor" component={() => (
+                            <div className="error">{errors.labelColor}</div>)} />
 						</div>
 
+						
 						<div>
-							<label htmlFor="labelName">Emoji:</label>
-								<Field
-									type="text" 
-									id="emoji" 
-									name="emoji" 
-								/>
-								<ErrorMessage name="emoji" component={() => (
-							<div className="error">{errors.emoji}</div>)} />
-						</div>
+     						 {/*EMOJI FORM*/}
+    					</div>
 
 						<div>
-							<label htmlFor='description'>Description:</label>
-							<Field id ='description' name="description" as="textarea" placeholder="Description..." />
-							<ErrorMessage name="description" component={() => (
-                            <div className="error">{errors.description}</div>)} />
+							<label htmlFor='labelDescription'>Description:</label>
+							<Field id ='labelDescription' name="labelDescription" as="textarea" placeholder="Description..." />
+							<ErrorMessage name="labelDescription" component={() => (
+                            <div className="error">{errors.labelDescription}</div>)} />
 						</div>
 
 						<button type="submit">Create Label</button>
-						{formSend && <p className="exito">Label successfully created</p>}
+						{formSend 
+							? <p style={{color:'green'}} className="exito">Label successfully created!</p>
+							: <p style={{color:'red'}} className="fracaso">Some fields are empty!</p>}
 
 					</Form>
 				)}
@@ -72,4 +71,4 @@ const LabelForm = () => {
 	);
 }
  
-export default LabelForm;
+export default Page;

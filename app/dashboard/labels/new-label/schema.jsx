@@ -2,23 +2,23 @@ import * as Yup from 'yup';
 
 export const initialParams = {
         labelName: '',
-        color: '',
+        labelColor: '',
         emoji: '',
-        description: ''
+        labelDescription: ''
 }
 
-export const loginSchema = Yup.object().shape(
+export const schema = Yup.object().shape(
     {
         labelName: Yup.string()
                 .required('Label Name is required.'),
 
-        color: Yup.string()
+        labelColor: Yup.string()
                 .required('Color is required.'),
 
         emoji: Yup.string()
                 .required('Emoji is required.'),
 
-        description: Yup.string()
+        labelDescription: Yup.string()
                 .required('Description is required'),
     }
 );
