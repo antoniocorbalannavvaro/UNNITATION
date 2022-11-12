@@ -1,0 +1,24 @@
+- /api/get-auth-info
+* /api/login
++ /api/get-meta-fields
+* /api/video/list
+- /api/video/upload
+- /api/experiment/list
+- /api/experiment/create
+- /api/experiment/end
+- /api/label/list
+- /api/label/create
+- /api/user/list
+- /api/user/invite
+- /api/user/accept
+- /api/user/update
+- /api/annotation/start
+- /api/annotation/annotate
+- /api/annotation/end
+
+NOTE: all 'list' methods accept filtering by meta-fields
+
+Leyend:
+	-	Not yet implemented
+	*	Work in progress
+	+	Implemented
