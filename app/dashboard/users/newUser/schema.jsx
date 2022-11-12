@@ -10,7 +10,7 @@ export const initialParams = {
     proficiencySecondLanguage: ''
 }
 
-export const loginSchema = Yup.object().shape(
+export const schema = Yup.object().shape(
     {
         fullName: Yup.string()
                 .required('Full Name is required.'),
