@@ -1,6 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
+
+import AuthContext from '../../auth';
 
 import UniButton from "../../(components)/UniButton";
 import UniCard from '../../(components)/UniCard'
@@ -13,16 +15,30 @@ import { useUser } from '../../auth';
 export default function Page(){
     
     const something = useUser({});
+
+    const metaFields = useContext(AuthContext);
     
     const [items,setItems] = useState([]);
     const [meta, setMeta] = useState([])
+    const [error, setError] = useState([])
 
     useEffect(() => {
+
+        fetch('/api/videos').then((res) => {
+            return res.json()
+        }).then((data) => {
+
+            if (data.error) {
+                setError(data.reason)
+                return;
+            }; 
+
+        })
 
         setItems([{
             name: '136D1D1D1DG.mp4',
             properties: [{
-                id: 'text12',
+                id: 'language',
                 value: 'English'
             },{
                 id: 'duration',

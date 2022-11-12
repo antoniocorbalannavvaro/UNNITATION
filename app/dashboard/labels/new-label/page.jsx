@@ -49,7 +49,7 @@ const Page = () => {
 
 						
 						<div>
-     						 {/*EMOJI FORM*/}
+							<EmojiPicker onEmojiClick={(e)=>console.log(e)} />
     					</div>
 
 						<div>
