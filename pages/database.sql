@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS ExperimentAnnotator;
 DROP TABLE IF EXISTS AnnotationEvent;
 DROP TABLE IF EXISTS Annotation;
 DROP TABLE IF EXISTS ExperimentLabel;
@@ -29,13 +30,38 @@ CREATE TYPE Departament AS ENUM ('SALES', 'ENGINEERING', 'SUPPORT', 'CALL_CENTER
 
 -- Table entities
 
-CREATE TABLE AppUser(id SERIAL PRIMARY KEY, email VARCHAR(128) NOT NULL, createdBy INTEGER);
-CREATE TABLE DataScientist(id SERIAL PRIMARY KEY, parentId INTEGER NOT NULL, FOREIGN KEY (parentId) REFERENCES AppUser(id));
-CREATE TABLE Administrator(id SERIAL PRIMARY KEY, parentId INTEGER NOT NULL, FOREIGN KEY (parentId) REFERENCES AppUser(id));
-ALTER TABLE AppUser ADD CONSTRAINT fk_appuser_administrator FOREIGN KEY (createdBy) REFERENCES Administrator(id);
-CREATE TABLE Annotator(id SERIAL PRIMARY KEY, weeklyGoal INTERVAL NOT NULL, parentId INTEGER NOT NULL, FOREIGN KEY (parentId) REFERENCES AppUser(id));
+CREATE TABLE AppUser(
+	id SERIAL PRIMARY KEY,
+	email VARCHAR(128) NOT NULL,
+	password VARCHAR(128) NOT NULL,		-- FIXME: this should be a hash
+	createdBy INTEGER
+);
 
-CREATE TABLE SecondaryLanguage(id SERIAL PRIMARY KEY, language LanguageEnum NOT NULL, level LanguageLevel NOT NULL);
+CREATE TABLE DataScientist(
+	id SERIAL PRIMARY KEY,
+	parentId INTEGER NOT NULL,
+	FOREIGN KEY (parentId) REFERENCES AppUser(id)
+);
+
+CREATE TABLE Administrator(
+	id SERIAL PRIMARY KEY,
+	parentId INTEGER NOT NULL,
+	FOREIGN KEY (parentId) REFERENCES AppUser(id)
+);
+ALTER TABLE AppUser ADD CONSTRAINT fk_appuser_administrator FOREIGN KEY (createdBy) REFERENCES Administrator(id);
+
+CREATE TABLE Annotator(
+	id SERIAL PRIMARY KEY,
+	parentId INTEGER NOT NULL,
+	FOREIGN KEY (parentId) REFERENCES AppUser(id)
+);
+
+CREATE TABLE SecondaryLanguage(
+	id SERIAL PRIMARY KEY,
+	language LanguageEnum NOT NULL,
+	level LanguageLevel NOT NULL
+);
+
 CREATE TABLE UserInfo(
 	id SERIAL PRIMARY KEY,
 	name VARCHAR(64) NOT NULL,
@@ -49,7 +75,11 @@ CREATE TABLE UserInfo(
 	FOREIGN KEY (appUserId) REFERENCES AppUser(id)
 );
 
-CREATE TABLE Experiment(id SERIAL PRIMARY KEY, administratorId INTEGER NOT NULL, FOREIGN KEY (administratorId) REFERENCES Administrator (id));
+CREATE TABLE Experiment(
+	id SERIAL PRIMARY KEY,
+	administratorId INTEGER NOT NULL,
+	FOREIGN KEY (administratorId) REFERENCES Administrator (id)
+);
 
 CREATE TABLE Video(
 	id SERIAL PRIMARY KEY,
@@ -57,7 +87,9 @@ CREATE TABLE Video(
 	platform VideoPlatform NOT NULL,
 	language LanguageEnum NOT NULL,
 	dataScientistId INTEGER NOT NULL,
-	FOREIGN KEY (dataScientistId) REFERENCES DataScientist(id)
+	newVersionVideoId INTEGER,
+	FOREIGN KEY (dataScientistId) REFERENCES DataScientist(id),
+	FOREIGN KEY (newVersionVideoId) REFERENCES Video(id)
 );
 
 CREATE TABLE VideoExperiment(
@@ -68,7 +100,12 @@ CREATE TABLE VideoExperiment(
 	FOREIGN KEY (experimentId) REFERENCES Experiment(id)
 );
 
-CREATE TABLE Label(id SERIAL PRIMARY KEY, name VARCHAR(32));
+CREATE TABLE Label(
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(32),
+	createdBy INTEGER NOT NULL,
+	FOREIGN KEY (createdBy) REFERENCES Administrator(id)
+);
 
 CREATE TABLE ExperimentLabel(
 	id SERIAL PRIMARY KEY,
@@ -93,5 +130,13 @@ CREATE TABLE AnnotationEvent(
 	labelId INTEGER NOT NULL,
 	FOREIGN KEY (annotationId) REFERENCES Annotation(id),
 	FOREIGN KEY (labelId) REFERENCES Label(id)
+);
+
+CREATE TABLE ExperimentAnnotator(
+	id SERIAL PRIMARY KEY,
+	experimentId INTEGER NOT NULL,
+	annotatorId INTEGER NOT NULL,
+	FOREIGN KEY (experimentId) REFERENCES Experiment(id),
+	FOREIGN KEY (annotatorId) REFERENCES Annotator(id)
 );
 
