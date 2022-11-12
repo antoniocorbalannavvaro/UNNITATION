@@ -79,7 +79,7 @@ CREATE TABLE UserInfo(
 CREATE TABLE Experiment(
 	id SERIAL PRIMARY KEY,
 	name VARCHAR(128) NOT NULL,
-	chunkTime INTERVAL NOT NULL,
+	chunkTime INTERVAL NOT NULL, CHECK(chunkTime > '10 seconds'::INTERVAL),
 	administratorId INTEGER NOT NULL,
 	FOREIGN KEY (administratorId) REFERENCES Administrator (id)
 );
@@ -111,6 +111,7 @@ CREATE TABLE VideoExperiment(
 CREATE TABLE Label(
 	id SERIAL PRIMARY KEY,
 	name VARCHAR(32) UNIQUE NOT NULL,
+	emojiUnicode CHAR(1) NOT NULL,
 	createdBy INTEGER NOT NULL,
 	FOREIGN KEY (createdBy) REFERENCES Administrator(id)
 );

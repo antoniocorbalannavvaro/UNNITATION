@@ -40,8 +40,8 @@ BEGIN
 		VALUES ('IBM and Sony tech meeting', 'https://amazon.com/some-url/video2.mp4', 'https://amazon.com/some-url/transcript2.mp4', 12, '2015-05-01 06:32:12+00'::TIMESTAMPTZ, (SELECT NOW()), 'MICROSOFT_TEAMS', 'ENGLISH', dataScientistId) RETURNING id INTO videoId2;
 	
 	-- The administrator creates two labels
-	INSERT INTO Label(name, createdBy) VALUES ('happy', adminId);
-	INSERT INTO Label(name, createdBy) VALUES ('sad', adminId);
+	INSERT INTO Label(name, emojiUnicode, createdBy) VALUES ('happy', '😀', adminId);
+	INSERT INTO Label(name, emojiUnicode, createdBy) VALUES ('sad', '😔', adminId);
 	
 	-- The administrator creates an experiment
 	INSERT INTO Experiment(name, chunkTime, administratorId) VALUES ('Some experiment name', '10 minutes'::INTERVAL, adminId) RETURNING id INTO experimentId;
