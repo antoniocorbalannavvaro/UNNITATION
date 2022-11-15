@@ -9,7 +9,16 @@ export default async (req, res) => {
 		return;
 	}
 	
-	const dbRes = await database.query('SELECT password FROM AppUser WHERE email = $1', [req.query.username]);
+	const cookies = new Cookies(req, res);
+	const previousSessionId = cookies.get('SESSION_ID');
+	
+	if (session.get(previousSessionId) !== null)
+	{
+		res.send({ error: true, reason: 'Already logged in' });
+		return;
+	}
+	
+	const dbRes = await database.query('SELECT id, password FROM AppUser WHERE email = $1', [req.query.username]);
 	
 	if (dbRes.rows.length !== 1)
 	{
@@ -23,9 +32,8 @@ export default async (req, res) => {
 		return;
 	}
 	
-	const cookies = new Cookies(req, res);
+	const {sessionId, sessionInfo} = session.create(dbRes.rows[0].id);
 	
-	const {sessionId, sessionInfo} = session.create(req.query.username);
 	cookies.set('SESSION_ID', sessionId, { expires: sessionInfo.expires });
 	res.send({ error: false });
 };
