@@ -6,6 +6,8 @@ const SESSION_LENGTH = 32;		/* In bytes */
 const sessions = new Map();
 const sessionIdByUserId = new Map();
 
+export const SESSION_ID_COOKIE_LABEL = 'SESSION_ID';
+
 export function create(userId)
 {
 	const sessionId = crypto.randomBytes(SESSION_LENGTH).toString('base64');
@@ -38,14 +40,14 @@ export function get(sessionId)
 {
 	const sessionInfo = sessions.get(sessionId);
 	
-	if (!sessionInfo)
-		return null;
+	if (sessionInfo === undefined)
+		return undefined;
 	
 	if (sessionInfo.expires < (new Date()))
 	{
 		sessions.delete(sessionId);
 		sessionIdByUserId.delete(sessionInfo.userId);
-		return null;
+		return undefined;
 	}
 	
 	const newExpirationDate = new Date();

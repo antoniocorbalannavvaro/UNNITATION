@@ -1,4 +1,4 @@
-- /api/get-auth-info
++ /api/get-auth-info
 + /api/login
 + /api/get-meta-fields
 * /api/video/list
