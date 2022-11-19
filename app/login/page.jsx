@@ -8,10 +8,12 @@ export default function Page() {
 
     const router = useRouter()
 
-    const [email,setEmail] = useState('');
-    const [error,setError] = useState('');
-    const [password,setPassword] = useState('');
-    const [prueba,setPrueba] = useState('No')
+    const [email, setEmail] = useState('');
+    const [error, setError] = useState('');
+    const [password, setPassword] = useState('');
+    const [prueba, setPrueba] = useState('No')
+
+    const [isValidUser, setIsValidUser] = useState();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -21,17 +23,19 @@ export default function Page() {
             password: password,
         })).then((res) => {
             return res.json()
+
         }).then((data) => {
 
             if (data.error) {
+                setIsValidUser(false)
+                setTimeout(() => {setIsValidUser('')}, 3000)
                 setError(data.reason)
                 return;
             };
 
-            router.push('/dashboard/videos')   
-
+            setIsValidUser(true);
+            router.push('/dashboard/videos');
         })
-
     }
 
     return (
@@ -49,10 +53,17 @@ export default function Page() {
                         handleSubmit={handleSubmit}>
                     </UniForm>
                 </UniCard>
+
+                {isValidUser === false 
+                ? <p style={{color:'red'}}>Username or password are incorrect !</p>
+                : null }
+
+                {isValidUser === true 
+                ? <p style={{color:'green'}}>Welcome to Unnitation pixa !</p>
+                : null }
+
                 </div>
             </div>
         </div>
-        
-        
     )
 }
