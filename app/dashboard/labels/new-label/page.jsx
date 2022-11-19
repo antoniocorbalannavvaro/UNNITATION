@@ -9,7 +9,7 @@ const Page = () => {
 	const [formSend, changeFormSend] = useState(false);
 	const [showEmojiComp, setShowEmojiComp] = useState(false);
 
-	var emojiChosen = 'Any';
+	let emojiChosen = 'Any';
 	const emojiButtonOn = 'Hide Emojis';
 	const emojiButtonOff = 'Show Emojis';
 
@@ -37,7 +37,6 @@ const Page = () => {
 								id="labelName" 
 								name="labelName" 
 							/>
-
 							<ErrorMessage name="labelName" component={() => (
                             <div className="error">{errors.labelName}</div>)} />
 						</div>
