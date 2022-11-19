@@ -28,6 +28,7 @@ export default function Page() {
 
             if (data.error) {
                 setIsValidUser(false)
+                setTimeout(() => {setIsValidUser('')}, 3000)
                 setError(data.reason)
                 return;
             };
