@@ -44,3 +44,4 @@ export async function getUserInfo(userId)
 	};
 }
 
+export default pool;
