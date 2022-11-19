@@ -9,16 +9,14 @@ export default async (req, res) => {
 			throw new InvalidRequestError(req);
 		
 		const userId = await userLogin(req.query.username, req.query.password);
-		
 		createSession(userId, req, res);
-		
 		res.send({ error: false });
 	}
 	catch (err)
 	{
-		if (err instanceof AppError)
-			res.send({ error: true, reason: err.message });
-		else
+		if (!(err instanceof AppError))
 			throw err;
+		
+		res.send({ error: true, reason: err.message });
 	}
 };

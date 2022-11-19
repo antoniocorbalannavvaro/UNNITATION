@@ -1,28 +1,21 @@
 import Cookies from 'cookies';
 import { getUserInfo } from '../database';
-import * as session from '../session';
+import { getUserId } from '../session';
+import { AppError } from '../errors';
 
 export default async (req, res) => {
-	const cookies = new Cookies(req, res);
-	
-	const sessionId = cookies.get(session.SESSION_ID_COOKIE_LABEL);
-	
-	if (sessionId === undefined)
+	try
 	{
-		res.send({ error: true, reason: 'No session token provided' });
-		return;
+		const userId = getUserId(req, res);
+		const userInfo = await getUserInfo(userId);
+		res.send(userInfo);
 	}
-	
-	const sessionInfo = session.get(sessionId);
-	
-	if (sessionInfo === undefined)
+	catch (err)
 	{
-		res.send({ error: true, reason: 'Session not registered' });
-		return;
+		if (!(err instanceof AppError))
+			throw err;
+		
+		res.send({ error: true, reason: err.message });
 	}
-	
-	const userInfo = await getUserInfo(sessionInfo.userId);
-	
-	res.send(userInfo);
 };
 

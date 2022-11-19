@@ -34,3 +34,39 @@ export class UserInfoError extends AppError
 	}
 }
 
+export class InvalidAuthenticationError extends AppError
+{
+	constructor()
+	{
+		super('Invalid authentication');
+		this.name = this.constructor.name;
+	}
+}
+
+export class NoSessionTokenError extends AppError
+{
+	constructor()
+	{
+		super('No session token provided');
+		this.name = this.constructor.name;
+	}
+}
+
+export class InvalidSessionTokenError extends AppError
+{
+	constructor(sessionId)
+	{
+		super(`Invalid session token ${sessionId}`);
+		this.name = this.constructor.name;
+	}
+}
+
+export class SessionExpiredError extends AppError
+{
+	constructor(sessionId)
+	{
+		super(`Session '${sessionId}' expired`);
+		this.name = this.constructor.name;
+	}
+}
+

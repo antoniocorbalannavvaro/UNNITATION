@@ -1,5 +1,6 @@
 import crypto from 'crypto';
 import Cookies from 'cookies';
+import { NoSessionTokenError, InvalidSessionTokenError, SessionExpiredError } from './errors';
 
 const SESSION_DURATION = 10;	/* In minutes */
 const SESSION_LENGTH = 32;		/* In bytes */
@@ -38,24 +39,32 @@ export function createSession(userId, req, res)
 	cookies.set(SESSION_ID_COOKIE_LABEL, sessionId, { expires });
 }
 
-export function get(sessionId)
+export function getUserId(req, res)
 {
+	const cookies = new Cookies(req, res);
+	
+	const sessionId = cookies.get(SESSION_ID_COOKIE_LABEL);
+	
+	if (sessionId === undefined)
+		throw new NoSessionTokenError();
+	
 	const sessionInfo = sessions.get(sessionId);
 	
 	if (sessionInfo === undefined)
-		return undefined;
+		throw new InvalidSessionTokenError(sessionId);
 	
 	if (sessionInfo.expires < (new Date()))
 	{
 		sessions.delete(sessionId);
 		sessionIdByUserId.delete(sessionInfo.userId);
-		return undefined;
+		throw new SessionExpiredError(sessionId);
 	}
 	
 	const newExpirationDate = new Date();
 	newExpirationDate.setMinutes(newExpirationDate.getMinutes() + SESSION_DURATION);
 	
 	sessionInfo.expires = newExpirationDate;
+	cookies.set(SESSION_ID_COOKIE_LABEL, sessionId, { expires: newExpirationDate });
 	
-	return sessionInfo;
+	return sessionInfo.userId;
 }
