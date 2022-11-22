@@ -31,12 +31,19 @@ CREATE TABLE app_user(
 	id SERIAL PRIMARY KEY,
 	email VARCHAR(128) UNIQUE NOT NULL,
 	password VARCHAR(128) NOT NULL,		-- FIXME: this should be a hash
+	completed_date TIMESTAMPTZ NULL,
 	first_name VARCHAR(64) NULL,
 	middle_name VARCHAR(64) NULL,
 	last_name VARCHAR(64) NULL,
 	gender gender NULL,
 	department department NULL,
-	created_by INTEGER NOT NULL
+	created_by INTEGER NULL,
+	CHECK(completed_date IS NULL OR (
+		first_name IS NOT NULL AND
+		last_name IS NOT NULL AND
+		gender IS NOT NULL AND
+		department IS NOT NULL
+	))
 );
 ALTER TABLE app_user ADD CONSTRAINT fk_app_user_created_by FOREIGN KEY (created_by) REFERENCES app_user(id);
 
@@ -78,12 +85,11 @@ CREATE TABLE video(
 );
 
 CREATE TABLE video_experiment(
-	id SERIAL PRIMARY KEY,
 	video_id INTEGER NOT NULL,
 	experiment_id INTEGER NOT NULL,
+	PRIMARY KEY (video_id, experiment_id),
 	FOREIGN KEY (video_id) REFERENCES video(id),
-	FOREIGN KEY (experiment_id) REFERENCES experiment(id),
-	UNIQUE (video_id, experiment_id)
+	FOREIGN KEY (experiment_id) REFERENCES experiment(id)
 );
 
 CREATE TABLE label(
@@ -105,9 +111,10 @@ CREATE TABLE experiment_label(
 CREATE TABLE annotation(
 	id SERIAL PRIMARY KEY,
 	chunk_num INTEGER NOT NULL,
-	video_experiment_id INTEGER NOT NULL,
+	video_id INTEGER NOT NULL,
+	experiment_id INTEGER NOT NULL,
 	app_user_id INTEGER NOT NULL,
-	FOREIGN KEY (video_experiment_id) REFERENCES video_experiment(id),
+	FOREIGN KEY (video_id, experiment_id) REFERENCES video_experiment(video_id, experiment_id),
 	FOREIGN KEY (app_user_id) REFERENCES app_user(id)
 );
 
