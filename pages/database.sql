@@ -1,152 +1,151 @@
-DROP TABLE IF EXISTS ExperimentAnnotator;
-DROP TABLE IF EXISTS AnnotationEvent;
-DROP TABLE IF EXISTS Annotation;
-DROP TABLE IF EXISTS ExperimentLabel;
-DROP TABLE IF EXISTS Label;
-DROP TABLE IF EXISTS VideoExperiment;
-DROP TABLE IF EXISTS Video;
-DROP TABLE IF EXISTS Experiment;
-DROP TABLE IF EXISTS UserInfo;
-DROP TABLE IF EXISTS SecondaryLanguage;
-DROP TABLE IF EXISTS Annotator;
-ALTER TABLE AppUser DROP CONSTRAINT fk_appuser_administrator;
-DROP TABLE IF EXISTS Administrator;
-DROP TABLE IF EXISTS DataScientist;
-DROP TABLE IF EXISTS AppUser;
+DROP TABLE IF EXISTS experiment_annotator;
+DROP TABLE IF EXISTS annotation_event;
+DROP TABLE IF EXISTS annotation;
+DROP TABLE IF EXISTS experiment_label;
+DROP TABLE IF EXISTS label;
+DROP TABLE IF EXISTS video_experiment;
+DROP TABLE IF EXISTS video;
+DROP TABLE IF EXISTS experiment;
+DROP TABLE IF EXISTS user_info;
+DROP TABLE IF EXISTS secondary_language;
+DROP TABLE IF EXISTS annotator;
+ALTER TABLE app_user DROP CONSTRAINT fk_appuser_administrator;
+DROP TABLE IF EXISTS administrator;
+DROP TABLE IF EXISTS data_scientist;
+DROP TABLE IF EXISTS app_user;
 
-DROP TYPE IF EXISTS Departament;
-DROP TYPE IF EXISTS Gender;
-DROP TYPE IF EXISTS LanguageLevel;
-DROP TYPE IF EXISTS LanguageEnum;
-DROP TYPE IF EXISTS VideoPlatform;
+DROP TYPE IF EXISTS department;
+DROP TYPE IF EXISTS gender;
+DROP TYPE IF EXISTS language_level;
+DROP TYPE IF EXISTS language_enum;
+DROP TYPE IF EXISTS video_platform;
 
 -- Enumerators
 
-CREATE TYPE VideoPlatform AS ENUM ('GOOGLE_MEET', 'ZOOM', 'MICROSOFT_TEAMS');
-CREATE TYPE LanguageEnum AS ENUM ('SPANISH', 'ENGLISH', 'INDIAN', 'CHINESE');
-CREATE TYPE LanguageLevel AS ENUM ('A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'NATIVE');
-CREATE TYPE Gender AS ENUM ('MALE', 'FEMALE', 'TRANS', 'NON_BINARY', 'NOT_APPLICABLE');
-CREATE TYPE Departament AS ENUM ('SALES', 'ENGINEERING', 'SUPPORT', 'CALL_CENTER');
+CREATE TYPE video_platform AS ENUM ('GOOGLE_MEET', 'ZOOM', 'MICROSOFT_TEAMS');
+CREATE TYPE language_enum AS ENUM ('SPANISH', 'ENGLISH', 'INDIAN', 'CHINESE');
+CREATE TYPE language_level AS ENUM ('A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'NATIVE');
+CREATE TYPE gender AS ENUM ('MALE', 'FEMALE', 'TRANS', 'NON_BINARY', 'NOT_APPLICABLE');
+CREATE TYPE department AS ENUM ('SALES', 'ENGINEERING', 'SUPPORT', 'CALL_CENTER');
 
 -- Table entities
 
-CREATE TABLE AppUser(
+CREATE TABLE app_user(
 	id SERIAL PRIMARY KEY,
 	email VARCHAR(128) UNIQUE NOT NULL,
 	password VARCHAR(128) NOT NULL,		-- FIXME: this should be a hash
-	createdBy INTEGER
+	created_by INTEGER
 );
 
-CREATE TABLE DataScientist(
+CREATE TABLE data_scientist(
 	id SERIAL PRIMARY KEY,
-	parentId INTEGER NOT NULL,
-	FOREIGN KEY (parentId) REFERENCES AppUser(id)
+	parent_id INTEGER NOT NULL,
+	FOREIGN KEY (parent_id) REFERENCES app_user(id)
 );
 
-CREATE TABLE Administrator(
+CREATE TABLE administrator(
 	id SERIAL PRIMARY KEY,
-	parentId INTEGER NOT NULL,
-	FOREIGN KEY (parentId) REFERENCES AppUser(id)
+	parent_id INTEGER NOT NULL,
+	FOREIGN KEY (parent_id) REFERENCES app_user(id)
 );
-ALTER TABLE AppUser ADD CONSTRAINT fk_appuser_administrator FOREIGN KEY (createdBy) REFERENCES Administrator(id);
+ALTER TABLE app_user ADD CONSTRAINT fk_appuser_administrator FOREIGN KEY (created_by) REFERENCES administrator(id);
 
-CREATE TABLE Annotator(
+CREATE TABLE annotator(
 	id SERIAL PRIMARY KEY,
-	parentId INTEGER NOT NULL,
-	FOREIGN KEY (parentId) REFERENCES AppUser(id)
+	parent_id INTEGER NOT NULL,
+	FOREIGN KEY (parent_id) REFERENCES app_user(id)
 );
 
-CREATE TABLE SecondaryLanguage(
+CREATE TABLE secondary_language(
 	id SERIAL PRIMARY KEY,
-	language LanguageEnum NOT NULL,
-	level LanguageLevel NOT NULL
+	language language_enum NOT NULL,
+	level language_level NOT NULL
 );
 
-CREATE TABLE UserInfo(
+CREATE TABLE user_info(
 	id SERIAL PRIMARY KEY,
 	name VARCHAR(64) NOT NULL,
-	middleName VARCHAR(64),
-	lastName VARCHAR(64) NOT NULL,
-	mainLanguage LanguageEnum NOT NULL,
-	gender Gender NOT NULL,
-	departament Departament NOT NULL,
-	secondaryLanguageId INTEGER,
-	appUserId INTEGER NOT NULL,
-	FOREIGN KEY (secondaryLanguageId) REFERENCES SecondaryLanguage(id),
-	FOREIGN KEY (appUserId) REFERENCES AppUser(id)
+	middle_name VARCHAR(64),
+	last_name VARCHAR(64) NOT NULL,
+	main_language language_enum NOT NULL,
+	gender gender NOT NULL,
+	department department NOT NULL,
+	secondary_language_id INTEGER,
+	app_user_id INTEGER NOT NULL,
+	FOREIGN KEY (secondary_language_id) REFERENCES secondary_language(id),
+	FOREIGN KEY (app_user_id) REFERENCES app_user(id)
 );
 
-CREATE TABLE Experiment(
+CREATE TABLE experiment(
 	id SERIAL PRIMARY KEY,
 	name VARCHAR(128) NOT NULL,
-	chunkTime INTERVAL NOT NULL, CHECK(chunkTime > '10 seconds'::INTERVAL),
-	administratorId INTEGER NOT NULL,
-	FOREIGN KEY (administratorId) REFERENCES Administrator (id)
+	chunk_time INTERVAL NOT NULL, CHECK(chunk_time > '10 seconds'::INTERVAL),
+	administrator_id INTEGER NOT NULL,
+	FOREIGN KEY (administrator_id) REFERENCES administrator (id)
 );
 
-CREATE TABLE Video(
+CREATE TABLE video(
 	id SERIAL PRIMARY KEY,
 	name VARCHAR(128) NOT NULL,
 	url VARCHAR(512) NOT NULL,
-	transcriptUrl VARCHAR(512),
-	numActors INTEGER, CHECK(numActors > 1),
-	videoDate TIMESTAMPTZ NOT NULL,
-	uploadDate TIMESTAMPTZ NOT NULL,
-	platform VideoPlatform NOT NULL,
-	language LanguageEnum NOT NULL,
-	dataScientistId INTEGER NOT NULL,
-	newVersionVideoId INTEGER,
-	FOREIGN KEY (dataScientistId) REFERENCES DataScientist(id),
-	FOREIGN KEY (newVersionVideoId) REFERENCES Video(id)
+	transcript_url VARCHAR(512),
+	num_actors INTEGER, CHECK(num_actors > 1),
+	upload_date TIMESTAMPTZ NOT NULL,
+	platform video_platform NOT NULL,
+	language language_enum NOT NULL,
+	data_scientist_id INTEGER NOT NULL,
+	new_version_video_id INTEGER,
+	FOREIGN KEY (data_scientist_id) REFERENCES data_scientist(id),
+	FOREIGN KEY (new_version_video_id) REFERENCES video(id)
 );
 
-CREATE TABLE VideoExperiment(
+CREATE TABLE video_experiment(
 	id SERIAL PRIMARY KEY,
-	videoId INTEGER NOT NULL,
-	experimentId INTEGER NOT NULL,
-	FOREIGN KEY (videoId) REFERENCES Video(id),
-	FOREIGN KEY (experimentId) REFERENCES Experiment(id)
+	video_id INTEGER NOT NULL,
+	experiment_id INTEGER NOT NULL,
+	FOREIGN KEY (video_id) REFERENCES video(id),
+	FOREIGN KEY (experiment_id) REFERENCES experiment(id)
 );
 
-CREATE TABLE Label(
+CREATE TABLE label(
 	id SERIAL PRIMARY KEY,
 	name VARCHAR(32) UNIQUE NOT NULL,
-	emojiUnicode CHAR(1) NOT NULL,
-	createdBy INTEGER NOT NULL,
-	FOREIGN KEY (createdBy) REFERENCES Administrator(id)
+	emoji_unicode CHAR(1) NOT NULL,
+	created_by INTEGER NOT NULL,
+	FOREIGN KEY (created_by) REFERENCES administrator(id)
 );
 
-CREATE TABLE ExperimentLabel(
+CREATE TABLE experiment_label(
 	id SERIAL PRIMARY KEY,
-	experimentId INTEGER NOT NULL,
-	labelId INTEGER NOT NULL,
-	FOREIGN KEY (experimentId) REFERENCES Experiment(id),
-	FOREIGN KEY (labelId) REFERENCES Label(id)
+	experiment_id INTEGER NOT NULL,
+	label_id INTEGER NOT NULL,
+	FOREIGN KEY (experiment_id) REFERENCES experiment(id),
+	FOREIGN KEY (label_id) REFERENCES label(id)
 );
 
-CREATE TABLE Annotation(
+CREATE TABLE annotation(
 	id SERIAL PRIMARY KEY,
-	chunkNum INTEGER NOT NULL,
-	videoExperimentId INTEGER NOT NULL,
-	annotatorId INTEGER NOT NULL,
-	FOREIGN KEY (videoExperimentId) REFERENCES VideoExperiment(id),
-	FOREIGN KEY (annotatorId) REFERENCES Annotator(id)
+	chunk_num INTEGER NOT NULL,
+	video_experiment_id INTEGER NOT NULL,
+	annotator_id INTEGER NOT NULL,
+	FOREIGN KEY (video_experiment_id) REFERENCES video_experiment(id),
+	FOREIGN KEY (annotator_id) REFERENCES annotator(id)
 );
 
-CREATE TABLE AnnotationEvent(
+CREATE TABLE annotation_event(
 	id SERIAL PRIMARY KEY,
 	instant INTERVAL NOT NULL,
-	annotationId INTEGER NOT NULL,
-	labelId INTEGER NOT NULL,
-	FOREIGN KEY (annotationId) REFERENCES Annotation(id),
-	FOREIGN KEY (labelId) REFERENCES Label(id)
+	annotation_id INTEGER NOT NULL,
+	label_id INTEGER NOT NULL,
+	FOREIGN KEY (annotation_id) REFERENCES annotation(id),
+	FOREIGN KEY (label_id) REFERENCES label(id)
 );
 
-CREATE TABLE ExperimentAnnotator(
+CREATE TABLE experiment_annotator(
 	id SERIAL PRIMARY KEY,
-	experimentId INTEGER NOT NULL,
-	annotatorId INTEGER NOT NULL,
-	FOREIGN KEY (experimentId) REFERENCES Experiment(id),
-	FOREIGN KEY (annotatorId) REFERENCES Annotator(id)
+	experiment_id INTEGER NOT NULL,
+	annotator_id INTEGER NOT NULL,
+	FOREIGN KEY (experiment_id) REFERENCES experiment(id),
+	FOREIGN KEY (annotator_id) REFERENCES annotator(id)
 );
 
