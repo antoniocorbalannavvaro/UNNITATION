@@ -3,7 +3,7 @@ import { InvalidLoginError, UserInfoError } from './errors';
 
 const pool = new Pool({
 	user: process.env.USER,
-	password: null,
+	password: '12345678',
 	database: 'unnitation',
 	host: 'localhost',
 	port: 5432
