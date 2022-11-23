@@ -52,6 +52,7 @@ CREATE TABLE app_user(
 ALTER TABLE app_user ADD CONSTRAINT fk_app_user_created_by FOREIGN KEY (created_by) REFERENCES app_user(id);
 
 CREATE TABLE app_user_language(
+	is_main BOOL NOT NULL,
 	language language_enum NOT NULL,
 	app_user_id INTEGER NOT NULL,
 	PRIMARY KEY (app_user_id, language),

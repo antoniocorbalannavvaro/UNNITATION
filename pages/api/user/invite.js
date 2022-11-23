@@ -1,10 +1,12 @@
-import { createUser } from '../../database';
-import { AppError, InvalidRequestError } from '../../errors';
+import { createUser } from '../../main/database';
 
 export default async (req, res) => {
 	try
 	{
-		await createUser(req.body.email, req.body.roles, req.body.annotationDedicationTime, null);
+		/* TODO: get from cookie session */
+		const userId = 1;
+		
+		await createUser(req.body.email, req.body.roles, req.body.annotationDedicationTime, userId);
 		res.json({ error: false });
 	}
 	catch (err)
