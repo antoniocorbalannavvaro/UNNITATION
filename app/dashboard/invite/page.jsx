@@ -2,6 +2,7 @@
 import React, {useState} from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { formSchema, initialParams } from './FormSchema';
+import getData from '../../../fetch.enum.module';
 
 /* fetch('/api/user/invite', {
 	method: 'POST',
@@ -21,16 +22,7 @@ import { formSchema, initialParams } from './FormSchema';
 });
  */
 
-const TimeForm = () => {
-    return (
-        <div>
-            <label htmlFor="annotationTime">Annotation Time:</label>
-            <Field id="annotationTime" type="number" name="annotationTime"/>
-            <ErrorMessage name="annotationTime" component={() => (<div className="error">Annotation Time is Required</div>)} />
-        </div>
-    );
-}
-
+const roles = await getData('user_role');
 
 const InviteForm = () => {
 
@@ -41,6 +33,27 @@ const InviteForm = () => {
         setIsAnnotator(!isAnnotator);
     }
 
+    const getRoles = () => {
+        return roles.map((i) => {
+            if(i === 'ANNOTATOR'){
+                return <label>
+                <Field onClick={() => changeAnnotatorState(false)} type="checkbox" name="role" value={i} />
+                {i.replace('_',' ').toLowerCase()}</label>}
+            else 
+                return <label><Field type="checkbox" name="role" value={i} />{i.replace('_',' ').toLowerCase()}</label> })
+           
+    }
+    
+    const TimeForm = () => {
+        return (
+            <div>
+                <label htmlFor="annotationTime">Annotation Time:</label>
+                <Field id="annotationTime" type="number" name="annotationTime"/>
+                <ErrorMessage name="annotationTime" component={() => (<div className="error">Annotation Time is Required</div>)} />
+            </div>
+        );
+    }
+    
     return (
 		<>
 			<Formik
@@ -63,20 +76,7 @@ const InviteForm = () => {
 					<Form>     
 
                     <div role="group" aria-labelledby="checkbox-group">Role: 
-                        <label>
-                            <Field type="checkbox" name="role" value="ADMIN" />
-                            Admin
-                        </label>
-
-                        <label>
-                            <Field type="checkbox" name="role" value="DATA_SCIENTIST" />
-                            Data Scientist
-                        </label>
-
-                        <label>
-                            <Field onClick={() => changeAnnotatorState(false)} type="checkbox" name="role" value="ANNOTATOR" />
-                            Annotator
-                        </label>
+                        {getRoles()}
                         <ErrorMessage name="role" component={() => (<div className="error">{errors.role}</div>)} />
                         {isAnnotator ? <TimeForm/> : null}
                     </div>         

@@ -2,24 +2,25 @@
 import React, {useState} from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { schema, initialParams } from './schema';
+import getData from '../../../../fetch.enum.module';
 
-const languages = ['english', 'spanish', 'german', 'french', 'chinese', 'russian', 'japanese'];
-const departments = ['engineer','marketing','HHRR','data_science', 'manager'];
+const departments = await getData('department');
+const languages = await getData('language_enum');
 
 const showLanguagesSelect = () => {
     return languages.map((i) => {
-        return <option value={i.toUpperCase()}>{i}</option>})
+        return <option value={i}> {i.replace('_',' ').toLowerCase()} </option>})
 }
 
 const showLanguagesCheckBox = () => {
     return languages.map((i) => {
-        return <div><label> <Field type="checkbox" name="fluidLanguages" value={i.toString().toUpperCase()} /> {i} </label></div>
+        return <div><label> <Field type="checkbox" name="fluidLanguages" value={i.toString()} /> {i.replace('_',' ').toLowerCase()} </label></div>
     })
 }
 
 const showDepartments = () => {
     return departments.map((i) => {
-        return <option value={i.toString().toUpperCase()}>{i.replace('_',' ')}</option>
+        return <option value={i.toString()}>{i.replace('_',' ').toLowerCase()}</option>
     })
 }
 
@@ -35,6 +36,9 @@ const Page = () => {
 
 				onSubmit={(params, {resetForm}) => {
                     //TODO send to the vaquen
+                    if(params.fluidLanguages.length === 0){
+                        delete params.fluidLanguages;
+                    }
                     console.log('Data: ',params);
 					//resetForm();
 					changeFormSend(true);
@@ -64,7 +68,7 @@ const Page = () => {
                     <div>
                         <label>Gender</label>
                         <Field name="gender" as="select">
-                            <option value='null'>-</option>
+                            <option value=''>-</option>
                             <option value="MALE">Male</option>
                             <option value="FEMALE">Female</option>
                         </Field>
@@ -74,7 +78,7 @@ const Page = () => {
                     <div>
                         <label>Working Department</label>
                         <Field name="workingDepartment" as="select">
-                            <option value="null">-</option>
+                            <option value="">-</option>
                             {showDepartments()}
                         </Field>
                         <ErrorMessage name="workingDepartment" component={() => (<div className="error">{errors.workingDepartment}</div>)} />
@@ -83,7 +87,7 @@ const Page = () => {
                     <div>
                         <label>Native Language</label>
                         <Field name="nativeLanguage" as="select">
-                            <option value='null'>-</option>
+                            <option value=''>-</option>
                             {showLanguagesSelect()}
                         </Field>
                         <ErrorMessage name="nativeLanguage" component={() => (<div className="error">{errors.nativeLanguage}</div>)} />
