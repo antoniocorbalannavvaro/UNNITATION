@@ -2,6 +2,8 @@ import UniButton from "./(components)/UniButton";
 import UniMenu from "./(components)/UniMenu";
 import UserAvatar from "./dashboard/prueba/page";
 
+const isOnline = true;
+
 export default function NavBar() {
     return (
         <div className="container-fluid gradient-background">  
@@ -13,7 +15,10 @@ export default function NavBar() {
                     <UniMenu></UniMenu>
                 </div>
                 <div className="col-3 d-flex align-items-center justify-content-end px-3">
-                    <div style={{padding:'30px'}}><UserAvatar></UserAvatar></div>
+                    <div style={{padding:'30px'}}>
+                    {isOnline ? <UserAvatar></UserAvatar> : <p></p>}
+                    
+                    </div>
                     <a href="/login"><UniButton>LOG IN</UniButton></a>
                     
                 </div>

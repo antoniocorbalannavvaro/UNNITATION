@@ -4,24 +4,6 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { formSchema, initialParams } from './FormSchema';
 import getData from '../../../fetch.enum.module';
 
-/* fetch('/api/user/invite', {
-	method: 'POST',
-	body: JSON.stringify(params),
-	headers: {
-		'Content-type': 'application/json; charset=UTF-8'
-	}
-}).then(function (response) {
-	if (response.ok) {
-		return response.json();
-	}
-	return Promise.reject(response);
-}).then(function (data) {
-	console.log(data);
-}).catch(function (error) {
-	console.warn('Something went wrong.', error);
-});
- */
-
 const roles = await getData('user_role');
 
 const InviteForm = () => {

@@ -60,7 +60,7 @@ const Page = () => {
       
 
                     <div>
-                        <label htmlFor="age">Birthday:</label>
+                        <label htmlFor="age">Birthday</label>
                         <Field id="age" type="date" name="age"/>
                         <ErrorMessage name="age" component={() => (<div className="error">{errors.age}</div>)} />
                     </div>
@@ -93,7 +93,7 @@ const Page = () => {
                         <ErrorMessage name="nativeLanguage" component={() => (<div className="error">{errors.nativeLanguage}</div>)} />
                     </div>
 
-                    <div role="group" aria-labelledby="checkbox-group">Fluid languajes: 
+                    <div role="group" aria-labelledby="checkbox-group">Fluid languajes
                         {showLanguagesCheckBox()}
                         <ErrorMessage name="fluidLanguages" component={() => (<div className="error">{errors.fluidLanguages}</div>)} />
                     </div>         

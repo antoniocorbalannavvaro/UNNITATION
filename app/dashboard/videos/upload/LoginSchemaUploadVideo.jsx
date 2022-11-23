@@ -9,8 +9,8 @@ export const initialParams = {
     participants: '',
     language: '',
     platform: '',
-    dealDisposition: '',
     videoCreationDate: '',
+    dateUploaded: '',
 }
 
 export const loginSchema = Yup.object().shape(
@@ -19,20 +19,21 @@ export const loginSchema = Yup.object().shape(
                 .url('URL invalid format')
                 .required('URL is required.'),
 
-        isTranscrypt: Yup.string()
+        isTranscrypt: Yup.bool()
                 .required('Transcript is required.'),
 
         participants: Yup.number()
+                .min(1)
+                .positive('Participants must be a positive number')
                 .required('Participants number is required'),
 
         transcryptUrl: Yup.string()
-                .url('URL invalid format')
-                .required('URL Transcript is required'),
+                .url('URL invalid format'),
 
-        salesMeeting: Yup.string()
+        salesMeeting: Yup.bool()
                 .required('Sales Meeting is required.'),
 
-        actors: Yup.string()
+        actors: Yup.bool()
                 .required('Actors are required.'),
 
 
@@ -42,10 +43,9 @@ export const loginSchema = Yup.object().shape(
         platform: Yup.string()
                 .required('Platform is required.'),
 
-        dealDisposition: Yup.string()
-                .required('Deal Disposition is required.'),
-
         videoCreationDate: Yup.date()
-                .required('Video Creation Date is required.')
+                .required('Video Creation Date is required.'),
+        
+        dateUploaded: Yup.date()
     }
 );
