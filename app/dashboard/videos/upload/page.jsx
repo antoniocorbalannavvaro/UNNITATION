@@ -35,15 +35,28 @@ const VideoUploadForm = () => {
                     if(params.transcryptUrl === ''){
                         delete params.transcryptUrl;
                         params.isTranscrypt = 'false';
-
                     }
+
+                    const nomalizaBooleans = () => {
+                        for(let i of Object.entries(params)){
+                            if(i[1] === 'true'){
+                                params[i[0]] = true
+                            }
+
+                            if(i[1] === 'false'){
+                                params[i[0]] = false
+                            }
+                        }
+                    }
+
+                    nomalizaBooleans();
 
                     let today = new Date();
                     let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
                     params.dateUploaded = date;
 
                     console.log('Data: ',params);
-					resetForm();
+					//resetForm();
 					changeFormSend(true);
 					setTimeout(() => changeFormSend(false), 5000);
 				}}

@@ -2,6 +2,7 @@ import UniButton from "./(components)/UniButton";
 import UniMenu from "./(components)/UniMenu";
 import UserAvatar from "./dashboard/prueba/page";
 
+//Dummie check:
 const isOnline = true;
 
 export default function NavBar() {

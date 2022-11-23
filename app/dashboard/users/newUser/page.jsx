@@ -20,7 +20,7 @@ const showLanguagesCheckBox = () => {
 
 const showDepartments = () => {
     return departments.map((i) => {
-        return <option value={i.toString()}>{i.replace('_',' ').toLowerCase()}</option>
+        return <option value={i}>{i.replace('_',' ').toLowerCase()}</option>
     })
 }
 
