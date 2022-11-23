@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { formSchema, initialParams } from './FormSchema';
 import getData from '../../../fetch.enum.module';
+import sendData from './post.module';
 
 const roles = await getData('user_role');
 
@@ -47,16 +48,15 @@ const InviteForm = () => {
                     if(params.annotationTime === 0){
                         delete params.annotationTime
                     }
-                    
-                    console.log('Data: ',params);
+                    //console.log('Data: ',params);
+                    sendData('/api/user/invite', params);
 					//resetForm();
 					changeFormSend(true);
 					setTimeout(() => changeFormSend(false), 5000);
 				}}
 			>
 				{( {errors} ) => (
-					<Form>     
-
+					<Form>  
                     <div role="group" aria-labelledby="checkbox-group">Role: 
                         {getRoles()}
                         <ErrorMessage name="role" component={() => (<div className="error">{errors.role}</div>)} />

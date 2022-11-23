@@ -6,6 +6,7 @@ import getData from '../../../../fetch.enum.module';
 
 const departments = await getData('department');
 const languages = await getData('language_enum');
+const sex = await getData('gender');
 
 const showLanguagesSelect = () => {
     return languages.map((i) => {
@@ -22,6 +23,11 @@ const showDepartments = () => {
     return departments.map((i) => {
         return <option value={i}>{i.replace('_',' ').toLowerCase()}</option>
     })
+}
+
+const showSex = () => {
+    return sex.map((i) => {
+        return <option value={i}>{i.replace('_',' ').toLowerCase()}</option>})
 }
 
 const Page = () => {
@@ -69,8 +75,7 @@ const Page = () => {
                         <label>Gender</label>
                         <Field name="gender" as="select">
                             <option value=''>-</option>
-                            <option value="MALE">Male</option>
-                            <option value="FEMALE">Female</option>
+                            {showSex()}
                         </Field>
                         <ErrorMessage name="gender" component={() => (<div className="error">{errors.gender}</div>)} />
                     </div>
