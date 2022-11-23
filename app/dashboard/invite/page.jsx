@@ -2,8 +2,8 @@
 import React, {useState} from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { formSchema, initialParams } from './FormSchema';
-import getData from '../../../fetch.enum.module';
-import sendData from './post.module';
+import getData from '../../../fetch.get.module';
+import sendData from '../../../fetch.post.module';
 
 const roles = await getData('user_role');
 
