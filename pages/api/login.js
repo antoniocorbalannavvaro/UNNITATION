@@ -1,29 +1,22 @@
-const database = new Map();
+import { userLogin } from '../database';
+import { createSession } from '../session';
+import { AppError, InvalidRequestError } from '../errors';
 
-database.set('topo@gmail.com', '1234');
-database.set('david@gmail.com', '4321');
-database.set('pablo@uxing.es', '1234');
-
-export default (req, res) => {
-	if (!(req.query && 'username' in req.query && 'password' in req.query))
+export default async (req, res) => {
+	try
 	{
-		res.send({ error: true, reason: 'Invalid request.' });
-		return;
+		if (!(req.query && 'username' in req.query && 'password' in req.query))
+			throw new InvalidRequestError(req);
+		
+		const userId = await userLogin(req.query.username, req.query.password);
+		createSession(userId, req, res);
+		res.send({ error: false });
 	}
-	
-	const password = database.get(req.query.username);
-	
-	if (password === undefined)
+	catch (err)
 	{
-		res.send({ error: true, reason: `User ${req.query.username} does not exist.` });
-		return;
+		if (!(err instanceof AppError))
+			throw err;
+		
+		res.send({ error: true, reason: err.message });
 	}
-	
-	if (req.query.password !== password)
-	{
-		res.send({ error: true, reason: 'Invalid password.' });
-		return;
-	}
-	
-	res.send({ error: false });
 };

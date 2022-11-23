@@ -2,6 +2,27 @@
 import React, {useState} from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { schema, initialParams } from './schema';
+import getData from '../../../../fetch.enum.module';
+
+const departments = await getData('department');
+const languages = await getData('language_enum');
+
+const showLanguagesSelect = () => {
+    return languages.map((i) => {
+        return <option value={i}> {i.replace('_',' ').toLowerCase()} </option>})
+}
+
+const showLanguagesCheckBox = () => {
+    return languages.map((i) => {
+        return <div><label> <Field type="checkbox" name="fluidLanguages" value={i.toString()} /> {i.replace('_',' ').toLowerCase()} </label></div>
+    })
+}
+
+const showDepartments = () => {
+    return departments.map((i) => {
+        return <option value={i}>{i.replace('_',' ').toLowerCase()}</option>
+    })
+}
 
 const Page = () => {
 
@@ -15,6 +36,9 @@ const Page = () => {
 
 				onSubmit={(params, {resetForm}) => {
                     //TODO send to the vaquen
+                    if(params.fluidLanguages.length === 0){
+                        delete params.fluidLanguages;
+                    }
                     console.log('Data: ',params);
 					//resetForm();
 					changeFormSend(true);
@@ -36,17 +60,17 @@ const Page = () => {
       
 
                     <div>
-                        <label htmlFor="age">Age:</label>
-                        <Field id="age" type="number" name="age" placeholder='Add Number'/>
+                        <label htmlFor="age">Birthday</label>
+                        <Field id="age" type="date" name="age"/>
                         <ErrorMessage name="age" component={() => (<div className="error">{errors.age}</div>)} />
                     </div>
 
                     <div>
                         <label>Gender</label>
                         <Field name="gender" as="select">
-                            <option value='null'>-</option>
-                            <option value="macho">Macho</option>
-                            <option value="hembra">Hembra</option>
+                            <option value=''>-</option>
+                            <option value="MALE">Male</option>
+                            <option value="FEMALE">Female</option>
                         </Field>
                         <ErrorMessage name="gender" component={() => (<div className="error">{errors.gender}</div>)} />
                     </div>
@@ -54,58 +78,26 @@ const Page = () => {
                     <div>
                         <label>Working Department</label>
                         <Field name="workingDepartment" as="select">
-                            <option value="null">-</option>
-                            <option value="sales">Sales</option>
-                            <option value="marketing">Marketing</option>
-                            <option value="it">IT</option>
-                            <option value="dataScience">Data Science</option>
-                            <option value="manager">Manager</option>
+                            <option value="">-</option>
+                            {showDepartments()}
                         </Field>
                         <ErrorMessage name="workingDepartment" component={() => (<div className="error">{errors.workingDepartment}</div>)} />
                     </div>
 
                     <div>
-                        <label>1er Language</label>
-                        <Field name="firstLanguage" as="select">
-                            <option value='null'>-</option>
-                            <option value="english">English</option>
-                            <option value="spanish">Spanish</option>
-                            <option value="german">German</option>
-                            <option value="french">French</option>
-                            <option value="chinese">Chinese</option>
-                            <option value="russian">Russian</option>
+                        <label>Native Language</label>
+                        <Field name="nativeLanguage" as="select">
+                            <option value=''>-</option>
+                            {showLanguagesSelect()}
                         </Field>
-                        <ErrorMessage name="firstLanguage" component={() => (<div className="error">{errors.firstLanguage}</div>)} />
+                        <ErrorMessage name="nativeLanguage" component={() => (<div className="error">{errors.nativeLanguage}</div>)} />
                     </div>
 
-                    <div>
-                        <label>2nd Language</label>
-                        <Field name="secondLanguage" as="select">
-                            <option value='null'>-</option>
-                            <option value="english">English</option>
-                            <option value="spanish">Spanish</option>
-                            <option value="german">German</option>
-                            <option value="french">French</option>
-                            <option value="chinese">Chinese</option>
-                            <option value="russian">Russian</option>
-                        </Field>
-                        <ErrorMessage name="secondLanguage" component={() => (<div className="error">{errors.secondLanguage}</div>)} />
-                    </div>
+                    <div role="group" aria-labelledby="checkbox-group">Fluid languajes
+                        {showLanguagesCheckBox()}
+                        <ErrorMessage name="fluidLanguages" component={() => (<div className="error">{errors.fluidLanguages}</div>)} />
+                    </div>         
 
-                    <div>
-                        <label>Proficiency 2nd Language</label>
-                        <Field name="proficiencySecondLanguage" as="select">
-                            <option value='null'>-</option>
-                            <option value="a1">A1</option>
-                            <option value="a2">A2</option>
-                            <option value="b1">B1</option>
-                            <option value="b2">B2</option>
-                            <option value="c1">C1</option>
-                            <option value="c2">C2</option>
-                            <option value="native">Native</option>
-                        </Field>
-                        <ErrorMessage name="proficiencySecondLanguage" component={() => (<div className="error">{errors.proficiencySecondLanguage}</div>)} />
-                    </div>
 
 						<button type="submit">Send</button>
 						{formSend && <p className="exito">Successfully!</p>}

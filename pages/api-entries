@@ -1,5 +1,5 @@
-- /api/get-auth-info
-* /api/login
++ /api/get-auth-info
++ /api/login
 + /api/get-meta-fields
 * /api/video/list
 - /api/video/upload

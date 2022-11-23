@@ -3,7 +3,18 @@ import React, {useState} from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import {TranscryptURLComp} from './form.components';
 import { loginSchema, initialParams } from './LoginSchemaUploadVideo';
+import getData from '../../../../fetch.enum.module';
 
+const languages = await getData('language_enum');
+const platforms = await getData('video_platform');
+
+const showLanguages = () => {
+    return languages.map((i) => {return <option value={i}>{i.toLowerCase()}</option>})
+}
+
+const showPlatforms = () => {
+    return platforms.map((i) => {return <option value={i}>{i.replace('_',' ').toLowerCase()}</option>})
+}
 const VideoUploadForm = () => {
 
     const [transcryptState, setTranscryptState] = useState('false');
@@ -17,6 +28,33 @@ const VideoUploadForm = () => {
 
 				onSubmit={(params, {resetForm}) => {
                     //TODO send to the vaquen
+                    if(params.isTranscrypt == 'false'){
+                        delete params.transcryptUrl
+                    }
+
+                    if(params.transcryptUrl === ''){
+                        delete params.transcryptUrl;
+                        params.isTranscrypt = 'false';
+                    }
+
+                    const nomalizaBooleans = () => {
+                        for(let i of Object.entries(params)){
+                            if(i[1] === 'true'){
+                                params[i[0]] = true
+                            }
+
+                            if(i[1] === 'false'){
+                                params[i[0]] = false
+                            }
+                        }
+                    }
+
+                    nomalizaBooleans();
+
+                    let today = new Date();
+                    let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+                    params.dateUploaded = date;
+
                     console.log('Data: ',params);
 					//resetForm();
 					changeFormSend(true);
@@ -40,13 +78,13 @@ const VideoUploadForm = () => {
                     <div>
                         <label>Video Has Transcrypt?</label>
                         <label>
-                        <Field onClick={() => {setTranscryptState('yes')}} type="radio" name="isTranscrypt" value="true" /> Yes
+                        <Field onClick={() => {setTranscryptState('true')}} type="radio" name="isTranscrypt" value={'true'} /> Yes
                         </label>
                         <label>
-                        <Field onClick={() => {setTranscryptState('no')}} type="radio" name="isTranscrypt" value="false" /> No
+                        <Field onClick={() => {setTranscryptState('false')}} type="radio" name="isTranscrypt" value={'false'} /> No
                         </label>
                         <ErrorMessage name="isTranscrypt" component={() => (<div>{errors.isTranscrypt}</div>)} />
-                        {transcryptState === 'yes' 
+                        {transcryptState === 'true'
                             ? <TranscryptURLComp></TranscryptURLComp>
                             : null}
                     </div>                 
@@ -66,13 +104,8 @@ const VideoUploadForm = () => {
                     <div>
                         <label>Language</label>
                         <Field name="language" as="select">
-                            <option value='null'>-</option>
-                            <option value="english">English</option>
-                            <option value="spanish">Spanish</option>
-                            <option value="german">German</option>
-                            <option value="french">French</option>
-                            <option value="chinese">Chinese</option>
-                            <option value="russian">Russian</option>
+                            <option value=''>-</option>
+                            {showLanguages()}
                         </Field>
                         <ErrorMessage name="language" component={() => (<div className="error">{errors.language}</div>)} />
                     </div>
@@ -80,31 +113,19 @@ const VideoUploadForm = () => {
                     <div>
                         <label>Platform</label>
                         <Field name="platform" as="select">
-                            <option value="null">-</option>
-                            <option value="zoom">Zoom</option>
-                            <option value="meet">Meet</option>
-                            <option value="team">Team</option>
+                            <option value="">-</option>
+                            {showPlatforms()}
                         </Field>
                         <ErrorMessage name="platform" component={() => (<div className="error">{errors.platform}</div>)} />
                     </div>
 
                     <div>
-                        <label>Deal Predisposition</label>
-                        <Field name="dealDisposition" as="select">
-                            <option value="null">-</option>
-                            <option value='true'>Yes</option>
-                            <option value='false'>No</option>
-                        </Field>
-                        <ErrorMessage name="dealDisposition" component={() => (<div className="error">{errors.dealDisposition}</div>)} />
-                    </div>
-
-                    <div>
                         <label>Actors?</label>
                         <label>
-                            <Field type="radio" name="actors" value="true" /> Yes
+                            <Field type="radio" name="actors" value={'true'} /> Yes
                         </label>
                         <label>
-                            <Field type="radio" name="actors" value="false" /> No
+                            <Field type="radio" name="actors" value={'false'} /> No
                         </label>
                         <ErrorMessage name="actors" component={() => (<div className="error">{errors.actors}</div>)} />
                     </div>
@@ -112,17 +133,15 @@ const VideoUploadForm = () => {
                     <div>
                         <label>Sales Meeting?</label>
                         <label>
-                            <Field type="radio" name="salesMeeting" value="true" /> Yes
+                            <Field type="radio" name="salesMeeting" value={'true'} /> Yes
                         </label>
                         <label>
-                            <Field type="radio" name="salesMeeting" value="false" /> No
+                            <Field type="radio" name="salesMeeting" value={'false'} /> No
                         </label>
                         <ErrorMessage name="salesMeeting" component={() => (<div className="error">{errors.salesMeeting}</div>)} />
                     </div>
 
-                
-
-						<button type="submit">Login</button>
+						<button type="submit">Upload</button>
 						{formSend && <p className="exito">Video uploaded successfully!</p>}
 
 					</Form>

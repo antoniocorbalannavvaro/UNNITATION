@@ -2,12 +2,11 @@ import * as Yup from 'yup';
 
 export const initialParams = {
     fullName: '',
-    age: '',
+    age: new Date(),
     gender: '',
     workingDepartment: '',
-    firstLanguage: '',
-    secondLanguage: '',
-    proficiencySecondLanguage: ''
+    nativeLanguage: '',
+    fluidLanguages: [],
 }
 
 export const schema = Yup.object().shape(
@@ -15,8 +14,8 @@ export const schema = Yup.object().shape(
         fullName: Yup.string()
                 .required('Full Name is required.'),
 
-        age: Yup.number()
-                .required('Age is required.'),
+        age: Yup.date()
+                .required('Birthday is required.'),
 
         gender: Yup.string()
                 .required('Gender is required'),
@@ -24,13 +23,10 @@ export const schema = Yup.object().shape(
         workingDepartment: Yup.string()
                 .required('Working Department is required.'),
 
-        firstLanguage: Yup.string()
-                .required('First Language is required.'),
+        nativeLanguage: Yup.string()
+                .required('Native Language is required.'),
 
-        secondLanguage: Yup.string()
-                .required('Second Language is required.'),
+        fluidLanguages: Yup.array(),
 
-        proficiencySecondLanguage: Yup.string()
-                .required('Required.'),
     }
 );

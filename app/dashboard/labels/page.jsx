@@ -1,5 +1,15 @@
+'use client'
 import UniButton from "../../(components)/UniButton";
 import UniCard from "../../(components)/UniCard";
+import getData from "./fetch.enum.module";
+
+const labels = await getData('labels');
+console.log('getLabelsgetLabelsgetLabelsgetLabels' , labels);
+
+const showLabels = () => {
+
+    return Object.entries(labels).map((i) => {console.log(i); return <UniCard>{i[0]} {i[1]}</UniCard>})
+}
 
 export default function Page(){
     return(
@@ -14,8 +24,7 @@ export default function Page(){
                             <a href="/dashboard/labels/new-label"><UniButton negative={true}>New Label Pair</UniButton></a>
                         </div>
                     </div>
-                    <UniCard>Sad / Happy</UniCard>
-                    <UniCard>Deal / Deal Rejected</UniCard>
+                    {showLabels()}
                 </div>
             </div>
         </div>
