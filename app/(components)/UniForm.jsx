@@ -25,7 +25,7 @@ function UniForm(props) {
                 })
                }
             </div>
-      </form>
+        </form>
     )
 }
 

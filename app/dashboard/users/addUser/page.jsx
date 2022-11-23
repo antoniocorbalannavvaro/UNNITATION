@@ -3,6 +3,11 @@ import React, {useState} from 'react';
 import { Formik, Field, ErrorMessage, Form } from 'formik';
 import { schema, initialParams } from './schema';
 
+
+// Email
+// 
+// Submit
+
 const Page = () => {
 
 	const [formSend, changeFormSend] = useState(false);
