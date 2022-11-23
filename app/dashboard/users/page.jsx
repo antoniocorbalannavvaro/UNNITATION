@@ -12,7 +12,7 @@ export default function Page(){
                     <div className="row">
                         <div className="col"><h1>Users</h1></div>
                         <div className="col d-flex justify-content-end">
-                            <a href="/dashboard/users/newUser">
+                            <a href="/dashboard/users/addUser">
                                 <UniButton negative={true}>Add User</UniButton>
                             </a>
                         </div>
