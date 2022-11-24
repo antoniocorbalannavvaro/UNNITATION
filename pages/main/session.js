@@ -1,70 +1,51 @@
 import crypto from 'crypto';
 import Cookies from 'cookies';
+import { createUserSession, getUserSession, refreshUserSession, deleteUserSession } from './database';
 import { NoSessionTokenError, InvalidSessionTokenError, SessionExpiredError } from './errors';
 
 const SESSION_DURATION = 10;	/* In minutes */
 const SESSION_LENGTH = 32;		/* In bytes */
 
-const sessions = new Map();
-const sessionIdByUserId = new Map();
-
 export const SESSION_ID_COOKIE_LABEL = 'SESSION_ID';
 
-export function createSession(userId, req, res)
+function getExpirationDate(date)
 {
-	const cookies = new Cookies(req, res);
-	const sessionId = crypto.randomBytes(SESSION_LENGTH).toString('base64');
-	
-	/* Delete the previous session (if it exists) */
-	if (sessionIdByUserId.get(userId) !== undefined)
-	{
-		const previousSessionId = sessionIdByUserId.get(userId);
-		sessions.delete(previousSessionId);
-		sessionIdByUserId.delete(userId);
-	}
-	
-	const started = new Date();
-	const expires = new Date(started);
-	expires.setMinutes(started.getMinutes() + SESSION_DURATION);
-	
-	const sessionInfo = {
-		userId,
-		started,
-		expires
-	};
-	
-	sessions.set(sessionId, sessionInfo);
-	sessionIdByUserId.set(userId, sessionId);
-	
-	cookies.set(SESSION_ID_COOKIE_LABEL, sessionId, { expires });
+	const expires = new Date(date);
+	expires.setMinutes(expires.getMinutes() + SESSION_DURATION);
+	return expires;
 }
 
-export function getUserId(req, res)
+export async function createSession(userId, req, res)
 {
 	const cookies = new Cookies(req, res);
+	const token = crypto.randomBytes(SESSION_LENGTH).toString('base64');
 	
-	const sessionId = cookies.get(SESSION_ID_COOKIE_LABEL);
+	await createUserSession(token, userId);
+	
+	cookies.set(SESSION_ID_COOKIE_LABEL, token, { expires: getExpirationDate(new Date()) });
+}
+
+export async function getUserId(req, res)
+{
+	const cookies = new Cookies(req, res);
+	const token = cookies.get(SESSION_ID_COOKIE_LABEL);
 	
 	if (sessionId === undefined)
 		throw new NoSessionTokenError();
 	
-	const sessionInfo = sessions.get(sessionId);
+	const userSession = await getUserSession(token);
 	
-	if (sessionInfo === undefined)
-		throw new InvalidSessionTokenError(sessionId);
+	const expires = getExpirationDate(userSession.latelyAccessed);
 	
-	if (sessionInfo.expires < (new Date()))
+	if (expires < (new Date()))
 	{
-		sessions.delete(sessionId);
-		sessionIdByUserId.delete(sessionInfo.userId);
-		throw new SessionExpiredError(sessionId);
+		deleteUserSession(token);
+		throw new SessionExpiredError(token);
 	}
 	
-	const newExpirationDate = new Date();
-	newExpirationDate.setMinutes(newExpirationDate.getMinutes() + SESSION_DURATION);
+	refreshUserSession(token);
 	
-	sessionInfo.expires = newExpirationDate;
-	cookies.set(SESSION_ID_COOKIE_LABEL, sessionId, { expires: newExpirationDate });
+	cookies.set(SESSION_ID_COOKIE_LABEL, token, { expires: getExpirationDate(new Date()) });
 	
-	return sessionInfo.userId;
+	return userSession.userId;
 }
