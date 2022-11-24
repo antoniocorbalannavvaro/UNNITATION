@@ -1,20 +1,99 @@
-+ /api/get-auth-info
-+ /api/login
+- /api/get-auth-info
+* /api/login
+Desde el front-end se pasa el email y password
 + /api/get-meta-fields
+No se envía nada, se recibe en el front-end el array de meta campos
 * /api/video/list
+Si no se envía nada, se reciben todos
+Si se envían filtros se reciben los vídeos que coincidan con los filtros
+Nombre
+Lenguaje
+Plataforma
+Fecha (start, end)
+Nº participantes rango
+ 
 - /api/video/upload
+	- Se envían desde el front-end los campos que salen en el formulario
+	- URL
+	- Lenguaje
+	- Plataforma
+	- Nº de participantes
+	- Nombre
 - /api/experiment/list
+	- Se reciben en el frontend los experimentos más recientes
+	- Si se envían parámetros de filtrado serán los siguientes
+ 
 - /api/experiment/create
+	- lista de ids de videos
+	- lista de ids de usuarios
+	- lista de ids de labels
+	- nombre del experimento
+	- chunk time
 - /api/experiment/end
+	- id del experimento
 - /api/label/list
+	- Se recibe la lista de labels
+		- name
+		- unicode emoji
 - /api/label/create
+	- Se envían
+		- name
+		- unicode emoji
 - /api/user/list
+	- Se recibe una lista de usuarios con los siguientes parámetros:
+		- full name
+		- edad
+		- genero
+		- departamento
+		- lenguajes
+		- Interrater agreement
 - /api/user/invite
+		- email
+		- rol
+		- si el rol es “ANNOTATOR”: entonces se rellenará un campo “Dedicated annotation time”
+Formato:
+{
+	email: string,
+	roles: string[],
+	annotationDedicationTime?: number
+}
 - /api/user/accept
+		- full name
+		- fecha de nacimiento
+		- genero
+		- departamento
+		- lenguajes
+Formato:
+{
+	password: string,
+	firstName: string,
+	middleName?: string,
+	lastName: string,
+	birthDate: datetime,
+	gender: gender,
+	department: department,
+	mainLanguage: language_enum,
+	secondaryLanguages: language_enum[]
+}
 - /api/user/update
+		- full name
+		- fecha de nacimiento
+		- genero
+		- departamento
+		- lenguajes
 - /api/annotation/start
+	- Se recibe en el frontend:
+		- url
+		- labels
 - /api/annotation/annotate
+	- Se envía desde el frontend
+		- label id
+		- tiempo de anotación
 - /api/annotation/end
+	- no se envía nada
+ 
+
+
 
 NOTE: all 'list' methods accept filtering by meta-fields
 
