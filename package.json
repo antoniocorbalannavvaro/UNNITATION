@@ -16,6 +16,7 @@
     "eslint": "8.26.0",
     "eslint-config-next": "13.0.1",
     "formik": "^2.2.9",
+    "gsap": "^3.11.3",
     "next": "13.0.1",
     "pg": "^8.8.0",
     "prop-types": "^15.8.1",

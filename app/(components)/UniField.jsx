@@ -1,8 +1,19 @@
-import React from 'react'
+'use client'
+
+import React, {useState} from 'react'
+import EmojiPicker from 'emoji-picker-react';
+
 
 export default function UniField(props) {
 
+    const [showPicker, setShowPicker] = useState(false)
+
     const handle = (e) => {
+        if (e.emoji) {
+            setShowPicker(false)
+            props.handleChange(e.emoji, props.id);
+            return;
+        }
         props.handleChange(e.target.value, props.id)
     }
  
@@ -25,6 +36,17 @@ export default function UniField(props) {
             </React.Fragment>
             
             
+        )
+    }
+
+    if (props.type == 'emoji') {
+
+        return (
+            <React.Fragment>   
+                <label>{props.label}</label>
+                <button onClick={(e) => { e.preventDefault() ; setShowPicker(true)}}>{ props.value == '' ? 'Select emoji' : props.value }</button>             
+                { showPicker ? <EmojiPicker onEmojiClick={handle}/> : null }
+            </React.Fragment>
         )
     }
 
