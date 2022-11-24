@@ -5,11 +5,8 @@ export default (req, res) => {
         'happyness':'😋',
         'sadness': '😔',
         'heresitation': '🤔',
-		'a':'😋',
-        'sadnbess': '😔',
-        'c': '🤔'
                 };
-	
+
 	/* FIXME: get this data from the database */
 	switch (api_labels)
 	{

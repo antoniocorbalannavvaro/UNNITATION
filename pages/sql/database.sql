@@ -30,17 +30,21 @@ CREATE TYPE user_role AS ENUM ('ADMINISTRATOR', 'DATA_SCIENTIST', 'ANNOTATOR');
 CREATE TABLE app_user(
 	id SERIAL PRIMARY KEY,
 	email VARCHAR(128) UNIQUE NOT NULL,
-	password VARCHAR(128) NOT NULL,		-- FIXME: this should be a hash
+	password VARCHAR(128) NULL,		-- FIXME: this should be a hash
+	annotation_dedication_time INTEGER NULL,
 	completed_date TIMESTAMPTZ NULL,
 	first_name VARCHAR(64) NULL,
 	middle_name VARCHAR(64) NULL,
 	last_name VARCHAR(64) NULL,
+	birth_date TIMESTAMPTZ NULL,
 	gender gender NULL,
 	department department NULL,
 	created_by INTEGER NULL,
 	CHECK(completed_date IS NULL OR (
+		password IS NOT NULL AND
 		first_name IS NOT NULL AND
 		last_name IS NOT NULL AND
+		birth_date IS NOT NULL AND
 		gender IS NOT NULL AND
 		department IS NOT NULL
 	))
@@ -48,6 +52,7 @@ CREATE TABLE app_user(
 ALTER TABLE app_user ADD CONSTRAINT fk_app_user_created_by FOREIGN KEY (created_by) REFERENCES app_user(id);
 
 CREATE TABLE app_user_language(
+	is_main BOOL NOT NULL,
 	language language_enum NOT NULL,
 	app_user_id INTEGER NOT NULL,
 	PRIMARY KEY (app_user_id, language),
@@ -74,7 +79,9 @@ CREATE TABLE video(
 	name VARCHAR(128) NOT NULL,
 	url VARCHAR(512) NOT NULL,
 	transcript_url VARCHAR(512),
-	num_actors INTEGER, CHECK(num_actors > 1),
+	sales_meeting BOOL,
+	actors_involved BOOL,
+	video_date TIMESTAMPTZ NOT NULL,
 	upload_date TIMESTAMPTZ NOT NULL,
 	platform video_platform NOT NULL,
 	language language_enum NOT NULL,
