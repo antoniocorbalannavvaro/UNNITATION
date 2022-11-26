@@ -1,5 +1,3 @@
-* /api/user/login
-Desde el front-end se pasa el email y password
 + /api/get-meta-fields
 No se envía nada, se recibe en el front-end el array de meta campos
 * /api/video/list
@@ -38,6 +36,8 @@ Nº participantes rango
 	- Se envían
 		- name
 		- unicode emoji
+* /api/user/login
+Desde el front-end se pasa el email y password
 - /api/user/list
 	- Se recibe una lista de usuarios con los siguientes parámetros:
 		- full name
