@@ -32,7 +32,7 @@ export async function get(token)
 	const res = await database.query('SELECT * FROM app_user_session WHERE token = $1', [token]);
 	
 	if (res.rows.length === 0)
-		throw new new InvalidSessionError(token);
+		throw new InvalidSessionError(token);
 	
 	return res.rows[0];
 }
