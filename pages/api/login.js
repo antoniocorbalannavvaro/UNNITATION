@@ -1,6 +1,6 @@
-import { userLogin } from '../main/database';
+import { getUser } from '../main/database';
 import { createSession } from '../main/session';
-import { AppError, InvalidRequestError } from '../main/errors';
+import { AppError, InvalidRequestError, InvalidLoginError } from '../main/errors';
 
 export default async (req, res) => {
 	try
@@ -8,8 +8,12 @@ export default async (req, res) => {
 		if (!(req.query && 'username' in req.query && 'password' in req.query))
 			throw new InvalidRequestError(req);
 		
-		const userId = await userLogin(req.query.username, req.query.password);
-		createSession(userId, req, res);
+		const { id, password } = await getUser({ email: req.query.username });
+		
+		if (req.query.password !== password)
+			throw new InvalidLoginError(req.query.username, req.query.password);
+		
+		await createSession(id, req, res);
 		res.send({ error: false });
 	}
 	catch (err)

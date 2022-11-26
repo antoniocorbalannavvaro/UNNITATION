@@ -1,11 +1,4 @@
-export class AppError extends Error
-{
-	constructor(message)
-	{
-		super(message);
-		this.name = this.constructor.name;
-	}
-}
+import util from 'util';
 
 export class InvalidRequestError extends AppError
 {

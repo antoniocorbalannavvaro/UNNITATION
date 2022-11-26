@@ -24,9 +24,9 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="0.36850799"
-     inkscape:cx="394.8354"
-     inkscape:cy="453.17877"
+     inkscape:zoom="1.042298"
+     inkscape:cx="343.95154"
+     inkscape:cy="370.33555"
      inkscape:window-width="1362"
      inkscape:window-height="729"
      inkscape:window-x="0"
@@ -642,7 +642,7 @@
        sodipodi:nodetypes="ccccc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.264583;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
-       d="M 40.314213,77.403773 V 50.86372 H 86.42872"
+       d="M 47.357538,77.403773 V 50.86372 l 39.071182,0"
        id="path2922"
        sodipodi:nodetypes="ccc" />
     <path
@@ -684,7 +684,7 @@
        id="path3226" />
     <path
        style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 38.82537,75.187613 1.488843,-2.216161 1.488844,2.216161 -1.488844,2.21616 z"
+       d="m 45.868695,75.187613 1.488843,-2.216161 1.488844,2.216161 -1.488844,2.21616 z"
        id="path2800-6"
        sodipodi:nodetypes="ccccc" />
     <path
@@ -1057,13 +1057,61 @@
     <text
        xml:space="preserve"
        style="font-size:4.23333px;line-height:1.25;font-family:Cantarell;-inkscape-font-specification:Cantarell;stroke-width:0.264583"
-       x="36.275238"
-       y="76.170609"
+       x="43.254604"
+       y="76.002037"
        id="text3725-9"><tspan
          sodipodi:role="line"
          id="tspan3723-4"
          style="stroke-width:0.264583"
-         x="36.275238"
-         y="76.170609">1</tspan></text>
+         x="43.254604"
+         y="76.002037">1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:Cantarell;-inkscape-font-specification:Cantarell;stroke-width:0.264583"
+       x="37.389851"
+       y="76.119537"
+       id="text3725-9-62"><tspan
+         sodipodi:role="line"
+         id="tspan3723-4-91"
+         style="stroke-width:0.264583"
+         x="37.389851"
+         y="76.119537">1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:Cantarell;-inkscape-font-specification:Cantarell;stroke-width:0.264583"
+       x="37.408497"
+       y="29.809481"
+       id="text3725-9-2"><tspan
+         sodipodi:role="line"
+         id="tspan3723-4-7"
+         style="stroke-width:0.264583"
+         x="37.408497"
+         y="29.809481">1</tspan></text>
+    <g
+       id="g1012-3"
+       transform="translate(-29.260755,-35.207195)">
+      <text
+         xml:space="preserve"
+         style="font-size:4.23333px;line-height:1.25;font-family:Cantarell;-inkscape-font-specification:Cantarell;text-align:center;text-anchor:middle;stroke-width:0.264583"
+         x="69.538986"
+         y="58.269894"
+         id="text236-67"><tspan
+           sodipodi:role="line"
+           style="text-align:center;text-anchor:middle;stroke-width:0.264583"
+           x="69.538986"
+           y="58.269894"
+           id="tspan238-53">Invitation</tspan></text>
+      <rect
+         style="fill:none;stroke:#000000;stroke-width:0.600001;stroke-linejoin:round"
+         id="rect400-5"
+         width="22.036739"
+         height="8.7714605"
+         x="58.556599"
+         y="52.404613" />
+    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 40.314213,25.96888 V 77.403774"
+       id="path1164" />
   </g>
 </svg>
