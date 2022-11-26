@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 import Cookies from 'cookies';
 import * as AppUserSession from '../data-access-layer/app-user-session';
-import { NoSessionProvidedError, InvalidSessionError, SessionExpiredError } from '../errors/session-error';
+import { NoSessionProvidedError, SessionExpiredError } from '../errors/session-error';
 import { NoRowsError } from '../errors/database-error';
 
 const SESSION_DURATION = 10;	/* In minutes */
@@ -27,11 +27,7 @@ export async function getAppUserId(req, res)
 	if (token === undefined)
 		throw new NoSessionProvidedError();
 	
-	const session = await AppUserSession.get(token).catch(err => {
-		if (!(err instanceof NoRowsError))
-			throw err;
-		throw new InvalidSessionError(token);
-	});
+	const session = await AppUserSession.get(token);
 	
 	const expires = getExpirationDate(session.lately_accessed);
 	

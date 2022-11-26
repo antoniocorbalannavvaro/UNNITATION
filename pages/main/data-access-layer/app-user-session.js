@@ -1,5 +1,6 @@
 import database from './database';
 import { NoRowsError } from '../errors/database-error';
+import { InvalidSessionError } from '../errors/session-error';
 
 /* TODO: handle (very unlikely but possible) token collisions (DATABASE DUPLICATED PRIMARY KEY) */
 export async function create(token, userId)
@@ -31,7 +32,7 @@ export async function get(token)
 	const res = await database.query('SELECT * FROM app_user_session WHERE token = $1', [token]);
 	
 	if (res.rows.length === 0)
-		throw new NoRowsError();
+		throw new new InvalidSessionError(token);
 	
 	return res.rows[0];
 }

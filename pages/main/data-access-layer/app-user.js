@@ -1,6 +1,6 @@
 import database from './database';
 import { NoRowsError } from '../errors/database-error';
-import { AlreadyRegisteredError } from '../errors/app-user-error';
+import { InvalidInvitationError, AlreadyRegisteredError } from '../errors/app-user-error';
 
 export async function create(email, roles, annotationDedicationTime, createdBy, invitationToken)
 {
@@ -96,7 +96,7 @@ export async function getIdByInvitation(invitationToken)
 	const res = await database.query('SELECT app_user_id FROM invitation WHERE token = $1', [invitationToken]);
 	
 	if (res.rows.length === 0)
-		throw new NoRowsError();
+		throw new InvalidInvitationError();
 	
 	return res.rows[0].app_user_id;
 }
