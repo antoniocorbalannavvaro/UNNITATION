@@ -2,7 +2,7 @@
 import React, {useState} from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { schema, initialParams } from './schema';
-import getData from '../../../../fetch.enum.module';
+import getData from '../../labels/fetch.enum.module';
 
 const departments = await getData('department');
 const languages = await getData('language_enum');

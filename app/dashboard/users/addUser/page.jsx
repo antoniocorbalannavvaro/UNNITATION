@@ -23,7 +23,7 @@ const Page = () => {
                         <UniForm 
                             fields={[
                                 formatField('text','Email', email, setEmail ),
-                                formatField('select','Role', role, setRole, { options: ['Maquinón','Pantera'] } ),
+                                formatField('select','Role', role, setRole, { options: ['Maquinón','Pantera','Mastodonte'] } ),
                                 formatField('submit','Submit', null, null )
                             ]}
                             handleSubmit={handleSubmit}/>

@@ -1,6 +1,6 @@
 import UniButton from "./(components)/UniButton";
 import UniMenu from "./(components)/UniMenu";
-import UserAvatar from "./dashboard/prueba/page";
+import UniPopUp from "./(components)/UniPopUp";
 
 //Dummie check:
 const isOnline = true;
@@ -17,7 +17,7 @@ export default function NavBar() {
                 </div>
                 <div className="col-3 d-flex align-items-center justify-content-end px-3">
                     <div style={{padding:'30px'}}>
-                    {isOnline ? <UserAvatar></UserAvatar> : <p></p>}
+                    {isOnline ? <UniPopUp></UniPopUp> : null}
                     
                     </div>
                     <a href="/login"><UniButton>LOG IN</UniButton></a>

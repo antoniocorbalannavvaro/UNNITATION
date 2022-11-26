@@ -1,54 +1,43 @@
 'use client'
 import React, {useState} from 'react';
-import './style.css';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
+import './style.css'
+const UniStar = () => {
+    const on = '★';
+    const off = '☆';
 
-let UserData = {
-    email: 'antoniocn1996@gmail.com',
-    name: 'Antonio Corbalán Navarro',
-    role: ['Annotator'],
-    department: 'Marketing',
-    languages: ['Spanish', 'English']
+    return (
+        <button >{on}</button>
+    );
 }
 
-const showLanguages = () => {
-    return UserData.languages.map((i) => {return <li>{i}</li>})
+const UniStars = () => {
+    return (
+        <UniStar></UniStar>
+    );
 }
 
-const PopUp = (imgState) => (
-    <Popup open={imgState} position="bottom center">
-        <div>
-            <p>{UserData.email}</p>
-            <p>{UserData.name}</p>
-            <p>{UserData.role}</p>
-            <p>{UserData.department}</p>
-            <p>Languages:</p>
-            <ul>
-                {showLanguages()}
-            </ul>
-        </div>
-    </Popup>
-);
+const Page = () => {
 
-function UserAvatar() {
+    const [popUpState, setPopUpState] = useState(false)
 
-    const [imgState, setImgState] = useState(false);
-
-    const changeImgState = () => {
-        setImgState(!imgState);
+    const showPopUp = () => {
+        setPopUpState(!popUpState);
     }
 
     return (
         <div>
-            <button className='buttonAvatar'>
-                <img onClick={() => changeImgState()} className='avatar' src="http://www.smartpowerdrink.com/pub/skin/default-skin/img/avatar.png"/> 
-            </button>
-            {imgState ? <PopUp/> : null}
+            <button onClick={() => {showPopUp()}}>Open</button>
+            <Popup open={popUpState}>
+           
+            {popUpState 
+                    ? <UniStars></UniStars>
+                    : null}
+                
+            </Popup>
         </div>
-
-      
-  );
+    );
 }
 
-export default UserAvatar;
+export default Page;
