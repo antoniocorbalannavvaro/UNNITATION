@@ -1,24 +1,48 @@
 'use client'
 import React, {useState} from 'react';
 import Popup from 'reactjs-popup';
+import { Rating } from 'react-simple-star-rating'
 import 'reactjs-popup/dist/index.css';
-import './style.css'
-const UniStar = () => {
-    const on = '★';
-    const off = '☆';
+import './style.css';
+
+const popUpStyle = {
+    backgroundColor: 'aliceblue',
+    width: '600px', 
+    height: '300px',
+    borderRadius: '10px',
+    boxShadow: '2px 2px #d2d2d2'
+}
+export function UniRating() {
+
+    let userRate;
+    
+    const [rating, setRating] = useState(0)
+    const [message, setMessage] = useState(false);
+
+    const changeMessage = () => {
+        setMessage(true)
+    }
+
+    const handleRating = (rate) => {
+        userRate = rate;
+        console.log(userRate,'userRate')
+        setRating(rate)
+        changeMessage()
+    }
 
     return (
-        <button >{on}</button>
-    );
+        <div>
+            <h1>Rate the deal possibillity</h1>
+            <h1>
+                <Rating onClick={handleRating}/>
+                {message ? <h3 style={{color:'green'}}>Thanks for rating. Fuck you 😊</h3> : null}
+            </h1>
+           
+        </div>
+    )
 }
 
-const UniStars = () => {
-    return (
-        <UniStar></UniStar>
-    );
-}
-
-const Page = () => {
+const PopUpRating = () => {
 
     const [popUpState, setPopUpState] = useState(false)
 
@@ -27,17 +51,20 @@ const Page = () => {
     }
 
     return (
-        <div>
+        <div >
             <button onClick={() => {showPopUp()}}>Open</button>
-            <Popup open={popUpState}>
-           
+
+            <Popup contentStyle={popUpStyle} open={popUpState}>
             {popUpState 
-                    ? <UniStars></UniStars>
+                    ? <UniRating></UniRating>
                     : null}
                 
             </Popup>
+
+
+
         </div>
     );
 }
 
-export default Page;
+export default PopUpRating;
