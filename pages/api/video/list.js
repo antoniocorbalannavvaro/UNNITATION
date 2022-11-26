@@ -1,4 +1,4 @@
-import database from '../../main/database';
+import database from '../../main/data-access-layer/database';
 
 export default async (req, res) => {
 	const dbRes = await database.query('SELECT name, url, transcriptUrl, numActors, videoDate, uploadDate, platform, language FROM Video');

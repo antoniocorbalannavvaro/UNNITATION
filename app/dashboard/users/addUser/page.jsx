@@ -1,13 +1,13 @@
 'use client'
 
 import {useState, useContext} from 'react';
-import AuthContext from '../../../auth';
+import GlobalContext from '../../../GlobalContext';
 import UniCard from '../../../(components)/UniCard';
 import { formatField, UniForm } from '../../../(components)/UniForm';
 
 const Page = () => {
 
-    const meta = useContext(AuthContext).meta
+    const meta = useContext(GlobalContext)
 
     const [email, setEmail] = useState('')
     const [roles, setRoles] = useState([])
@@ -23,13 +23,10 @@ const Page = () => {
         }).then((data) => {
 
             if (data.error) {
-                setIsValidUser(false)
-                setTimeout(() => {setIsValidUser('')}, 3000)
-                setError(data.reason)
+                console.log(data)
                 return;
             };
 
-            setIsValidUser(true);
             router.push('/dashboard/videos');
         })
     }

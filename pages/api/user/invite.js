@@ -6,7 +6,7 @@ export default async (req, res) => {
 	{
 		/* TODO: get from cookie session */
 		const userId = 1;
-		
+		console.log(req.body)
 		const invitationToken = crypto.randomBytes(64).toString('hex');
 		await AppUser.create(req.body.email, req.body.roles, req.body.annotationDedicationTime, userId, invitationToken);
 		
