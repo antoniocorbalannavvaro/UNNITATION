@@ -1,7 +1,7 @@
 import Cookies from 'cookies';
-import { getUserInfo } from '../database';
-import { getUserId } from '../session';
-import { AppError } from '../errors';
+import { getUserInfo } from '../main/database';
+import { getUserId } from '../main/session';
+import { AppError } from '../main/errors';
 
 export default async (req, res) => {
 	try

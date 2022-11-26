@@ -1,33 +1,18 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import AuthContext from '../auth'
+import { useEffect, useImperativeHandle, useState } from 'react'
+import { useUser } from '../auth'
+import getMeta from '../meta'
+import GlobalContext from "../GlobalContext"
+
 
 export default function RootLayout({ children }) {
 
-    const [meta, setMeta] = useState({})
-
-    useEffect(() => {
-        
-        fetch('/api/get-meta-fields').then((res) => {
-            return res.json()
-        }).then((data) => {
-
-            if (data.error) {
-                setError(data.reason)
-                return;
-            }; 
-
-            setMeta(data)
-
-        })
-
-    }, [])
+    useUser()
 
   return (
-    <AuthContext.Provider value={{meta: meta}}>
+    <GlobalContext.Provider value={{ meta: getMeta() }}>
         {children}
-    </AuthContext.Provider>
-      
+    </GlobalContext.Provider>  
   )
 }

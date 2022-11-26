@@ -1,6 +1,6 @@
-import { userLogin } from '../database';
-import { createSession } from '../session';
-import { AppError, InvalidRequestError } from '../errors';
+import { userLogin } from '../main/database';
+import { createSession } from '../main/session';
+import { AppError, InvalidRequestError } from '../main/errors';
 
 export default async (req, res) => {
 	try

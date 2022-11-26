@@ -23,7 +23,6 @@ export default function Page() {
             password: password,
         })).then((res) => {
             return res.json()
-
         }).then((data) => {
 
             if (data.error) {

@@ -1,12 +1,13 @@
 import UniCard from "./UniCard"
 import UniLabeledPair from "./UniLabeledPair"
 import { useContext, useState, useEffect } from "react"
-import AuthContext from "../auth"
 import { formatField, UniForm } from "./UniForm"
+import GlobalContext from "../GlobalContext"
+
 
 export default function UniFilterableList(props) {
 
-    const meta = useContext(AuthContext).meta
+    const meta = useContext(GlobalContext).meta
 
     const [items,setItems] = useState([]);
     const [metaFields,setMetaFields] = useState([]);

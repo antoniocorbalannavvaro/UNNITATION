@@ -1,22 +1,18 @@
 'use client'
 
-import React, {useEffect, useState} from 'react'
 import { useRouter } from 'next/navigation'
-
-const AuthContext = React.createContext({})
+import { useState } from 'react'
 
 const useUser = (props) => {
 
+    const router = useRouter()
     const [user, setUser] = useState({})
 
-    const router = useRouter()
+    fetch('/api/get-auth-info/').then(res => res.json()).then(data => {
+        return true;
+        //if (data.error) router.replace('/login'); return;
+    })
 
-    if (props.prueba) {
-        router.push('/login')
-    }
-
-    return true;
 }
 
 export { useUser }
-export default AuthContext

@@ -1,17 +1,37 @@
 'use client'
 
-import {useState} from 'react';
+import {useState, useContext} from 'react';
+import AuthContext from '../../../auth';
 import UniCard from '../../../(components)/UniCard';
 import { formatField, UniForm } from '../../../(components)/UniForm';
 
 const Page = () => {
 
+    const meta = useContext(AuthContext).meta
+
     const [email, setEmail] = useState('')
-    const [role, setRole] = useState('')
+    const [roles, setRoles] = useState([])
 
     const handleSubmit = (e) => {
         e.preventDefault()
         // se envia al backend
+        fetch('/api/user/invite?' + new URLSearchParams({
+            email: email,
+            roles: roles
+        })).then((res) => {
+            return res.json()
+        }).then((data) => {
+
+            if (data.error) {
+                setIsValidUser(false)
+                setTimeout(() => {setIsValidUser('')}, 3000)
+                setError(data.reason)
+                return;
+            };
+
+            setIsValidUser(true);
+            router.push('/dashboard/videos');
+        })
     }
 
     return (
@@ -23,7 +43,7 @@ const Page = () => {
                         <UniForm 
                             fields={[
                                 formatField('text','Email', email, setEmail ),
-                                formatField('select','Role', role, setRole, { options: ['Maquinón','Pantera'] } ),
+                                formatField('select','Role', roles, setRoles, { options: ['Maquinón','Pantera'] } ),
                                 formatField('submit','Submit', null, null )
                             ]}
                             handleSubmit={handleSubmit}/>
