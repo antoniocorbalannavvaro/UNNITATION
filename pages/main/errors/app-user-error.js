@@ -26,3 +26,14 @@ export class AlreadyRegisteredError extends AppUserError
 		this.name = this.constructor.name;
 	}
 }
+
+export class InvalidLoginError extends AppUserError
+{
+	constructor(email, password)
+	{
+		super(`Login failed for user ${email}. Password: ${password}`);
+		this.name = this.constructor.name;
+	}
+}
+
+

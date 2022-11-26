@@ -12,7 +12,7 @@ export const SESSION_ID_COOKIE_LABEL = 'SESSION_ID';
 export async function create(userId, req, res)
 {
 	const cookies = new Cookies(req, res);
-	const token = crypto.randomBytes(SESSION_LENGTH).toString('base64');
+	const token = crypto.randomBytes(SESSION_LENGTH).toString('hex');
 	
 	await AppUserSession.create(token, userId);
 	
