@@ -1,32 +1,5 @@
 import util from 'util';
 
-export class AppError extends Error
-{
-	constructor(message)
-	{
-		super(message);
-		this.name = this.constructor.name;
-	}
-}
-
-export class SingleRowError extends AppError
-{
-	constructor()
-	{
-		super('The result of the query violates the single row constraint');
-		this.name = this.constructor.name;
-	}
-}
-
-export class InvalidQueryParametersError extends AppError
-{
-	constructor(params)
-	{
-		super(`Invalid query parameters (${util.inspect(params)})`);
-		this.name = this.constructor.name;
-	}
-}
-
 export class InvalidRequestError extends AppError
 {
 	constructor(req)

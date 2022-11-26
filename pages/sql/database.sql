@@ -1,22 +1,3 @@
-DROP TABLE IF EXISTS experiment_app_user;
-DROP TABLE IF EXISTS annotation_event;
-DROP TABLE IF EXISTS annotation;
-DROP TABLE IF EXISTS experiment_label;
-DROP TABLE IF EXISTS label;
-DROP TABLE IF EXISTS video_experiment;
-DROP TABLE IF EXISTS video;
-DROP TABLE IF EXISTS experiment;
-DROP TABLE IF EXISTS app_user_user_role;
-DROP TABLE IF EXISTS app_user_language;
-ALTER TABLE app_user DROP CONSTRAINT fk_app_user_created_by;
-DROP TABLE IF EXISTS app_user;
-
-DROP TYPE IF EXISTS user_role;
-DROP TYPE IF EXISTS department;
-DROP TYPE IF EXISTS gender;
-DROP TYPE IF EXISTS language_enum;
-DROP TYPE IF EXISTS video_platform;
-
 -- Enumerators
 
 CREATE TYPE video_platform AS ENUM ('GOOGLE_MEET', 'ZOOM', 'MICROSOFT_TEAMS');
@@ -50,6 +31,12 @@ CREATE TABLE app_user(
 	))
 );
 ALTER TABLE app_user ADD CONSTRAINT fk_app_user_created_by FOREIGN KEY (created_by) REFERENCES app_user(id);
+
+CREATE TABLE invitation(
+	token CHAR(128) PRIMARY KEY,
+	app_user_id INTEGER UNIQUE NOT NULL,
+	FOREIGN KEY (app_user_id) REFERENCES app_user(id)
+);
 
 CREATE TABLE app_user_language(
 	is_main BOOL NOT NULL,

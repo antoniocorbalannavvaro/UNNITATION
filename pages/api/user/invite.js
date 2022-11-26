@@ -1,4 +1,5 @@
-import { createUser } from '../../main/database';
+import crypto from 'crypto';
+import * as AppUser from '../../main/data-access-layer/app-user';
 
 export default async (req, res) => {
 	try
@@ -6,8 +7,10 @@ export default async (req, res) => {
 		/* TODO: get from cookie session */
 		const userId = 1;
 		
-		await createUser(req.body.email, req.body.roles, req.body.annotationDedicationTime, userId);
-		res.json({ error: false });
+		const invitationToken = crypto.randomBytes(64).toString('hex');
+		await AppUser.create(req.body.email, req.body.roles, req.body.annotationDedicationTime, userId, invitationToken);
+		
+		res.json({ error: false, invitation: invitationToken });
 	}
 	catch (err)
 	{
