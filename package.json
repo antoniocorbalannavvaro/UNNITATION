@@ -25,7 +25,11 @@
     "react-avatar-group": "^1.0.2",
     "react-color": "^2.19.3",
     "react-dom": "^18.2.0",
+    "react-icon-rating": "^0.3.0",
+    "react-icons": "^4.6.0",
     "react-input-emoji": "^4.3.0",
+    "react-rating-stars-component": "^2.2.0",
+    "react-simple-star-rating": "^5.1.7",
     "reactjs-popup": "^2.0.5",
     "styled-components": "^5.3.6",
     "yup": "^0.32.11"

@@ -1,5 +1,4 @@
-- /api/get-auth-info
-* /api/login
+* /api/user/login
 Desde el front-end se pasa el email y password
 + /api/get-meta-fields
 No se envía nada, se recibe en el front-end el array de meta campos
