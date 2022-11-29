@@ -11,7 +11,7 @@
     z-index: 0;
 }
 
-.next-button {
+.uni-button {
     font-family: sans-serif;
     font-weight: bold;
     border-radius: 10px;
@@ -24,20 +24,7 @@
     height: 50px;
 }
 
-.back-button {
-    font-family: sans-serif;
-    font-weight: bold;
-    border-radius: 10px;
-    border-style: solid;
-    border-color: rgb(81, 81, 81);
-    box-shadow: 0 3px 10px rgb(0 0 0 / 1);
-    color:aliceblue;
-    background: linear-gradient(90deg, rgba(255,106,19,1) 0%, rgba(212,15,125,1) 100%);
-    width: 120px;
-    height: 50px;
-}
-
-.next-button:hover, .back-button:hover {
+.uni-button:hover {
     background: linear-gradient(90deg, rgb(190, 70, 0) 0%, rgb(164, 13, 99) 100%);
     color:white;
     border-color: black;
@@ -69,8 +56,24 @@
 }
 
 .tour-text {
+    text-align: center;
+    padding: 8px;
     position: fixed;
     background: blanchedalmond;
-    border-radius: 10%;
+    border-style: solid;
+    border-radius: 19px;
+    border: 5px;
     z-index: 6;
+}
+
+.smiling-face {
+    position: absolute; 
+    top:30px;
+    left: 100px;
+}
+
+.cursor-hand {
+    position: absolute; 
+    top:60Px;
+    left: 600px;
 }

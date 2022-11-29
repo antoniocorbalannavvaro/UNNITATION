@@ -20,13 +20,13 @@ const userInfoTextPosition = {top:'100px', left:'705px', width:'370px', height:'
 const loginTextPosition = {top:'120px', left:'800px', width:'410px', height:'100px'};
 
 
-const userWizardPosition = {top:'30px', left:'420px', width:'65px', height:'50px'};
-const videoWizardPosition = {top:'30px', left:'480px', width:'65px', height:'50px'};
-const experimentWizardPosition = {top:'30px', left:'540px', width:'115px', height:'50px'};
-const labelWizardPosition =  {top:'30px', left:'650px', width:'65px', height:'50px'};
-const annotationWizardPosition = {top:'30px', left:'705px', width:'115px', height:'50px'};
-const userInfoTextWizardPosition = {top:'20px', left:'980px', width:'90px', height:'70px'};
-const loginTextWizardPosition = {top:'7px', left:'1070px', width:'140px', height:'100px'};
+const userWizardPosition = {top:'30px', left:'425px', width:'65px', height:'50px'};
+const videoWizardPosition = {top:'30px', left:'485px', width:'68px', height:'50px'};
+const experimentWizardPosition = {top:'30px', left:'545px', width:'115px', height:'50px'};
+const labelWizardPosition =  {top:'30px', left:'655px', width:'65px', height:'50px'};
+const annotationWizardPosition = {top:'30px', left:'715px', width:'115px', height:'50px'};
+const userInfoTextWizardPosition = {top:'20px', left:'985px', width:'100px', height:'70px'};
+const loginTextWizardPosition = {top:'7px', left:'1075px', width:'150px', height:'100px'};
 
 const TEXTS = [userText, videoText, experimentText, labelText, annotationText, userInfoText, loginText];
 const TEXT_POSITIONS = [userTextPosition, videoTextPosition, experimentTextPosition, labelTextPosition, annotationTextPosition, userInfoTextPosition, loginTextPosition]
@@ -90,8 +90,9 @@ const UniWizard = () => {
                 </div>
 
                     <div className='button-container'>
-                        <button onClick={() => {backAction()}} className='back-button'>⬅ Back</button>
-                        <button onClick={() => {nextAction()}} className='next-button'>Next ➡</button>
+                        <button onClick={() => {closeInfo()}} className='uni-button'>❌ Close</button>
+                        <button onClick={() => {backAction()}} className='uni-button'>⬅ Back</button>
+                        <button onClick={() => {nextAction()}} className='uni-button'>Next ➡</button>
                     </div>
             </div>
 
@@ -124,7 +125,7 @@ const Page = () => {
     }
 
     return (
-        <div>
+        <div className="fix-display">
             <ButtonInfo></ButtonInfo>
             {infoState
                 ? <UniWizard></UniWizard>
