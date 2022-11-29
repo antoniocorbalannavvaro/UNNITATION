@@ -74,6 +74,35 @@
 
 .cursor-hand {
     position: absolute; 
-    top:60Px;
+    top:100px;
+    left: 700px;
+}
+
+.arrow-img {
+    position: absolute;
     left: 600px;
+    top: 150px;
+}
+
+.labels-img {
+    position: absolute;
+    left: -550px;
+    top: 150px;
+}
+
+.emotions-img {
+    position: absolute;
+    top:120px;
+}
+
+.deal-img {
+    position: absolute;
+    top: -110px;
+    left: -550px;
+}
+
+.searching-img {
+    position: absolute;
+    left: 830px;
+    top: 125px;
 }

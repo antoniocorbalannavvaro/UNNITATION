@@ -3,6 +3,8 @@
 import React, {useState} from 'react';
 import './style.css';
 
+import arrow from '../../../../public/ilustrations/Arrow.png';
+
 const userText = 'userTextPosition.';
 const videoText = 'videoTextPosition';
 const experimentText = 'experimentTextPosition';
@@ -75,7 +77,7 @@ const UniWizard = () => {
                 <div className='tour-card' style={WIZARD_POSITIONS[positionIndex]}>
                     <div>
                         <button onClick={() => {closeInfo()}} className='close-button'>
-                            <img src="https://cdn3.emoji.gg/emojis/9636_Cross.png"
+                            <img src={arrow}
                             alt=""
                             width='10'
                             height='10'

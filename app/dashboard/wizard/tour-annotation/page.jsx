@@ -72,20 +72,63 @@ const UniWizard = () => {
             <div>
                 <div className='tour-card' style={WIZARD_POSITIONS[positionIndex]}>
                     <div>
+                        {textIndex === 0
+                            ? 
+                            <div className='arrow-img'>
+                                <img src="../ilustrations/Arrow.png" alt=""
+                                width='500' height='400'
+                                />
+                            </div>
+                            : null}
+
+                        {textIndex === 1
+                        ? 
+                            <div className='labels-img'>
+                                <img src="../ilustrations/Pomodoro technique.png" alt=""
+                                width='500' height='400'
+                                />
+                            </div>
+                            : null}
+
+                        {textIndex === 2
+                        ? 
+                            <div className='emotions-img'>
+                                <img src="../ilustrations/Thanks.png" alt=""
+                                width='500' height='400'
+                                />
+                            </div>
+                            : null}
+
+                        {textIndex === 3
+                        ? 
+                            <div className='deal-img'>
+                                <img src="../ilustrations/Approved.png" alt=""
+                                width='500' height='400'
+                                />
+                            </div>
+                            : null}
+
                         {textIndex === 4 
                         ? 
-                        <div className='smiling-face'>
-                            <img src="https://officialpsds.com/imageview/7m/81/7m819x_large.png?1521316578" alt=""
-                                width='285' height='285'
-                            />
-                        <div className='cursor-hand'>
-                            <img src="https://www.freeiconspng.com/uploads/hand-cursor-png-click-cursor-hand-icon-13.png" alt=""
-                                width='50'
-                                height='50'
-                            />
+                        <div>
+
+                            <div className='smiling-face'>
+                                <img src="https://officialpsds.com/imageview/7m/81/7m819x_large.png?1521316578" alt="" width='285' height='285'/>
+                            </div>
+
+                            <div className='cursor-hand'>
+                                <img src="https://www.freeiconspng.com/uploads/hand-cursor-png-click-cursor-hand-icon-13.png" alt=""
+                                    width='50'
+                                    height='50'/>
+                            </div>
+
+                            <div className='searching-img'>
+                                <img src="../ilustrations/Detective check footprint.png" alt=""
+                                width='285' height='285'/>
+                            </div>
+                            
                         </div>
-                        
-                        </div>
+
                         : null}
 
                         <button onClick={() => {closeInfo()}} className='close-button'>
