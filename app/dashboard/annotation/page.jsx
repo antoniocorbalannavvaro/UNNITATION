@@ -4,7 +4,7 @@ import { useState, useRef } from 'react'
 
 import UniLabelsControl from "../../(components)/UniLabelsControl";
 
-import UniTutorial from '../tour/page';
+import UniTutorial from '../wizard/tour-annotation/page';
 
 export default function Page(){
 

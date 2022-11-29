@@ -3,18 +3,28 @@
 import React, {useState} from 'react';
 import './style.css';
 
-const videoText = '';
-const labelText = '';
-const individualLabelText = '';
-const deelText = '';
+const videoText = 'This is the video you gonna annotate.';
+const labelText = 'Label section';
+const individualLabelText = 'Emotional label';
+const dealText = 'Deal label';
+const goodLuck = 'goodluck';
 
-const videoTextPosition = {top:'185px', left:'20px',width:'600px', height:'405px'};
-const labelTextPosition = {top:'150px', left:'600px',width:'600px', width:'600px', height:'350px'};
-const individualLabelTextPosition = {top:'256px', left:'600px', width:'580px', height:'80px'};
-const deelTextPosition = {top:'342px', left:'600px', width:'580px', height:'80px'};
+const videoTextPosition = {top:'185px', left:'700px',width:'auto', height:'auto'};
+const labelTextPosition = {top:'150px', left:'100px',width:'auto', height:'auto'};
+const individualLabelTextPosition = {top:'256px', left:'100px', width:'auto', height:'auto'};
+const dealTextPosition = {top:'342px', left:'100px', width:'auto', height:'auto'};
+const goodLuckTextPosition = {top:'185px', left:'600px' ,width:'auto', height:'auto'};
 
-const TEXTS = [videoText, labelText, individualLabelText, deelText];
-const POSITIONS = [videoTextPosition, labelTextPosition, individualLabelTextPosition, deelTextPosition];
+const videoWizardPosition = {top:'185px', left:'20px',width:'600px', height:'405px'};
+const labelWizardPosition = {top:'150px', left:'600px',width:'600px', height:'350px'};
+const individualLabelWizardPosition = {top:'256px', left:'600px', width:'580px', height:'80px'};
+const dealWizardPosition = {top:'342px', left:'600px', width:'580px', height:'80px'};
+const goodLuckWizardPosition = {top:'185px', left:'350px' ,width:'600px', height:'405px', backgroundColor:'white'};
+
+const TEXTS = [videoText, labelText, individualLabelText, dealText, goodLuck];
+const TEXT_POSITIONS = [videoTextPosition, labelTextPosition, individualLabelTextPosition, dealTextPosition, goodLuckTextPosition]
+const WIZARD_POSITIONS = [videoWizardPosition, labelWizardPosition, individualLabelWizardPosition, dealWizardPosition, goodLuckWizardPosition];
+
 
 const UniWizard = () => {
 
@@ -55,7 +65,7 @@ const UniWizard = () => {
             {infoState
             ?
             <div>
-                <div className='tour-card' style={POSITIONS[positionIndex]}>
+                <div className='tour-card' style={WIZARD_POSITIONS[positionIndex]}>
                     <div>
                         <button onClick={() => {closeInfo()}} className='close-button'>
                             <img src="https://cdn3.emoji.gg/emojis/9636_Cross.png"
@@ -66,7 +76,10 @@ const UniWizard = () => {
                         </button>
                     </div>
 
-                    <p>{TEXTS[textIndex]}</p>
+                    <div className='tour-text' style={TEXT_POSITIONS[positionIndex]}>
+                        <p>{TEXTS[textIndex]}</p>
+                    </div>
+                        
                 </div>
 
                     <div className='button-container'>
@@ -78,9 +91,6 @@ const UniWizard = () => {
             : 
             null
             }
-
-
- 
 
         </div>
     );
@@ -100,7 +110,7 @@ const Page = () => {
             <div>
                 <button onClick={() => {showInfo()}} className='question'>
                     <img src="https://cdn-icons-png.flaticon.com/512/71/71768.png" alt="img not found"
-                    width="80" height="80"/>
+                    width="30" height="30"/>
                 </button>
             </div>
         );
