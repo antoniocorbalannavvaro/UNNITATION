@@ -3,21 +3,21 @@
 import React, {useState} from 'react';
 import './style.css';
 
-const userText = 'UsersUsersUsersUsersUsersUsers.';
-const videoText = 'videosvideosvideosvideosvideosvideosvideos';
-const experimentText = 'experimentsexperimentsexperimentsexperimentsexperimentsexperiments';
-const labelText = 'labellabellabellabellabellabellabel';
-const annotationText = 'annotationannotationannotationannotationannotationannotationannotation';
-const userInfoText = 'userInfoTextuserInfoTextuserInfoTextuserInfoTextuserInfoTextuserInfoTextuserInfoTextuserInfoTextuserInfoText'
-const loginText = 'loginTextloginTextloginTextloginText'
+const userText = 'userTextPosition.';
+const videoText = 'videoTextPosition';
+const experimentText = 'experimentTextPosition';
+const labelText = 'labelTextPosition';
+const annotationText = 'annotationTextPosition';
+const userInfoText = 'userInfoTextPosition'
+const loginText = 'loginTextPosition'
 
 const userTextPosition = {top:'100px', left:'420px', width:'auto', height:'100px'};
 const videoTextPosition = {top:'100px', left:'480px', width:'auto', height:'100px'};
 const experimentTextPosition = {top:'100px', left:'540px', width:'auto', height:'100px'};
 const labelTextPosition =  {top:'100px', left:'650px', width:'auto', height:'100px'};
-const annotationTextPosition = {top:'100px', left:'705px', width:'auto', height:'100px'};
-const userInfoTextPosition = {top:'100px', left:'705px', width:'auto', height:'100px'};
-const loginTextPosition = {top:'150px', left:'800px', width:'auto', height:'100px'};
+const annotationTextPosition = {top:'100px', left:'705px', width:'auto', height:'auto'};
+const userInfoTextPosition = {top:'100px', left:'705px', width:'370px', height:'100px'};
+const loginTextPosition = {top:'120px', left:'800px', width:'410px', height:'100px'};
 
 
 const userWizardPosition = {top:'30px', left:'420px', width:'65px', height:'50px'};
