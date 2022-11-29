@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint"
   },
+  
   "dependencies": {
     "bootstrap": "^5.2.2",
     "cookies": "^0.8.0",

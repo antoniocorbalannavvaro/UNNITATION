@@ -48,7 +48,7 @@ const InviteForm = () => {
                     if(params.annotationTime === 0){
                         delete params.annotationTime
                     }
-                    //console.log('Data: ',params);
+                    console.log('Data: ',params);
                     sendData('/api/user/invite', params);
 					//resetForm();
 					changeFormSend(true);

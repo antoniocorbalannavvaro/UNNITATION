@@ -4,6 +4,8 @@ import { useState, useRef } from 'react'
 
 import UniLabelsControl from "../../(components)/UniLabelsControl";
 
+import UniTutorial from '../tour/page';
+
 export default function Page(){
 
     const ref = useRef(null);
@@ -26,7 +28,6 @@ export default function Page(){
                     <h2>Click if you notice...</h2>
                     <UniLabelsControl label={['Happy','Sad']} clickHandler={handleClick}></UniLabelsControl>
                     <UniLabelsControl label={['Deal','Deal Rejected']} clickHandler={handleClick}></UniLabelsControl>
-                    
                     {annotations.map(i => (
                         <div className="row">
                             <div className="col">
@@ -36,6 +37,7 @@ export default function Page(){
                     ))}
                 </div>
             </div>
+            <UniTutorial></UniTutorial> 
         </div>
     )
 }
