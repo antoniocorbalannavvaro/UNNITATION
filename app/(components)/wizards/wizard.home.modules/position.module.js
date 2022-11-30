@@ -6,7 +6,7 @@ export const labelTextPosition =  {top:'100px', left:'650px', width:'400px', hei
 export const annotationTextPosition = {top:'100px', left:'705px', width:'400px', height:'auto'};
 export const userInfoTextPosition = {top:'100px', left:'705px', width:'400px', height:'auto'};
 export const questionTextPosition = {top:'120px', left:'800px', width:'400px', height:'auto'};
-export const ratingTextPosition = {top:'250px', left:'415px', width:'400px', height:'auto'}
+export const ratingTextPosition = {top:'100px', left:'415px', width:'400px', height:'auto'}
 
 //WIZARD POSITIONS:
 export const userWizardPosition = {top:'30px', left:'425px', width:'67px', height:'50px'};
