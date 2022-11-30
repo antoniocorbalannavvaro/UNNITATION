@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import Popup from 'reactjs-popup';
 import { Rating } from 'react-simple-star-rating'
 import 'reactjs-popup/dist/index.css';
-import './style.css';
+import './UniPopUpRating.module.css';
 
 const popUpStyle = {
     backgroundColor: 'aliceblue',
@@ -12,6 +12,7 @@ const popUpStyle = {
     borderRadius: '10px',
     boxShadow: '2px 2px #d2d2d2'
 }
+
 export function UniRating() {
 
     let userRate;
@@ -60,8 +61,6 @@ const PopUpRating = () => {
                     : null}
                 
             </Popup>
-
-
 
         </div>
     );

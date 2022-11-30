@@ -1,7 +1,7 @@
 import UniButton from "./(components)/UniButton";
 import UniMenu from "./(components)/UniMenu";
 import UniPopUp from "./(components)/UniPopUp";
-import UniTutorial from './dashboard/wizard/tour-home/page';
+import UniWizardHome from './(components)/UniWizardHome'
 
 //Dummie check:
 const isOnline = true;
@@ -20,7 +20,7 @@ export default function NavBar() {
                 </div>
                 
                 <div className="col-3 d-flex align-items-center justify-content-end px-3">
-                    <UniTutorial></UniTutorial>
+                    <UniWizardHome></UniWizardHome>
                     <div style={{padding:'30px'}}>
                     {isOnline ? <UniPopUp></UniPopUp> : null}
                     

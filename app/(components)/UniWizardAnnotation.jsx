@@ -1,16 +1,15 @@
 'use client'
-
 import React, {useState} from 'react';
-import './style.css';
+import styles from './UniWizard.module.css' 
 
 const videoText = `Here is the place where the video will play. You can stop the video whenever you want
-but you can't rewind. Once the video ends, you will not be able to play it.`;
+but you can't rewind. Once the video ends, you will not be able to play it again.`;
 const labelText = `In this section you will find the labels. It can contain one or more tags depending on
 of the experiment`;
 const individualLabelText = `These tags represent human emotions.`;
 const dealText = `These others determine if there has been a deal in a sales meeting or if, 
 on the contrary, if there had been a previous deal, it would have been rejected.`;
-const mainGoal = `The main objective is to be able to determine at what specific moment in a video one of the emotions found in the labels section has occurred.
+const mainGoal = `The main objective is to be able to determine at what specific moment in a video, one of the emotions found in the labels section has occurred.
 So, anytime you detect one of those emotions, 
 click on the corresponding label.`;
 
@@ -70,11 +69,11 @@ const UniWizard = () => {
             {infoState
             ?
             <div>
-                <div className='tour-card' style={WIZARD_POSITIONS[positionIndex]}>
+                <div className={styles.tourCard} style={WIZARD_POSITIONS[positionIndex]}>
                     <div>
                         {textIndex === 0
                             ? 
-                            <div className='arrow-img'>
+                            <div className={styles.arrowImg}>
                                 <img src="../ilustrations/Arrow.png" alt=""
                                 width='500' height='400'
                                 />
@@ -83,7 +82,7 @@ const UniWizard = () => {
 
                         {textIndex === 1
                         ? 
-                            <div className='labels-img'>
+                            <div className={styles.labelsImg}>
                                 <img src="../ilustrations/Pomodoro technique.png" alt=""
                                 width='500' height='400'
                                 />
@@ -92,7 +91,7 @@ const UniWizard = () => {
 
                         {textIndex === 2
                         ? 
-                            <div className='emotions-img'>
+                            <div className={styles.emotionsImg}>
                                 <img src="../ilustrations/Thanks.png" alt=""
                                 width='500' height='400'
                                 />
@@ -101,7 +100,7 @@ const UniWizard = () => {
 
                         {textIndex === 3
                         ? 
-                            <div className='deal-img'>
+                            <div className={styles.dealImg}>
                                 <img src="../ilustrations/Approved.png" alt=""
                                 width='500' height='400'
                                 />
@@ -112,17 +111,17 @@ const UniWizard = () => {
                         ? 
                         <div>
 
-                            <div className='smiling-face'>
+                            <div className={styles.smilingFace}>
                                 <img src="https://officialpsds.com/imageview/7m/81/7m819x_large.png?1521316578" alt="" width='285' height='285'/>
                             </div>
 
-                            <div className='cursor-hand'>
+                            <div className={styles.cursorHand}>
                                 <img src="https://www.freeiconspng.com/uploads/hand-cursor-png-click-cursor-hand-icon-13.png" alt=""
                                     width='50'
                                     height='50'/>
                             </div>
 
-                            <div className='searching-img'>
+                            <div className={styles.searchingImg}>
                                 <img src="../ilustrations/Detective check footprint.png" alt=""
                                 width='285' height='285'/>
                             </div>
@@ -131,7 +130,7 @@ const UniWizard = () => {
 
                         : null}
 
-                        <button onClick={() => {closeInfo()}} className='close-button'>
+                        <button onClick={() => {closeInfo()}} className={styles.closeButton}>
                             <img src="https://cdn3.emoji.gg/emojis/9636_Cross.png"
                             alt=""
                             width='20'
@@ -140,16 +139,16 @@ const UniWizard = () => {
                         </button>
                     </div>
 
-                    <div className='tour-text' style={TEXT_POSITIONS[positionIndex]}>
+                    <div className={styles.tourText} style={TEXT_POSITIONS[positionIndex]}>
                         {TEXTS[textIndex]}
                     </div>
                         
                 </div>
 
-                    <div className='button-container'>
-                        <button onClick={() => {closeInfo()}} className='uni-button'>❌ Close</button>
-                        <button onClick={() => {backAction()}} className='uni-button'>⬅ Back</button>
-                        <button onClick={() => {nextAction()}} className='uni-button'>Next ➡</button>
+                    <div className={styles.buttonContainer}>
+                        <button onClick={() => {closeInfo()}} className={styles.uniButton}>❌ Close</button>
+                        <button onClick={() => {backAction()}} className={styles.uniButton}>⬅ Back</button>
+                        <button onClick={() => {nextAction()}} className={styles.uniButton}>Next ➡</button>
                     </div>
             </div>
 
@@ -173,7 +172,7 @@ const Page = () => {
 
         return (
             <div>
-                <button onClick={() => {showInfo()}} className='question'>
+                <button onClick={() => {showInfo()}} className={styles.question}>
                     <img src="https://cdn-icons-png.flaticon.com/512/71/71768.png" alt="img not found"
                     width="30" height="30"/>
                 </button>

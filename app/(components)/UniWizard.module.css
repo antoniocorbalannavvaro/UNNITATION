@@ -1,5 +1,4 @@
-
-.tour-card {
+.tourCard {
     height: auto;
     position: absolute;
     font-size: large;
@@ -8,10 +7,27 @@
     border: 5px;
     border-color: rgb(154, 154, 154);
     box-shadow: rgba(0, 0, 0, 0.6) 0px 0px 0px 10000px;
-    z-index: 0;
 }
 
-.uni-button {
+.tourText {
+    text-align: center;
+    padding: 8px;
+    position: fixed;
+    background: blanchedalmond;
+    border-style: solid;
+    border-radius: 19px;
+    border: 5px;
+}
+
+.closeButton {
+    border-radius: 100%;
+    border-color: transparent;
+    background: transparent;
+    position: absolute;
+}
+
+
+.uniButton {
     font-family: sans-serif;
     font-weight: bold;
     border-radius: 10px;
@@ -19,18 +35,18 @@
     border-color: rgb(81, 81, 81);
     box-shadow: 0 3px 10px rgb(0 0 0 / 1);
     color:aliceblue;
-    background: linear-gradient(90deg, rgba(255,106,19,1) 0%, rgba(212,15,125,1) 100%);
+    background: linear-gradient(90deg, #ff6a13 0%, #d40f7d 100%);
     width: 120px;
     height: 50px;
 }
 
-.uni-button:hover {
+.uniButton:hover {
     background: linear-gradient(90deg, rgb(190, 70, 0) 0%, rgb(164, 13, 99) 100%);
     color:white;
     border-color: black;
 }
 
-.button-container {
+.buttonContainer {
     position: fixed;
     right: 0px; bottom: 0px;
     width: auto;
@@ -47,61 +63,47 @@
     background: rgba(255, 230, 0,0.5);
 }
 
-.close-button {
-    border-radius: 90%;
-    border-color: transparent;
-    background: transparent;
-    position: absolute;
-    left: 0px;
+
+.fixDisplay {
+    max-block-size: 50%;
 }
 
-.tour-text {
-    text-align: center;
-    padding: 8px;
-    position: fixed;
-    background: blanchedalmond;
-    border-style: solid;
-    border-radius: 19px;
-    border: 5px;
-    z-index: 6;
-}
-
-.smiling-face {
+.smilingFace {
     position: absolute; 
     top:30px;
     left: 100px;
 }
 
-.cursor-hand {
+.cursorHand {
     position: absolute; 
     top:100px;
     left: 700px;
 }
 
-.arrow-img {
+.arrowImg {
     position: absolute;
     left: 600px;
     top: 150px;
 }
 
-.labels-img {
+.labelsImg {
     position: absolute;
     left: -550px;
     top: 150px;
 }
 
-.emotions-img {
+.emotionsImg {
     position: absolute;
     top:120px;
 }
 
-.deal-img {
+.dealImg {
     position: absolute;
     top: -110px;
     left: -550px;
 }
 
-.searching-img {
+.searchingImg {
     position: absolute;
     left: 830px;
     top: 125px;
