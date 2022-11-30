@@ -1,7 +1,7 @@
 import UniButton from "./(components)/UniButton";
 import UniMenu from "./(components)/UniMenu";
 import UniPopUp from "./(components)/UniPopUp";
-import UniWizardHome from './(components)/UniWizardHome'
+import UniWizardHome from './(components)/wizards/UniWizardHome'
 
 //Dummie check:
 const isOnline = true;

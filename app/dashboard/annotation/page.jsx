@@ -4,7 +4,7 @@ import { useState, useRef } from 'react'
 
 import UniLabelsControl from "../../(components)/UniLabelsControl";
 
-import UniWizardAnnotation from '../../(components)/UniWizardAnnotation';
+import UniWizardAnnotation from '../../(components)/wizards/UniWizardAnnotation';
 
 export default function Page(){
 

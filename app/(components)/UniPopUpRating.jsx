@@ -13,7 +13,7 @@ const popUpStyle = {
     boxShadow: '2px 2px #d2d2d2'
 }
 
-export function UniRating() {
+export function UniRating({popUpStartMessage, popUpEndMessage}) {
 
     let userRate;
     
@@ -33,17 +33,18 @@ export function UniRating() {
 
     return (
         <div>
-            <h1>Rate the deal possibillity</h1>
+            <h1>{popUpStartMessage}</h1>
             <h1>
                 <Rating onClick={handleRating}/>
-                {message ? <h3 style={{color:'green'}}>Thanks for rating. Fuck you 😊</h3> : null}
+                {message ? <h3 style={{color:'green'}}>{popUpEndMessage} 😊</h3> : null}
             </h1>
            
         </div>
     )
 }
 
-const PopUpRating = () => {
+export default UniRating;
+/* const PopUpRating = () => {
 
     const [popUpState, setPopUpState] = useState(false)
 
@@ -67,3 +68,4 @@ const PopUpRating = () => {
 }
 
 export default PopUpRating;
+ */

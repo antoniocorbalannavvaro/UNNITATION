@@ -1,5 +1,6 @@
 'use client'
 import React, {useState} from 'react';
+import UniPopUpRating from '../UniPopUpRating'
 import styles from './UniWizard.module.css';
 import * as TEXT from './wizard.home.modules/text.module';
 import * as POSITION from './wizard.home.modules/position.module';
@@ -38,7 +39,7 @@ const UniWizardHome = () => {
     
             switch (action) {
                 case 'back': {if (pageNum === 0) {return} else {setPageNum(pageNum -= 1); console.log(pageNum); return}}
-                case 'next': {if (pageNum === 6) {return} else {setPageNum(pageNum += 1); console.log(pageNum); return}}
+                case 'next': {if (pageNum === 7) {return} else {setPageNum(pageNum += 1); console.log(pageNum); return}}
                 case 'close': setPageNum(pageNum = -1); console.log(pageNum); return
             }        
         }
@@ -140,6 +141,18 @@ const UniWizardHome = () => {
                     imagePosition={POSITION.questionImagePosition}>
                 </UniWizard>: null
             }
+
+            {pageNum === 7 ?
+                <UniWizard 
+                    text={<UniPopUpRating popUpStartMessage='Rate this wizard' popUpEndMessage='Thanks Pantera'/>} 
+                    textPosition={POSITION.ratingTextPosition} 
+                    wizardPosition={POSITION.ratingTextPosition}
+                    image={IMAGE.ratingImage}
+                    imageSize={IMAGE.globalSize}
+                    imagePosition={POSITION.ratingImagePosition}>
+                </UniWizard> : null
+            }
+            
             <UniWizardButtons></UniWizardButtons>
         </div>
         );
