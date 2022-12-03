@@ -18,13 +18,13 @@ export default function Page() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        fetch('/api/login?' + new URLSearchParams({
+        fetch('/api/user/login?' + new URLSearchParams({
             email: email,
             password: password,
         })).then((res) => {
             return res.json()
         }).then((data) => {
-
+            console.log(data)
             if (data.error) {
                 setIsValidUser(false)
                 setTimeout(() => {setIsValidUser('')}, 3000)

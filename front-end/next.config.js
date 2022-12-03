@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+
   reactStrictMode: false,
   experimental:{appDir: true},
   webpack: (config) => {
@@ -8,6 +9,14 @@ const nextConfig = {
     // this will just update topLevelAwait property of config.experiments
     config.experiments.topLevelAwait = true 
     return config;
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'http://localhost:3001/:path*',
+      },
+    ]
   },
   
 }
