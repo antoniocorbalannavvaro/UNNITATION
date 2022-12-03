@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import database from '../../main/data-access-layer/database';
-=======
 /* TDOO */
->>>>>>> fb7557bfd346bcfc236e28307f0bd353d066dbe3
 
 const dummyVideos = [
 	{

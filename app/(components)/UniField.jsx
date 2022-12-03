@@ -2,11 +2,10 @@
 
 import React, {useState} from 'react'
 import EmojiPicker from 'emoji-picker-react';
+import UniCard from './UniCard';
 
 
-export default function UniField(props) {
-
-    const [showPicker, setShowPicker] = useState(false)
+export default function UniField(props) {    
 
     const handle = (e) => {
         if (e.emoji) {
@@ -16,30 +15,21 @@ export default function UniField(props) {
         }
         props.handleChange(e.target.value, props.id)
     }
+
+    
  
     if ( props.type == 'submit' ) {
         return <input className="form-control btn gradient-background my-3" type={props.type} value={props.label} />
     }
 
     if (props.type == 'select') {
-        return (
-            <React.Fragment>
-                <label className="mt-2">{props.label}</label>
-                
-                <select className="form-control my-1" onChange={handle}>
-                    {
-                        props.config.options.map((el,i) => {
-                            return <option key={i} value={el}>{el}</option>
-                        })
-                    }
-                </select>
-            </React.Fragment>
-            
-            
-        )
+
+        
     }
 
     if (props.type == 'emoji') {
+
+        const [showPicker, setShowPicker] = useState(false)
 
         return (
             <React.Fragment>   

@@ -26,7 +26,7 @@ export default function UniFilterableList(props) {
             }; 
 
             setItems(data);
-            setMetaFields(data[0].properties.map((i) => i.id))
+            setMetaFields(Object.keys(data[0]))
 
         })
 
@@ -50,7 +50,8 @@ export default function UniFilterableList(props) {
         if (Object.hasOwnProperty.call(meta, key) && metaFields.indexOf(key) > -1) {
 
             const config = {
-                options: meta[key].options ? meta[key].options : null
+                options: meta[key].options ? meta[key].options : null,
+                multiple: true
             } 
 
             filters.push(
@@ -87,9 +88,9 @@ export default function UniFilterableList(props) {
                                         <UniCard key={i}>
                                             <h2>{ el.name }</h2>
                                             {
-                                                el.properties.map((p,ji) => {
-
-                                                    return <UniLabeledPair key={ji} label={meta[p.id] ? meta[p.id].label : '' }>{p.value}</UniLabeledPair>
+                                                Object.keys(el).map((p,ji) => {
+                                                    if (p == 'name') return;
+                                                    return <UniLabeledPair key={ji} label={meta[p] ? meta[p].label : '' }>{el[p]}</UniLabeledPair>
                                                 })
                                             }
                                         </UniCard>
