@@ -19,7 +19,7 @@ export default function Page() {
         e.preventDefault();
 
         fetch('/api/login?' + new URLSearchParams({
-            username: email,
+            email: email,
             password: password,
         })).then((res) => {
             return res.json()

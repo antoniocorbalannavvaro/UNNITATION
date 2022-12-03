@@ -1,0 +1,107 @@
+.tourCard {
+    height: auto;
+    position: absolute;
+    font-size: large;
+    border-style: solid;
+    border-radius: 19px;
+    border: 5px;
+    border-color: rgb(154, 154, 154);
+    box-shadow: rgba(0, 0, 0, 0.6) 0px 0px 0px 100vw;
+}
+
+.tourText {
+    text-align: center;
+    padding: 8px;
+    position: fixed;
+    background: blanchedalmond;
+    border-style: solid;
+    border-radius: 19px;
+    border: 5px;
+}
+
+.closeButton {
+    border-radius: 100%;
+    border-color: transparent;
+    background: transparent;
+    position: absolute;
+}
+
+
+.uniButton {
+    margin-left: 5px;
+    font-family: sans-serif;
+    font-weight: bold;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: rgb(81, 81, 81);
+    box-shadow: 0 3px 10px rgb(0 0 0 / 1);
+    color:aliceblue;
+    background: linear-gradient(90deg, #ff6a13 0%, #d40f7d 100%);
+    width: 120px;
+    height: 50px;
+}
+
+.uniButton:hover {
+    background: linear-gradient(90deg, rgb(190, 70, 0) 0%, rgb(164, 13, 99) 100%);
+    color:white;
+    border-color: black;
+}
+
+.buttonContainer {
+    position: fixed;
+    right: 0px; bottom: 0px;
+    width: auto;
+    height: auto;
+}
+
+.question {
+    border-radius: 100%;
+    border-color: rgba(0,0,0,0);
+    background-color: rgba(0,0,0,0);
+}
+
+.question:hover{
+    background: rgba(255, 230, 0,0.5);
+}
+
+
+.smilingFace {
+    position: absolute; 
+    top:30px;
+    left: 100px;
+}
+
+.cursorHand {
+    position: absolute; 
+    top:100px;
+    left: 700px;
+}
+
+.arrowImg {
+    position: absolute;
+    left: 600px;
+    top: 150px;
+}
+
+.labelsImg {
+    position: absolute;
+    left: -550px;
+    top: 150px;
+}
+
+.emotionsImg {
+    position: absolute;
+    top:120px;
+}
+
+.dealImg {
+    position: absolute;
+    top: -110px;
+    left: -550px;
+}
+
+.searchingImg {
+    position: absolute;
+    left: 830px;
+    top: 125px;
+}
