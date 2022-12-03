@@ -179,7 +179,7 @@ const Page = () => {
     }
 
     return (
-        <div className="fix-display">
+        <div>
             <ButtonInfo></ButtonInfo>
             {infoState
                 ? <UniWizardHome></UniWizardHome>
