@@ -1,5 +1,4 @@
 
-
 export default function Page() {
     return (
             <div id="homepage-container" className=" container-fluid gradient-background">
@@ -13,6 +12,7 @@ export default function Page() {
                         <img src="/homepage-illustration.png" alt="" />
                     </div>
                 </div>
+
             </div>
     );
 }

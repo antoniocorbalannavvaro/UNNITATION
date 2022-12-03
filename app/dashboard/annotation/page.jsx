@@ -4,7 +4,7 @@ import { useState, useRef } from 'react'
 
 import UniLabelsControl from "../../(components)/UniLabelsControl";
 
-import UniTutorial from '../tour/page';
+import UniWizardAnnotation from '../../(components)/wizards/UniWizardAnnotation';
 
 export default function Page(){
 
@@ -37,7 +37,7 @@ export default function Page(){
                     ))}
                 </div>
             </div>
-            <UniTutorial></UniTutorial> 
+            <UniWizardAnnotation></UniWizardAnnotation> 
         </div>
     )
 }
