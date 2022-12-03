@@ -1,0 +1,35 @@
+/*!*********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[3].oneOf[6].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[3].oneOf[6].use[3]!./app/globals.css ***!
+  \*********************************************************************************************************************************************************************************************************************************************************/
+
+
+html, body {
+    width: 100%;
+    margin: 0px;
+    height: 100vh;
+}
+
+.logo {
+    font-size: 35px;
+    font-weight: bold;
+    padding: 25px 25px;
+    margin-bottom: 0px;
+    color:white
+}
+
+#homepage-container {
+    color:white;
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    max-height: 100vh;
+}
+
+#homepage-container img {
+    margin-top: -250px;
+}
+
+.gradient-background {
+    background: rgb(255,106,19);
+    background: linear-gradient(90deg, rgba(255,106,19,1) 0%, rgba(212,15,125,1) 100%);
+}

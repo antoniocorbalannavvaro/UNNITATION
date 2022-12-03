@@ -1,0 +1,17 @@
+/*!*******************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[3].oneOf[4].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[3].oneOf[4].use[3]!./app/(components)/UniButton.module.css ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************/
+.UniButton_button__OOo7l {
+    background-color: rgba(255, 255, 255, 0.5);
+    color: white;
+    padding: 15px 35px;
+    border-radius: 5px;
+    border: none;
+    font-weight: bold;
+}
+
+.UniButton_negative__uuaxq {
+    color: white;   
+    background: rgb(255,106,19);
+    background: linear-gradient(90deg, rgba(255,106,19,1) 0%, rgba(212,15,125,1) 100%);
+}

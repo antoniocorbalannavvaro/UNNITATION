@@ -1,0 +1,23 @@
+/*!************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[3].oneOf[4].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[3].oneOf[4].use[3]!./app/(components)/UniLabeledPair.module.css ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************/
+.UniLabeledPair_labeledPair__W1GCQ {
+    display: inline-block;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin: 15px 15px 0px 0
+}
+
+.UniLabeledPair_label__16__S, .UniLabeledPair_content__EMhqN {
+    display: block;
+    font-size: 15px;
+}
+
+.UniLabeledPair_label__16__S {
+    font-weight: bold;
+}
+
+.UniLabeledPair_content__EMhqN {
+    font-weight: 400;
+    margin-bottom: 0px;
+}

@@ -1,0 +1,137 @@
+/*!***********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[3].oneOf[6].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[3].oneOf[6].use[3]!./node_modules/reactjs-popup/dist/index.css ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************/
+.popup-content{margin:auto;background:#fff;width:50%;padding:5px;border:1px solid #d7d7d7}[role=tooltip].popup-content{width:200px;box-shadow:0 0 3px rgba(0,0,0,.16);border-radius:5px}.popup-overlay{background:rgba(0,0,0,.5)}[data-popup=tooltip].popup-overlay{background:transparent}.popup-arrow{filter:drop-shadow(0 -3px 3px rgba(0,0,0,.16));color:#fff;stroke-width:2px;stroke:#d7d7d7;stroke-dasharray:30px;stroke-dashoffset:-54px;left:0;right:0;top:0;bottom:0}
+/*!******************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[3].oneOf[4].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[3].oneOf[4].use[3]!./app/(components)/UniPopUp.module.css ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************/
+.UniPopUp_avatar__3FKvJ {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+
+.UniPopUp_userInfo__MZToE {
+    width: 20%;
+    height: 50%;
+    border-radius: 1%;
+
+}
+
+.UniPopUp_buttonAvatar__g5nfB {
+  padding: 0;
+  border: none;
+  background: none;
+  
+}
+/*!***************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[3].oneOf[4].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[3].oneOf[4].use[3]!./app/(components)/wizards/UniWizard.module.css ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************/
+.UniWizard_tourCard__vNcWd {
+    height: auto;
+    position: absolute;
+    font-size: large;
+    border-style: solid;
+    border-radius: 19px;
+    border: 5px;
+    border-color: rgb(154, 154, 154);
+    box-shadow: rgba(0, 0, 0, 0.6) 0px 0px 0px 100vw;
+}
+
+.UniWizard_tourText__uJVhK {
+    text-align: center;
+    padding: 8px;
+    position: fixed;
+    background: blanchedalmond;
+    border-style: solid;
+    border-radius: 19px;
+    border: 5px;
+}
+
+.UniWizard_closeButton__YyhHn {
+    border-radius: 100%;
+    border-color: transparent;
+    background: transparent;
+    position: absolute;
+}
+
+
+.UniWizard_uniButton__BzJH8 {
+    margin-left: 5px;
+    font-family: sans-serif;
+    font-weight: bold;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: rgb(81, 81, 81);
+    box-shadow: 0 3px 10px rgb(0 0 0 / 1);
+    color:aliceblue;
+    background: linear-gradient(90deg, #ff6a13 0%, #d40f7d 100%);
+    width: 120px;
+    height: 50px;
+}
+
+.UniWizard_uniButton__BzJH8:hover {
+    background: linear-gradient(90deg, rgb(190, 70, 0) 0%, rgb(164, 13, 99) 100%);
+    color:white;
+    border-color: black;
+}
+
+.UniWizard_buttonContainer__1r7xV {
+    position: fixed;
+    right: 0px; bottom: 0px;
+    width: auto;
+    height: auto;
+}
+
+.UniWizard_question__Cc4dE {
+    border-radius: 100%;
+    border-color: rgba(0,0,0,0);
+    background-color: rgba(0,0,0,0);
+}
+
+.UniWizard_question__Cc4dE:hover{
+    background: rgba(255, 230, 0,0.5);
+}
+
+
+.UniWizard_smilingFace__wW3RU {
+    position: absolute; 
+    top:30px;
+    left: 100px;
+}
+
+.UniWizard_cursorHand__e5eHA {
+    position: absolute; 
+    top:100px;
+    left: 700px;
+}
+
+.UniWizard_arrowImg__5WVIo {
+    position: absolute;
+    left: 600px;
+    top: 150px;
+}
+
+.UniWizard_labelsImg__TqCgu {
+    position: absolute;
+    left: -550px;
+    top: 150px;
+}
+
+.UniWizard_emotionsImg__lfa7b {
+    position: absolute;
+    top:120px;
+}
+
+.UniWizard_dealImg__e_uP0 {
+    position: absolute;
+    top: -110px;
+    left: -550px;
+}
+
+.UniWizard_searchingImg__cIzpy {
+    position: absolute;
+    left: 830px;
+    top: 125px;
+}
+

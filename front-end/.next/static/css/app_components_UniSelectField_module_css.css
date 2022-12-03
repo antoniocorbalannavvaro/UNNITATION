@@ -1,0 +1,13 @@
+/*!************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[3].oneOf[4].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[3].oneOf[4].use[3]!./app/(components)/UniSelectField.module.css ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************/
+.UniSelectField_selectContainer__n2WLf {
+    margin-bottom: 15px;
+    margin-right: 15px;
+    display: inline-block;
+}
+
+.UniSelectField_label__dqVsF {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
