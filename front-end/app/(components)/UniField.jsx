@@ -3,6 +3,7 @@
 import React, {useState} from 'react'
 import EmojiPicker from 'emoji-picker-react';
 import UniCard from './UniCard';
+import UniSelectField from './UniSelectField';
 
 
 export default function UniField(props) {    
@@ -24,7 +25,7 @@ export default function UniField(props) {
 
     if (props.type == 'select') {
 
-        
+            
     }
 
     if (props.type == 'emoji') {

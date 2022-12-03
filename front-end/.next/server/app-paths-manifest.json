@@ -1,5 +1,7 @@
 {
-  "/dashboard/videos/page": "app/dashboard/videos/page.js",
-  "/login/page": "app/login/page.js",
-  "/dashboard/videos/upload/page": "app/dashboard/videos/upload/page.js"
+  "/dashboard/users/page": "app/dashboard/users/page.js",
+  "/dashboard/labels/page": "app/dashboard/labels/page.js",
+  "/dashboard/experiments/page": "app/dashboard/experiments/page.js",
+  "/dashboard/annotation/page": "app/dashboard/annotation/page.js",
+  "/dashboard/videos/page": "app/dashboard/videos/page.js"
 }

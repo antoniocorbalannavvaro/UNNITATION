@@ -2,9 +2,7 @@
 
 import { useContext, useEffect, useImperativeHandle, useState } from 'react'
 import { useUser } from '../auth'
-import getMeta from '../meta'
 import GlobalContext from "../GlobalContext"
-
 
 export default function RootLayout({ children }) {
 
@@ -12,8 +10,20 @@ export default function RootLayout({ children }) {
 
     const [meta, setMeta] = useState()
 
-    getMeta().then(d => setMeta(d))
+    useEffect(() => {
+      
+      fetch('/api/meta').then((res) => {
+        return res.json()
+      }).then((data) => {
+          console.log(data)
+          if (data.error) {
+              return;
+          }; 
 
+          setMeta(data)
+
+      })
+    },[])
 
   return (
     <GlobalContext.Provider value={{ meta: meta }}>

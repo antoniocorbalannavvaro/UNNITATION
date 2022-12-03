@@ -11,6 +11,7 @@ const labelRouter = require('api/label');
 const videoRouter = require('api/video');
 const experimentRouter = require('api/experiment');
 const annotationRouter = require('api/annotation');
+const metaRouter = require('api/meta')
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use('/label', labelRouter);
 app.use('/video', videoRouter);
 app.use('/experiment', experimentRouter);
 app.use('/annotation', annotationRouter);
+app.use('/meta', metaRouter);
 
 /* Not found handler */
 app.use((req, res, next) => {

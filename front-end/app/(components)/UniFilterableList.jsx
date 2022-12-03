@@ -25,6 +25,8 @@ export default function UniFilterableList(props) {
                 return;
             }; 
 
+            console.log(data)
+
             setItems(data);
             setMetaFields(Object.keys(data[0]))
 
