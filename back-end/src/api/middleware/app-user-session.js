@@ -2,7 +2,7 @@ const crypto = require('crypto');
 const Cookies = require('cookies');
 const AppUserSession = require('data-access-layer/app-user-session');
 const AppUser = require('data-access-layer/app-user');
-const { SessionExpiredError } = require('errors/session-error');
+const { SessionExpiredError, InvalidSessionError } = require('errors/session-error');
 
 const SESSION_ID_COOKIE_LABEL = 'SESSION_ID';
 
@@ -38,21 +38,34 @@ function middleware(sessionDuration, sessionTokenLength)
 			if (token === undefined)
 				return undefined;
 			
-			const session = await AppUserSession.get(token);
-			
-			const expires = getExpirationDate(session.lately_accessed);
-			
-			if (expires < (new Date()))
+			try
 			{
-				AppUserSession.remove(token);
-				throw new SessionExpiredError(token);
+				const session = await AppUserSession.get(token);
+				
+				const expires = getExpirationDate(session.lately_accessed);
+				
+				if (expires < (new Date()))
+				{
+					AppUserSession.remove(token);
+					throw new SessionExpiredError(token);
+				}
+				
+				AppUserSession.refresh(token);
+				
+				cookies.set(SESSION_ID_COOKIE_LABEL, token, { expires: getExpirationDate(new Date()) });
+				
+				return await AppUser.getById(session.app_user_id);
 			}
-			
-			AppUserSession.refresh(token);
-			
-			cookies.set(SESSION_ID_COOKIE_LABEL, token, { expires: getExpirationDate(new Date()) });
-			
-			return await AppUser.getById(session.app_user_id);
+			catch (err)
+			{
+				if (err instanceof InvalidSessionError)
+				{
+					const cookies = new Cookies(req, res);
+					cookies.set(SESSION_ID_COOKIE_LABEL, undefined);
+				}
+				
+				throw err;
+			}
 		}
 		
 		try

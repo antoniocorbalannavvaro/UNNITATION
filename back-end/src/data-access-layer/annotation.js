@@ -13,7 +13,7 @@ async function create(chunkUrl, startInterval, duration, videoId, experimentId, 
 async function getCurrentByUserId(userId)
 {
 	const res = await database.query(
-		'SELECT a.chunk_url, a.start_interval, EXTRACT(epoch FROM a.duration) AS duration, a.completed_date, a.video_id, a.experiment_id, a.app_user_id FROM annotation AS a JOIN experiment AS e ON e.id = a.experiment_id WHERE a.completed_date IS NULL AND e.aborted_date IS NULL AND a.app_user_id = $1 ORDER BY video_id ASC, start_interval ASC LIMIT 1',
+		'SELECT v.url, EXTRACT(epoch FROM a.start_interval) AS start_interval, EXTRACT(epoch FROM a.duration) AS duration, a.completed_date, a.video_id, a.experiment_id, a.app_user_id FROM annotation AS a JOIN experiment AS e ON e.id = a.experiment_id JOIN video AS v ON v.id = a.video_id WHERE a.completed_date IS NULL AND e.aborted_date IS NULL AND a.app_user_id = $1 ORDER BY video_id ASC, start_interval ASC LIMIT 1;',
 		[ userId ]
 	);
 	
@@ -25,10 +25,13 @@ async function getCurrentByUserId(userId)
 
 async function complete(userId)
 {
-	await database.query(
+	const res = await database.query(
 		'UPDATE annotation SET completed_date = (SELECT NOW()) WHERE (start_interval, video_id, experiment_id, app_user_id) IN (SELECT a.start_interval, a.video_id, a.experiment_id, a.app_user_id FROM annotation AS a JOIN experiment AS e ON e.id = a.experiment_id WHERE a.completed_date IS NULL AND e.aborted_date IS NULL AND a.app_user_id = $1 ORDER BY video_id ASC, start_interval ASC LIMIT 1)',
 		[ userId ]
 	);
+	
+	if (res.rowCount === 0)
+		throw new NoCurrentExperimentAppUserError(userId);
 }
 
 module.exports = {

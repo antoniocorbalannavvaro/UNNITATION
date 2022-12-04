@@ -14,5 +14,5 @@ echo "Session ID: $sessionId"
 
 curl -b "$SESSION_ID_COOKIE_LABEL=$sessionId" --json '{"name": "IBM tech meeting 2", "url": "https://youtube.com/ibm-tech-meeting-2.mp4", "transcriptUrl": "https://google.com/transcript/ibm-2.txt", "salesMeeting": false, "actorsInvolved": true, "videoDate": "2015/05/10 15:30:00.031+1", "platform": "ZOOM", "language": "SPANISH"}' $API_URL/video/upload ; echo
 
-curl -b "$SESSION_ID_COOKIE_LABEL=$sessionId" --json '{"name": "Google sales meeting 2", "url": "https://youtube.com/google-sales-meeting-2.mp4", "salesMeeting": true, "actorsInvolved": true, "videoDate": "2018/04/22 20:00:00.500+1", "platform": "MICROSOFT_TEAMS", "language": "ENGLISH"}' $API_URL/video/upload ; echo
+curl -b "$SESSION_ID_COOKIE_LABEL=$sessionId" --json '{"name": "Google sales meeting 2", "url": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", "salesMeeting": true, "actorsInvolved": true, "videoDate": "2018/04/22 20:00:00.500+1", "platform": "MICROSOFT_TEAMS", "language": "ENGLISH"}' $API_URL/video/upload ; echo
 

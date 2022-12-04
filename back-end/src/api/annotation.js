@@ -46,7 +46,8 @@ router.get('/info', async (req, res, next) => {
 		
 		res.json({
 			video: {
-				url: currentAnnotation.chunk_url,
+				url: currentAnnotation.url,
+				start: currentAnnotation.start_interval,
 				duration: currentAnnotation.duration
 			},
 			labels: labels

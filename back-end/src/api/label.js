@@ -37,6 +37,7 @@ router.get('/list', async (req, res, next) => {
 			const label = await Label.getById(labelId);
 			
 			labels.push({
+				id: labelId,
 				name: label.name,
 				emojiUnicode: label.emoji_unicode
 			});
