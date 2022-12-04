@@ -5,7 +5,7 @@
   "main": "src/app.js",
   "scripts": {
     "start": "NODE_PATH=./src/ nodemon -w src src/app.js",
-    "test": "NODE_PATH=./src node src/test/test-all.js",
+    "test": "src/sql/reset-db.sh ; NODE_PATH=./src node src/test/test-all.js",
     "lint": "eslint src"
   },
   "keywords": [],

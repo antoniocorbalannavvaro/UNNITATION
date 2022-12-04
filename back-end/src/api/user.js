@@ -67,7 +67,7 @@ router.post('/invite', async (req, res, next) => {
 		
 		/* TODO: send the invitation link to the email */
 		
-		res.json({ error: false, invitationUrl: `/invitation/${invitationToken}` });
+		res.json({ error: false, invitationUrl: process.env['APP_ENVIRONMENT'] === 'development' ? `/invitation/${invitationToken}` : undefined });
 	}
 	catch (err)
 	{

@@ -104,6 +104,7 @@ router.post('/create', async (req, res, next) => {
 	}
 });
 
+/* TODO: change to POST */
 router.get('/abort', async (req, res, next) => {
 	try
 	{

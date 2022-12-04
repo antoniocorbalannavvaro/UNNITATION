@@ -1,4 +1,4 @@
-const tests = [ './data-access-layer/enum-translator' ];
+const tests = [ './data-access-layer/enum-translator', './api/test1' ];
 
 for (const test of tests)
 {
