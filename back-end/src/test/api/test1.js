@@ -2,15 +2,41 @@ const { get, post } = require('./api');
 
 async function main()
 {
+
+    async function makeAndInviteUsers(userEmail, userName){
+        const userInvitation = await post('/user/invite', { email: userEmail, roles: [ 'ANNOTATOR' ], annotationDedicationTime: 20 });
+        
+        await get(userInvitation.invitationUrl);
+        
+	    await post('/user/accept', {
+		    password: '1234',
+		    firstName: userName,
+		    middleName: 'Rodríguez',
+		    lastName: 'Miñarro',
+		    birthDate: '1998/08/11 17:35:13.133+2',
+		    gender: 'NON_BINARY',
+		    department: 'SALES',
+		    mainLanguage: 'SPANISH',
+		    secondaryLanguages: [ 'INDIAN', 'ENGLISH' ]
+	    });
+    }
+
 	/* Login */
 	await get('/user/login', { email: 'andrea@hotmail.com', password: '123' });
 	
 	/* Invite */
-	const user1Invitation = await post('/user/invite', { email: 'ana@gmail.es', roles: [ 'ADMINISTRATOR' ] });
-	const user2Invitation = await post('/user/invite', { email: 'sandra@gmail.com', roles: [ 'ANNOTATOR', 'DATA_SCIENTIST' ], annotationDedicationTime: 5 });
+	const user1Invitation = await post('/user/invite', { email: 'ana@gmail.es', roles: [ 'ADMINISTRATOR', 'ANNOTATOR' ],  annotationDedicationTime: 20 });
+	const user2Invitation = await post('/user/invite', { email: 'sandra@gmail.com', roles: [ 'ANNOTATOR', 'DATA_SCIENTIST' ], annotationDedicationTime: 20 });
 	const user3Invitation = await post('/user/invite', { email: 'pedro@yahoo.com', roles: [ 'ANNOTATOR' ], annotationDedicationTime: 20 });
-	await post('/user/invite', { email: 'diego@gmail.com', roles: [ 'DATA_SCIENTIST' ] });
-	
+	const user4Invitation = await post('/user/invite', { email: 'diego@gmail.com', roles: [ 'ANNOTATOR' ], annotationDedicationTime: 20 });
+    makeAndInviteUsers('pablo@gmail.com', 'Pablo');
+    makeAndInviteUsers('juan@gmail.com', 'Juan');
+    makeAndInviteUsers('pepe@gmail.com', 'Pepe');
+    makeAndInviteUsers('victor@gmail.com', 'Victor');
+    makeAndInviteUsers('javier@gmail.com', 'Javier');
+    makeAndInviteUsers('sara@gmail.com', 'Sara');
+    makeAndInviteUsers('manuel@gmail.com', 'Manuel');
+        
 	/* Accept */
 	await get(user1Invitation.invitationUrl);
 	await post('/user/accept', {
@@ -49,6 +75,20 @@ async function main()
 		department: 'CALL_CENTER',
 		mainLanguage: 'INDIAN',
 		secondaryLanguages: [ 'ENGLISH', 'CHINESE' ]
+	});
+	
+	
+	await get(user4Invitation.invitationUrl);
+	await post('/user/accept', {
+		password: '321',
+		firstName: 'Diego',
+		middleName: 'Sanchez',
+		lastName: 'Molina',
+		birthDate: '1999/01/06 08:00:11.153+1',
+		gender: 'MALE',
+		department: 'SUPPORT',
+		mainLanguage: 'SPANISH',
+		secondaryLanguages: [ 'ENGLISH' ]
 	});
 	
 	/* Login again */
@@ -155,8 +195,8 @@ async function main()
 			name: 'Experiment test 2',
 			chunkTime: 300,
 			videoIds: [ 2, 3 ],
-			labelIds: [ 2, 4 ],
-			userIds: [ 3 ]
+			labelIds: [ 1, 2, 3, 4 ],
+			userIds: [ 2, 3, 5, 6, 7, 8, 9, 10, 11, 12]
 		}
 	];
 	
@@ -183,20 +223,123 @@ async function main()
 	await get('/user/login', { email: 'sandra@gmail.com', password: 'sss' });
 	await get('/annotation/info');
 	
-	/* Add annotation events */
-	await get('/user/login', { email: 'pedro@yahoo.com', password: 'pedro' });
-	const annotationEvents = [
-		{ instant: 20.5, labelId: 1 },
-		{ instant: 55.0, labelId: 3 },
-		{ instant: 1200.0, labelId: 2 }
-	];
-	
-	for (const annotationEvent of annotationEvents)
-		await post('/annotation/add-event', annotationEvent);
-	
-	/* End some annotations */
-	for (let i = 0; i < 4; i++)
-		await get('/annotation/end');
+	for(let i = 0; i <= 1; i++){
+
+	    /* Add annotation events */
+	    await get('/user/login', { email: 'pedro@yahoo.com', password: 'pedro' });
+	    const annotationEvents1 = [
+		    { instant: 20.5, labelId: 1 },
+		    { instant: 55.0, labelId: 3 },
+		    { instant: 1200.0, labelId: 2 }
+	    ];
+	    
+	    for (const annotationEvent of annotationEvents1)
+		    await post('/annotation/add-event', annotationEvent);
+    
+	    /* End some annotations */
+	    await get('/annotation/end');   
+	    
+	    //-----------------------------//
+        await get('/user/login', { email: 'pablo@gmail.com', password: '1234' });
+	    const annotationEvents2 = [
+		    { instant: 24.5, labelId: 1 },
+		    { instant: 59.0, labelId: 3 },
+		    { instant: 1100.0, labelId: 2 }
+	    ];
+	    
+	    for (const annotationEvent of annotationEvents2)
+		    await post('/annotation/add-event', annotationEvent);
+    
+	    /* End some annotations */
+	    await get('/annotation/end');   
+	    
+	    //-----------------------------//
+        await get('/user/login', { email: 'juan@gmail.com', password: '1234' });
+	    const annotationEvents3 = [
+		    { instant: 30.5, labelId: 1 },
+		    { instant: 60.0, labelId: 3 },
+		    { instant: 1000.0, labelId: 2 }
+	    ];
+	    
+	    for (const annotationEvent of annotationEvents3)
+		    await post('/annotation/add-event', annotationEvent);
+    
+	    /* End some annotations */
+	    await get('/annotation/end');   
+
+	    
+	    //-----------------------------//
+        await get('/user/login', { email: 'pepe@gmail.com', password: '1234' });
+	    const annotationEvents4 = [
+		    { instant: 25.245, labelId: 1 },
+		    { instant: 43.2130, labelId: 3 },
+		    { instant: 1150.2340, labelId: 2 }
+	    ];
+	    
+	    for (const annotationEvent of annotationEvents4)
+		    await post('/annotation/add-event', annotationEvent);
+    
+	    /* End some annotations */
+	    await get('/annotation/end');   
+
+	    
+	    //-----------------------------//
+        await get('/user/login', { email: 'victor@gmail.com', password: '1234' });
+	    const annotationEvents5 = [
+		    { instant: 21.342, labelId: 1 },
+		    { instant: 49.3240, labelId: 3 },
+		    { instant: 990.4053, labelId: 2 }
+	    ];
+	    
+	    for (const annotationEvent of annotationEvents5)
+		    await post('/annotation/add-event', annotationEvent);
+    
+	    /* End some annotations */
+	    await get('/annotation/end');   
+	    
+	    
+	    //-----------------------------//
+        await get('/user/login', { email: 'javier@gmail.com', password: '1234' });
+	    const annotationEvents6 = [
+		    { instant: 18.5, labelId: 1 },
+		    { instant: 30.0, labelId: 3 },
+		    { instant: 1130.421, labelId: 2 }
+	    ];
+	    
+	    for (const annotationEvent of annotationEvents6)
+		    await post('/annotation/add-event', annotationEvent);
+    
+	    /* End some annotations */
+	    await get('/annotation/end');   
+	    
+	    //-----------------------------//
+        await get('/user/login', { email: 'sara@gmail.com', password: '1234' });
+	    const annotationEvents7 = [
+		    { instant: 23.795, labelId: 1 },
+		    { instant: 59.2340, labelId: 3 },
+		    { instant: 1120.304, labelId: 2 }
+	    ];
+	    
+	    for (const annotationEvent of annotationEvents7)
+		    await post('/annotation/add-event', annotationEvent);
+    
+	    /* End some annotations */
+	    await get('/annotation/end');   
+	    
+	    //-----------------------------//
+        await get('/user/login', { email: 'manuel@gmail.com', password: '1234' });
+	    const annotationEvents8 = [
+		    { instant: 29.95, labelId: 1 },
+		    { instant: 53.40434, labelId: 3 },
+		    { instant: 1111.1, labelId: 2 }
+	    ];
+	    
+	    for (const annotationEvent of annotationEvents8)
+		    await post('/annotation/add-event', annotationEvent);
+    
+	    /* End some annotations */
+	    await get('/annotation/end');   
+    }
 }
 
 main();
