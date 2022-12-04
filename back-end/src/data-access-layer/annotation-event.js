@@ -8,6 +8,17 @@ async function create(instant, startInterval, videoId, experimentId, appUserId, 
 	);
 }
 
+async function getAllByVideoId(videoId)
+{
+	const res = await database.query(
+		'SELECT EXTRACT(epoch FROM (ae.start_interval + ae.instant)) AS instant, l.name AS label_name FROM annotation_event AS ae JOIN label AS l ON l.id = ae.label_id WHERE video_id = $1 ORDER BY instant ASC',
+		[ videoId ]
+	);
+	
+	return res.rows;
+}
+
 module.exports = {
-	create
+	create,
+	getAllByVideoId
 };

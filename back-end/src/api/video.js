@@ -1,13 +1,12 @@
 const express = require('express');
 const AppUser = require('data-access-layer/app-user');
 const Video = require('data-access-layer/video');
+const AnnotationEvent = require('data-access-layer/annotation-event');
 const { InvalidUserRoleError } = require('errors/app-user-error');
 const { InvalidRequestError } = require('errors/request-error');
 const checkLogin = require('api/middleware/check-login');
 
 const router = express.Router();
-
-router.use(checkLogin());
 
 async function getAppUser(userId)
 {
@@ -20,6 +19,8 @@ async function getAppUser(userId)
 		lastName: appUser.last_name
 	};
 }
+
+router.use(checkLogin());
 
 router.use(async (req, res, next) => {
 	try
@@ -92,6 +93,25 @@ router.get('/list', async (req, res, next) => {
 		}
 		
 		res.json(videos);
+	}
+	catch (err)
+	{
+		next(err);
+	}
+});
+
+router.post('/list-annotations', async (req, res, next) => {
+	try
+	{
+		if (typeof req.body.id !== 'number')
+			throw new InvalidRequestError(req);
+		
+		const annotations = [];
+		
+		for (const { instant, label_name } of await AnnotationEvent.getAllByVideoId(req.body.id))
+			annotations.push({ instant, label: label_name });
+		
+		res.json(annotations);
 	}
 	catch (err)
 	{

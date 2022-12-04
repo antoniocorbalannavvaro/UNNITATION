@@ -2,8 +2,9 @@ const { get, post } = require('./api');
 
 async function main()
 {
-
     async function makeAndInviteUsers(userEmail, userName){
+		await get('/user/login', { email: 'andrea@hotmail.com', password: '123' });
+		
         const userInvitation = await post('/user/invite', { email: userEmail, roles: [ 'ANNOTATOR' ], annotationDedicationTime: 20 });
         
         await get(userInvitation.invitationUrl);
@@ -29,14 +30,14 @@ async function main()
 	const user2Invitation = await post('/user/invite', { email: 'sandra@gmail.com', roles: [ 'ANNOTATOR', 'DATA_SCIENTIST' ], annotationDedicationTime: 20 });
 	const user3Invitation = await post('/user/invite', { email: 'pedro@yahoo.com', roles: [ 'ANNOTATOR' ], annotationDedicationTime: 20 });
 	const user4Invitation = await post('/user/invite', { email: 'diego@gmail.com', roles: [ 'ANNOTATOR' ], annotationDedicationTime: 20 });
-    makeAndInviteUsers('pablo@gmail.com', 'Pablo');
-    makeAndInviteUsers('juan@gmail.com', 'Juan');
-    makeAndInviteUsers('pepe@gmail.com', 'Pepe');
-    makeAndInviteUsers('victor@gmail.com', 'Victor');
-    makeAndInviteUsers('javier@gmail.com', 'Javier');
-    makeAndInviteUsers('sara@gmail.com', 'Sara');
-    makeAndInviteUsers('manuel@gmail.com', 'Manuel');
-        
+    await makeAndInviteUsers('pablo@gmail.com', 'Pablo');
+    await makeAndInviteUsers('juan@gmail.com', 'Juan');
+    await makeAndInviteUsers('pepe@gmail.com', 'Pepe');
+    await makeAndInviteUsers('victor@gmail.com', 'Victor');
+    await makeAndInviteUsers('javier@gmail.com', 'Javier');
+    await makeAndInviteUsers('sara@gmail.com', 'Sara');
+    await makeAndInviteUsers('manuel@gmail.com', 'Manuel');
+    
 	/* Accept */
 	await get(user1Invitation.invitationUrl);
 	await post('/user/accept', {
@@ -340,6 +341,11 @@ async function main()
 	    /* End some annotations */
 	    await get('/annotation/end');   
     }
+    
+	await get('/user/login', { email: 'andrea@hotmail.com', password: '123' });
+    await post('/video/list-annotations', { id: 2 });
+    
+    console.log('END');
 }
 
 main();
